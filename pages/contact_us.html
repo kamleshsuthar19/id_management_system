@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - ID Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Employee Records
+                        </a>
+                        <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            About
+                        </a>
+                        <a href="contact_us.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+                <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact_us.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="home_dashboard.html" class="text-primary hover:text-primary-700 text-sm font-medium">
+                        <i class="fas fa-home text-primary text-sm mr-1"></i>
+                        Home
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">Contact Us</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="bg-primary-100 p-4 rounded-full">
+                            <i class="fas fa-envelope text-3xl text-primary"></i>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+                        Contact Us
+                    </h1>
+                    <p class="text-xl text-text-secondary max-w-3xl mx-auto mb-8">
+                        Get in touch with our team for support, inquiries, or feedback about the ID Management System. We're here to help you with all your employee identification needs.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Form and Information Section -->
+        <section class="py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Contact Form - Left Column (7 cols) -->
+                    <div class="lg:col-span-7">
+                        <div class="card">
+                            <div class="mb-8">
+                                <h2 class="text-2xl font-bold text-text-primary mb-2">Send us a Message</h2>
+                                <p class="text-text-secondary">Fill out the form below and we'll get back to you within 24 hours.</p>
+                            </div>
+
+                            <!-- Success Message (Hidden by default) -->
+                            <div id="success-message" class="hidden mb-6 p-4 bg-success-50 border border-success-100 rounded-lg">
+                                <div class="flex items-center">
+                                    <i class="fas fa-check-circle text-success mr-3"></i>
+                                    <div>
+                                        <h3 class="text-success font-medium">Message Sent Successfully!</h3>
+                                        <p class="text-success-600 text-sm mt-1">Thank you for contacting us. We'll respond within 24 hours.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form id="contact-form" class="space-y-6">
+                                <!-- Name Field -->
+                                <div>
+                                    <label for="name" class="block text-sm font-medium text-text-primary mb-2">
+                                        Full Name <span class="text-error">*</span>
+                                    </label>
+                                    <input type="text" id="name" name="name" required class="form-input" placeholder="Enter your full name" />
+                                    <div id="name-error" class="hidden mt-1 text-sm text-error">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Please enter your full name
+                                    </div>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-text-primary mb-2">
+                                        Email Address <span class="text-error">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required class="form-input" placeholder="Enter your email address" />
+                                    <div id="email-error" class="hidden mt-1 text-sm text-error">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Please enter a valid email address
+                                    </div>
+                                </div>
+
+                                <!-- Subject Dropdown -->
+                                <div>
+                                    <label for="subject" class="block text-sm font-medium text-text-primary mb-2">
+                                        Subject <span class="text-error">*</span>
+                                    </label>
+                                    <select id="subject" name="subject" required class="form-input">
+                                        <option value>Select inquiry type</option>
+                                        <option value="technical-support">Technical Support</option>
+                                        <option value="account-issues">Account Issues</option>
+                                        <option value="feature-request">Feature Request</option>
+                                        <option value="billing-inquiry">Billing Inquiry</option>
+                                        <option value="general-inquiry">General Inquiry</option>
+                                        <option value="bug-report">Bug Report</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                    <div id="subject-error" class="hidden mt-1 text-sm text-error">
+                                        <i class="fas fa-exclamation-circle mr-1"></i>
+                                        Please select a subject
+                                    </div>
+                                </div>
+
+                                <!-- Message Textarea -->
+                                <div>
+                                    <label for="message" class="block text-sm font-medium text-text-primary mb-2">
+                                        Message <span class="text-error">*</span>
+                                    </label>
+                                    <textarea id="message" name="message" rows="6" required class="form-input resize-none" placeholder="Please describe your inquiry in detail..." maxlength="1000"></textarea>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <div id="message-error" class="hidden text-sm text-error">
+                                            <i class="fas fa-exclamation-circle mr-1"></i>
+                                            Please enter your message (minimum 10 characters)
+                                        </div>
+                                        <div class="text-sm text-text-secondary">
+                                            <span id="char-count">0</span>/1000 characters
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button type="submit" id="submit-btn" class="btn-primary w-full sm:w-auto px-8 py-3 text-base">
+                                        <span id="submit-text">
+                                            <i class="fas fa-paper-plane mr-2"></i>
+                                            Send Message
+                                        </span>
+                                        <span id="loading-text" class="hidden">
+                                            <i class="fas fa-spinner fa-spin mr-2"></i>
+                                            Sending...
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information - Right Column (5 cols) -->
+                    <div class="lg:col-span-5">
+                        <!-- Company Contact Information -->
+                        <div class="card mb-8">
+                            <div class="mb-6">
+                                <h3 class="text-xl font-bold text-text-primary mb-2">Get in Touch</h3>
+                                <p class="text-text-secondary">Reach out to us through any of the following channels</p>
+                            </div>
+
+                            <div class="space-y-6">
+                                <!-- Office Address -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-map-marker-alt text-primary"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">Office Address</h4>
+                                        <p class="text-text-secondary text-sm leading-relaxed">
+                                            123 Business District<br />
+                                            Corporate Plaza, Suite 456<br />
+                                            New York, NY 10001<br />
+                                            United States
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Phone Numbers -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-accent-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-phone text-accent"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">Phone Numbers</h4>
+                                        <p class="text-text-secondary text-sm">
+                                            Main: <a href="tel:+1-555-123-4567" class="text-primary hover:text-primary-700">+1 (555) 123-4567</a><br />
+                                            Support: <a href="tel:+1-555-123-4568" class="text-primary hover:text-primary-700">+1 (555) 123-4568</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Email Addresses -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-warning-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-envelope text-warning"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">Email Addresses</h4>
+                                        <p class="text-text-secondary text-sm">
+                                            General: <a href="mailto:info@idmanagement.com" class="text-primary hover:text-primary-700">info@idmanagement.com</a><br />
+                                            Support: <a href="mailto:support@idmanagement.com" class="text-primary hover:text-primary-700">support@idmanagement.com</a>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Business Hours -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-10 h-10 bg-secondary-100 rounded-lg flex items-center justify-center">
+                                            <i class="fas fa-clock text-secondary-600"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-medium text-text-primary mb-1">Business Hours</h4>
+                                        <div class="text-text-secondary text-sm space-y-1">
+                                            <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                            <p>Saturday: 10:00 AM - 4:00 PM</p>
+                                            <p>Sunday: Closed</p>
+                                            <p class="text-xs text-secondary-400 mt-2">Eastern Standard Time (EST)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Map -->
+                        <div class="card">
+                            <div class="mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary mb-2">Our Location</h3>
+                                <p class="text-text-secondary text-sm">Find us at our corporate headquarters</p>
+                            </div>
+                            
+                            <!-- Map Container -->
+                            <div class="relative bg-secondary-100 rounded-lg overflow-hidden" style="height: 250px;">
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.9663095343008!2d-74.00425878459418!3d40.74844097932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259bf5c1654f3%3A0xc80f9cfce5383d5d!2sNew%20York%2C%20NY%2010001%2C%20USA!5e0!3m2!1sen!2sus!4v1629794729807!5m2!1sen!2sus" width="100%" height="250" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="rounded-lg">
+                                </iframe>
+                                
+                                <!-- Map Overlay for Mobile Touch -->
+                                <div class="absolute inset-0 bg-transparent md:hidden" id="map-overlay"></div>
+                            </div>
+                            
+                            <!-- Map Controls -->
+                            <div class="mt-4 flex justify-between items-center">
+                                <a href="https://maps.google.com/?q=New+York,+NY+10001" target="_blank" class="text-primary hover:text-primary-700 text-sm font-medium inline-flex items-center">
+                                    <i class="fas fa-external-link-alt mr-2"></i>
+                                    Open in Google Maps
+                                </a>
+                                <button id="directions-btn" class="text-accent hover:text-accent-600 text-sm font-medium inline-flex items-center">
+                                    <i class="fas fa-directions mr-2"></i>
+                                    Get Directions
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Support Section -->
+        <section class="bg-surface py-12 lg:py-16 border-t border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">Need Immediate Help?</h2>
+                    <p class="text-lg text-text-secondary">Explore these quick support options</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- FAQ Section -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                            <i class="fas fa-question-circle text-2xl text-primary"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-2">FAQ</h3>
+                        <p class="text-text-secondary mb-4">Find answers to commonly asked questions about our ID management system</p>
+                        <a href="javascript:void(0)" class="text-primary hover:text-primary-700 font-medium inline-flex items-center">
+                            <span>Browse FAQ</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+
+                    <!-- Live Chat -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-200 transition-colors">
+                            <i class="fas fa-comments text-2xl text-accent"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-2">Live Chat</h3>
+                        <p class="text-text-secondary mb-4">Chat with our support team in real-time for immediate assistance</p>
+                        <button class="text-accent hover:text-accent-600 font-medium inline-flex items-center">
+                            <span>Start Chat</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <!-- Documentation -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="bg-warning-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-warning-200 transition-colors">
+                            <i class="fas fa-book text-2xl text-warning"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-2">Documentation</h3>
+                        <p class="text-text-secondary mb-4">Access comprehensive guides and tutorials for system usage</p>
+                        <a href="javascript:void(0)" class="text-warning hover:text-warning-600 font-medium inline-flex items-center">
+                            <span>View Docs</span>
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Character counter for message textarea
+        const messageTextarea = document.getElementById('message');
+        const charCount = document.getElementById('char-count');
+
+        messageTextarea.addEventListener('input', function() {
+            const currentLength = this.value.length;
+            charCount.textContent = currentLength;
+            
+            if (currentLength > 950) {
+                charCount.parentElement.classList.add('text-warning');
+            } else {
+                charCount.parentElement.classList.remove('text-warning');
+            }
+        });
+
+        // Form validation and submission
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const submitText = document.getElementById('submit-text');
+        const loadingText = document.getElementById('loading-text');
+        const successMessage = document.getElementById('success-message');
+
+        // Real-time validation
+        function validateField(fieldId, errorId, validationFn) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+            
+            field.addEventListener('blur', function() {
+                if (!validationFn(this.value)) {
+                    error.classList.remove('hidden');
+                    field.classList.add('border-error', 'focus:ring-error-500', 'focus:border-error-500');
+                } else {
+                    error.classList.add('hidden');
+                    field.classList.remove('border-error', 'focus:ring-error-500', 'focus:border-error-500');
+                }
+            });
+
+            field.addEventListener('input', function() {
+                if (validationFn(this.value)) {
+                    error.classList.add('hidden');
+                    field.classList.remove('border-error', 'focus:ring-error-500', 'focus:border-error-500');
+                }
+            });
+        }
+
+        // Validation functions
+        validateField('name', 'name-error', (value) => value.trim().length >= 2);
+        validateField('email', 'email-error', (value) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value));
+        validateField('subject', 'subject-error', (value) => value !== '');
+        validateField('message', 'message-error', (value) => value.trim().length >= 10);
+
+        // Form submission
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Validate all fields
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value.trim();
+            
+            let isValid = true;
+            
+            // Check name
+            if (name.length < 2) {
+                document.getElementById('name-error').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Check email
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                document.getElementById('email-error').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Check subject
+            if (!subject) {
+                document.getElementById('subject-error').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            // Check message
+            if (message.length < 10) {
+                document.getElementById('message-error').classList.remove('hidden');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                return;
+            }
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitText.classList.add('hidden');
+            loadingText.classList.remove('hidden');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide loading state
+                submitBtn.disabled = false;
+                submitText.classList.remove('hidden');
+                loadingText.classList.add('hidden');
+                
+                // Show success message
+                successMessage.classList.remove('hidden');
+                contactForm.reset();
+                charCount.textContent = '0';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.add('hidden');
+                }, 5000);
+            }, 2000);
+        });
+
+        // Map interaction for mobile
+        const mapOverlay = document.getElementById('map-overlay');
+        if (mapOverlay) {
+            mapOverlay.addEventListener('click', function() {
+                this.style.display = 'none';
+            });
+        }
+
+        // Directions button
+        document.getElementById('directions-btn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+                    const destination = "New York, NY 10001";
+                    const url = `https://www.google.com/maps/dir/${lat},${lng}/${encodeURIComponent(destination)}`;
+                    window.open(url, '_blank');
+                }, function() {
+                    // Fallback if geolocation fails
+                    const url = `https://www.google.com/maps/dir//New+York,+NY+10001`;
+                    window.open(url, '_blank');
+                });
+            } else {
+                // Fallback for browsers without geolocation
+                const url = `https://www.google.com/maps/dir//New+York,+NY+10001`;
+                window.open(url, '_blank');
+            }
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Approval Dashboard - ID Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Admin Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="admin_approval_dashboard.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Approval Dashboard
+                        </a>
+                        <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Employee Records
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="admin_approval_dashboard.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Approval Dashboard</a>
+                <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <i class="fas fa-home text-primary text-sm"></i>
+                    <span class="text-primary font-medium text-sm">Home</span>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">Approval Dashboard</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Cards Section -->
+        <section class="bg-surface py-6 border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Pending Requests -->
+                    <div class="bg-warning-50 rounded-lg p-6 border border-warning-100">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-warning rounded-full flex items-center justify-center">
+                                    <i class="fas fa-clock text-white text-lg"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-2xl font-bold text-warning">23</p>
+                                <p class="text-sm font-medium text-warning-600">Pending Requests</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Today's Approvals -->
+                    <div class="bg-success-50 rounded-lg p-6 border border-success-100">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-success rounded-full flex items-center justify-center">
+                                    <i class="fas fa-check text-white text-lg"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-2xl font-bold text-success">8</p>
+                                <p class="text-sm font-medium text-success-600">Today's Approvals</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rejections This Week -->
+                    <div class="bg-error-50 rounded-lg p-6 border border-error-100">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-error rounded-full flex items-center justify-center">
+                                    <i class="fas fa-times text-white text-lg"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <p class="text-2xl font-bold text-error">3</p>
+                                <p class="text-sm font-medium text-error-600">Rejections This Week</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter Toolbar -->
+        <section class="bg-surface py-4 border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                    <!-- Status Filter -->
+                    <div class="flex-shrink-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">Status</label>
+                        <select class="form-input w-40" id="status-filter">
+                            <option value="all">All Requests</option>
+                            <option value="pending">Pending</option>
+                            <option value="approved">Approved</option>
+                            <option value="rejected">Rejected</option>
+                        </select>
+                    </div>
+
+                    <!-- Site Filter -->
+                    <div class="flex-shrink-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">Site</label>
+                        <select class="form-input w-40" id="site-filter">
+                            <option value="all">All Sites</option>
+                            <option value="headquarters">Headquarters</option>
+                            <option value="branch-a">Branch A</option>
+                            <option value="branch-b">Branch B</option>
+                            <option value="warehouse">Warehouse</option>
+                        </select>
+                    </div>
+
+                    <!-- Date Range -->
+                    <div class="flex-shrink-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">Date Range</label>
+                        <input type="date" class="form-input w-40" id="date-from" />
+                    </div>
+
+                    <div class="flex-shrink-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">&nbsp;</label>
+                        <input type="date" class="form-input w-40" id="date-to" />
+                    </div>
+
+                    <!-- Search -->
+                    <div class="flex-1 min-w-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">Search</label>
+                        <div class="relative">
+                            <input type="text" class="form-input pl-10" placeholder="Search by employee name or ID..." id="search-input" />
+                            <i class="fas fa-search absolute left-3 top-3 text-secondary-400"></i>
+                        </div>
+                    </div>
+
+                    <!-- Bulk Actions -->
+                    <div class="flex-shrink-0">
+                        <label class="block text-sm font-medium text-text-secondary mb-1">&nbsp;</label>
+                        <div class="flex gap-2">
+                            <button class="btn-secondary" id="bulk-approve" disabled>
+                                <i class="fas fa-check mr-1"></i> Approve Selected
+                            </button>
+                            <button class="bg-error-100 text-error-600 px-4 py-2 rounded-lg font-medium transition-all duration-200 hover:bg-error-200 focus:outline-none focus:ring-2 focus:ring-error-500 focus:ring-offset-2" id="bulk-reject" disabled>
+                                <i class="fas fa-times mr-1"></i> Reject Selected
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Requests Table -->
+        <section class="py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="card">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-xl font-semibold text-text-primary">ID Generation Requests</h2>
+                        <div class="text-sm text-text-secondary">
+                            Showing 1-10 of 23 requests
+                        </div>
+                    </div>
+
+                    <!-- Desktop Table -->
+                    <div class="hidden lg:block overflow-x-auto">
+                        <table class="w-full">
+                            <thead>
+                                <tr class="border-b border-secondary-200">
+                                    <th class="text-left py-3 px-2 w-12">
+                                        <input type="checkbox" class="form-checkbox" id="select-all" />
+                                    </th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Request ID</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Employee Name</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Site Supervisor</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Department</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Submission Date</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Status</th>
+                                    <th class="text-left py-3 px-2 font-medium text-text-secondary">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-secondary-200" id="requests-table-body">
+                                <!-- Pending Request -->
+                                <tr class="hover:bg-secondary-50">
+                                    <td class="py-4 px-2">
+                                        <input type="checkbox" class="form-checkbox request-checkbox" value="REQ001" />
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="font-data text-sm">REQ001</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <div class="flex items-center">
+                                            <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Employee" />
+                                            <div class="ml-3">
+                                                <p class="font-medium text-text-primary">Sarah Johnson</p>
+                                                <p class="text-sm text-text-secondary">EMP001</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <p class="font-medium text-text-primary">John Smith</p>
+                                        <p class="text-sm text-text-secondary">Headquarters</p>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Civil Engineering</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Dec 18, 2024</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="status-badge bg-warning-100 text-warning-700">
+                                            <i class="fas fa-clock mr-1"></i>
+                                            Pending
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <div class="flex items-center gap-2">
+                                            <button class="btn-primary text-xs px-2 py-1" onclick="approveRequest('REQ001')">
+                                                <i class="fas fa-check"></i>
+                                            </button>
+                                            <button class="bg-error text-white text-xs px-2 py-1 rounded hover:bg-error-600" onclick="rejectRequest('REQ001')">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                            <button class="text-primary hover:text-primary-700 text-xs" onclick="viewDetails('REQ001')">
+                                                <i class="fas fa-eye"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Approved Request -->
+                                <tr class="hover:bg-secondary-50">
+                                    <td class="py-4 px-2">
+                                        <input type="checkbox" class="form-checkbox request-checkbox" value="REQ002" disabled />
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="font-data text-sm">REQ002</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <div class="flex items-center">
+                                            <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Employee" />
+                                            <div class="ml-3">
+                                                <p class="font-medium text-text-primary">Michael Brown</p>
+                                                <p class="text-sm text-text-secondary">EMP002</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <p class="font-medium text-text-primary">Lisa Davis</p>
+                                        <p class="text-sm text-text-secondary">Branch A</p>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Mechanical</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Dec 17, 2024</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="status-badge bg-success-100 text-success-700" title="Approved by Admin on Dec 18, 2024">
+                                            <i class="fas fa-check mr-1"></i>
+                                            Approved
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="viewDetails('REQ002')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Rejected Request -->
+                                <tr class="hover:bg-secondary-50">
+                                    <td class="py-4 px-2">
+                                        <input type="checkbox" class="form-checkbox request-checkbox" value="REQ003" disabled />
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="font-data text-sm">REQ003</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <div class="flex items-center">
+                                            <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Employee" />
+                                            <div class="ml-3">
+                                                <p class="font-medium text-text-primary">David Wilson</p>
+                                                <p class="text-sm text-text-secondary">EMP003</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <p class="font-medium text-text-primary">Robert Miller</p>
+                                        <p class="text-sm text-text-secondary">Branch B</p>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Electrical</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="text-sm text-text-primary">Dec 16, 2024</span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <span class="status-badge bg-error-100 text-error-700" title="Rejected: Incomplete documentation">
+                                            <i class="fas fa-times mr-1"></i>
+                                            Rejected
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-2">
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="viewDetails('REQ003')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Mobile Card Layout -->
+                    <div class="lg:hidden space-y-4" id="requests-mobile-view">
+                        <!-- Pending Request Card -->
+                        <div class="bg-warning-50 border border-warning-100 rounded-lg p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" class="form-checkbox request-checkbox" value="REQ001" />
+                                    <img class="h-10 w-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Employee" />
+                                    <div>
+                                        <p class="font-medium text-text-primary">Sarah Johnson</p>
+                                        <p class="text-sm text-text-secondary">REQ001 • EMP001</p>
+                                    </div>
+                                </div>
+                                <span class="status-badge bg-warning-100 text-warning-700">
+                                    <i class="fas fa-clock mr-1"></i>
+                                    Pending
+                                </span>
+                            </div>
+                            <div class="text-sm text-text-secondary mb-3">
+                                <p>Supervisor: John Smith • Civil Engineering</p>
+                                <p>Submitted: Dec 18, 2024</p>
+                            </div>
+                            <div class="flex gap-2">
+                                <button class="btn-primary text-sm px-3 py-1" onclick="approveRequest('REQ001')">
+                                    <i class="fas fa-check mr-1"></i> Approve
+                                </button>
+                                <button class="bg-error text-white text-sm px-3 py-1 rounded hover:bg-error-600" onclick="rejectRequest('REQ001')">
+                                    <i class="fas fa-times mr-1"></i> Reject
+                                </button>
+                                <button class="text-primary hover:text-primary-700 text-sm px-3 py-1" onclick="viewDetails('REQ001')">
+                                    <i class="fas fa-eye mr-1"></i> View
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-secondary-200">
+                        <div class="text-sm text-text-secondary">
+                            Showing 1 to 3 of 23 results
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="btn-secondary text-sm px-3 py-1" disabled>
+                                <i class="fas fa-chevron-left mr-1"></i> Previous
+                            </button>
+                            <button class="btn-primary text-sm px-3 py-1">
+                                Next <i class="fas fa-chevron-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Request Details Modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="details-modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-surface rounded-lg shadow-modal max-w-2xl w-full max-h-screen overflow-y-auto">
+                <div class="p-6 border-b border-secondary-200">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-lg font-semibold text-text-primary">Request Details</h3>
+                        <button class="text-secondary-400 hover:text-text-primary" onclick="closeModal()">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="p-6" id="modal-content">
+                    <!-- Modal content will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden" id="confirmation-modal">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-surface rounded-lg shadow-modal max-w-md w-full">
+                <div class="p-6">
+                    <div class="text-center">
+                        <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full mb-4" id="confirmation-icon">
+                            <i class="text-xl" id="confirmation-icon-class"></i>
+                        </div>
+                        <h3 class="text-lg font-medium text-text-primary mb-2" id="confirmation-title"></h3>
+                        <p class="text-sm text-text-secondary mb-6" id="confirmation-message"></p>
+                        <div class="flex gap-3 justify-center">
+                            <button class="btn-secondary px-4 py-2" onclick="closeConfirmationModal()">Cancel</button>
+                            <button class="btn-primary px-4 py-2" id="confirmation-action">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Checkbox handling
+        document.getElementById('select-all').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.request-checkbox:not([disabled])');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+            updateBulkActions();
+        });
+
+        document.querySelectorAll('.request-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', updateBulkActions);
+        });
+
+        function updateBulkActions() {
+            const checkedBoxes = document.querySelectorAll('.request-checkbox:checked:not([disabled])');
+            const bulkApprove = document.getElementById('bulk-approve');
+            const bulkReject = document.getElementById('bulk-reject');
+            
+            if (checkedBoxes.length > 0) {
+                bulkApprove.disabled = false;
+                bulkReject.disabled = false;
+            } else {
+                bulkApprove.disabled = true;
+                bulkReject.disabled = true;
+            }
+        }
+
+        // Request actions
+        function approveRequest(requestId) {
+            showConfirmationModal(
+                'approve',
+                'Approve Request',
+                `Are you sure you want to approve request ${requestId}?`,
+                () => {
+                    // Simulate API call
+                    console.log('Approving request:', requestId);
+                    showNotification('Request approved successfully', 'success');
+                    closeConfirmationModal();
+                    // Update UI to show approved status
+                }
+            );
+        }
+
+        function rejectRequest(requestId) {
+            showConfirmationModal(
+                'reject',
+                'Reject Request',
+                `Are you sure you want to reject request ${requestId}? Please provide a reason.`,
+                () => {
+                    console.log('Rejecting request:', requestId);
+                    showNotification('Request rejected', 'error');
+                    closeConfirmationModal();
+                    // Update UI to show rejected status
+                }
+            );
+        }
+
+        function viewDetails(requestId) {
+            const modal = document.getElementById('details-modal');
+            const content = document.getElementById('modal-content');
+            
+            // Sample request data
+            const requestData = {
+                'REQ001': {
+                    id: 'REQ001',
+                    employee: {
+                        name: 'Sarah Johnson',
+                        empId: 'EMP001',
+                        department: 'Civil Engineering',
+                        photo: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+                    },
+                    supervisor: 'John Smith',
+                    site: 'Headquarters',
+                    submissionDate: 'Dec 18, 2024',
+                    status: 'pending',
+                    documents: ['ID Photo', 'Resume', 'ID Proof']
+                }
+            };
+
+            const data = requestData[requestId];
+            if (data) {
+                content.innerHTML = `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-medium text-text-primary mb-3">Employee Information</h4>
+                            <div class="space-y-2">
+                                <div class="flex items-center gap-3">
+                                    <img class="h-12 w-12 rounded-full object-cover" src="${data.employee.photo}" alt="Employee">
+                                    <div>
+                                        <p class="font-medium text-text-primary">${data.employee.name}</p>
+                                        <p class="text-sm text-text-secondary">${data.employee.empId}</p>
+                                    </div>
+                                </div>
+                                <p class="text-sm"><strong>Department:</strong> ${data.employee.department}</p>
+                                <p class="text-sm"><strong>Supervisor:</strong> ${data.supervisor}</p>
+                                <p class="text-sm"><strong>Site:</strong> ${data.site}</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-text-primary mb-3">Request Details</h4>
+                            <div class="space-y-2">
+                                <p class="text-sm"><strong>Request ID:</strong> ${data.id}</p>
+                                <p class="text-sm"><strong>Submission Date:</strong> ${data.submissionDate}</p>
+                                <p class="text-sm"><strong>Status:</strong> 
+                                    <span class="status-badge bg-warning-100 text-warning-700">
+                                        <i class="fas fa-clock mr-1"></i> ${data.status.charAt(0).toUpperCase() + data.status.slice(1)}
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-medium text-text-primary mb-3">Uploaded Documents</h4>
+                        <div class="flex flex-wrap gap-2">
+                            ${data.documents.map(doc => `
+                                <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">
+                                    <i class="fas fa-file mr-1"></i> ${doc}
+                                </span>
+                            `).join('')}
+                        </div>
+                    </div>
+                    ${data.status === 'pending' ? `
+                        <div class="mt-6 flex gap-3">
+                            <button class="btn-primary px-4 py-2" onclick="approveRequest('${data.id}'); closeModal();">
+                                <i class="fas fa-check mr-1"></i> Approve Request
+                            </button>
+                            <button class="bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-error-600" onclick="rejectRequest('${data.id}'); closeModal();">
+                                <i class="fas fa-times mr-1"></i> Reject Request
+                            </button>
+                        </div>
+                    ` : ''}
+                `;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('details-modal').classList.add('hidden');
+        }
+
+        function showConfirmationModal(action, title, message, callback) {
+            const modal = document.getElementById('confirmation-modal');
+            const icon = document.getElementById('confirmation-icon');
+            const iconClass = document.getElementById('confirmation-icon-class');
+            const titleEl = document.getElementById('confirmation-title');
+            const messageEl = document.getElementById('confirmation-message');
+            const actionBtn = document.getElementById('confirmation-action');
+
+            if (action === 'approve') {
+                icon.className = 'mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-success-100 mb-4';
+                iconClass.className = 'fas fa-check text-xl text-success';
+                actionBtn.className = 'btn-primary px-4 py-2';
+                actionBtn.textContent = 'Approve';
+            } else {
+                icon.className = 'mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-error-100 mb-4';
+                iconClass.className = 'fas fa-times text-xl text-error';
+                actionBtn.className = 'bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-error-600';
+                actionBtn.textContent = 'Reject';
+            }
+
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            actionBtn.onclick = callback;
+            modal.classList.remove('hidden');
+        }
+
+        function closeConfirmationModal() {
+            document.getElementById('confirmation-modal').classList.add('hidden');
+        }
+
+        function showNotification(message, type) {
+            // Create a simple notification (you can enhance this)
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 right-4 z-50 p-4 rounded-lg shadow-lg ${type === 'success' ? 'bg-success-100 text-success-700' : 'bg-error-100 text-error-700'}`;
+            notification.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-${type === 'success' ? 'check' : 'times'}"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Bulk actions
+        document.getElementById('bulk-approve').addEventListener('click', function() {
+            const checkedBoxes = document.querySelectorAll('.request-checkbox:checked:not([disabled])');
+            const requestIds = Array.from(checkedBoxes).map(cb => cb.value);
+            
+            showConfirmationModal(
+                'approve',
+                'Bulk Approve',
+                `Are you sure you want to approve ${requestIds.length} requests?`,
+                () => {
+                    console.log('Bulk approving:', requestIds);
+                    showNotification(`${requestIds.length} requests approved successfully`, 'success');
+                    closeConfirmationModal();
+                    // Reset checkboxes
+                    checkedBoxes.forEach(cb => cb.checked = false);
+                    updateBulkActions();
+                }
+            );
+        });
+
+        document.getElementById('bulk-reject').addEventListener('click', function() {
+            const checkedBoxes = document.querySelectorAll('.request-checkbox:checked:not([disabled])');
+            const requestIds = Array.from(checkedBoxes).map(cb => cb.value);
+            
+            showConfirmationModal(
+                'reject',
+                'Bulk Reject',
+                `Are you sure you want to reject ${requestIds.length} requests?`,
+                () => {
+                    console.log('Bulk rejecting:', requestIds);
+                    showNotification(`${requestIds.length} requests rejected`, 'error');
+                    closeConfirmationModal();
+                    // Reset checkboxes
+                    checkedBoxes.forEach(cb => cb.checked = false);
+                    updateBulkActions();
+                }
+            );
+        });
+
+        // Filter functionality
+        document.getElementById('status-filter').addEventListener('change', filterRequests);
+        document.getElementById('site-filter').addEventListener('change', filterRequests);
+        document.getElementById('search-input').addEventListener('input', filterRequests);
+
+        function filterRequests() {
+            // Implement filtering logic here
+            console.log('Filtering requests...');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateBulkActions();
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

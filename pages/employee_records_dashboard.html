@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Records Dashboard - ID Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="employee_records_dashboard.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Employee Records
+                        </a>
+                        <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            About
+                        </a>
+                        <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+                <a href="employee_records_dashboard.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="home_dashboard.html" class="text-primary hover:text-primary-700 text-sm">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-1">Home</span>
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">Employee Records</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <section class="bg-surface py-6 border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                    <div class="flex-1 min-w-0">
+                        <h1 class="text-2xl font-bold text-text-primary sm:text-3xl">Employee Records Dashboard</h1>
+                        <p class="mt-1 text-sm text-text-secondary">Manage and view all employee records with advanced filtering and search capabilities</p>
+                    </div>
+                    <div class="mt-4 flex lg:mt-0 lg:ml-4">
+                        <a href="employee_id_generation_form.html" class="btn-primary inline-flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            Add New Employee
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter and Search Section -->
+        <section class="bg-surface py-4 border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <!-- Filters -->
+                    <div class="flex flex-col sm:flex-row gap-3 flex-1">
+                        <div class="relative">
+                            <select id="departmentFilter" class="form-input pr-8 text-sm min-w-0 sm:min-w-32">
+                                <option value>All Departments</option>
+                                <option value="Carpenter">Carpenter</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Painter">Painter</option>
+                                <option value="POP">POP</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+                        
+                        <div class="relative">
+                            <select id="designationFilter" class="form-input pr-8 text-sm min-w-0 sm:min-w-32">
+                                <option value>All Designations</option>
+                                <option value="Half-Mistri">Half-Mistri</option>
+                                <option value="Helper">Helper</option>
+                                <option value="Mistri">Mistri</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+                        
+                        <div class="relative">
+                            <select id="siteFilter" class="form-input pr-8 text-sm min-w-0 sm:min-w-40">
+                                <option value>All Sites</option>
+                                <option value="Campian School">Campian School</option>
+                                <option value="D Decor">D Decor</option>
+                                <option value="Damani">Damani</option>
+                                <option value="EON One">EON One</option>
+                                <option value="J Kumar">J Kumar</option>
+                                <option value="Kalpataru">Kalpataru</option>
+                            </select>
+                            <i class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+                        
+                        <button id="clearFilters" class="btn-secondary text-sm px-3 py-2 whitespace-nowrap">
+                            <i class="fas fa-times mr-1"></i>
+                            Clear Filters
+                        </button>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="relative flex-1 max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-secondary-400"></i>
+                        </div>
+                        <input type="text" id="searchInput" class="form-input pl-10 text-sm" placeholder="Search by name, ID, mobile, Aadhaar, PAN, account..." />
+                        <button id="searchClear" class="absolute inset-y-0 right-0 pr-3 flex items-center text-secondary-400 hover:text-text-primary hidden">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Count and Bulk Actions -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 pt-4 border-t border-secondary-200">
+                    <div class="flex items-center space-x-4">
+                        <span id="resultsCount" class="text-sm text-text-secondary">Showing 1,247 employees</span>
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" id="selectAll" class="rounded border-secondary-300 text-primary focus:ring-primary-500" />
+                            <label for="selectAll" class="text-sm text-text-secondary">Select All</label>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-0">
+                        <div class="relative">
+                            <button id="bulkActions" class="btn-secondary text-sm px-3 py-2 disabled:opacity-50" disabled>
+                                <i class="fas fa-cog mr-1"></i>
+                                Bulk Actions
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div id="bulkMenu" class="absolute right-0 mt-1 w-48 bg-surface rounded-md shadow-modal border border-secondary-200 z-10 hidden">
+                                <div class="py-1">
+                                    <button class="w-full text-left px-4 py-2 text-sm text-text-primary hover:bg-secondary-100">
+                                        <i class="fas fa-download mr-2"></i>
+                                        Generate Selected IDs
+                                    </button>
+                                    <button class="w-full text-left px-4 py-2 text-sm text-text-primary hover:bg-secondary-100">
+                                        <i class="fas fa-edit mr-2"></i>
+                                        Bulk Edit
+                                    </button>
+                                    <button class="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-50">
+                                        <i class="fas fa-trash mr-2"></i>
+                                        Delete Selected
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- Data Table -->
+                    <div class="flex-1">
+                        <div class="card p-0 overflow-hidden">
+                            <!-- Desktop Table View -->
+                            <div class="hidden lg:block overflow-x-auto">
+                                <table class="min-w-full divide-y divide-secondary-200">
+                                    <thead class="bg-secondary-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left">
+                                                <input type="checkbox" class="rounded border-secondary-300 text-primary focus:ring-primary-500" />
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="userID">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>User ID</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="name">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>Name</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="department">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>Department</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="designation">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>Designation</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="site">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>Site</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast" data-sort="mobile">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>Mobile</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="employeeTableBody" class="bg-surface divide-y divide-secondary-200">
+                                        <!-- Table rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Mobile Card View -->
+                            <div class="lg:hidden" id="mobileCardView">
+                                <!-- Mobile cards will be populated by JavaScript -->
+                            </div>
+
+                            <!-- Loading State -->
+                            <div id="loadingState" class="hidden p-8 text-center">
+                                <div class="inline-flex items-center">
+                                    <i class="fas fa-spinner fa-spin text-primary mr-2"></i>
+                                    <span class="text-text-secondary">Loading employees...</span>
+                                </div>
+                            </div>
+
+                            <!-- Empty State -->
+                            <div id="emptyState" class="hidden p-8 text-center">
+                                <div class="text-secondary-400 mb-4">
+                                    <i class="fas fa-search text-4xl"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-text-primary mb-2">No employees found</h3>
+                                <p class="text-text-secondary">Try adjusting your search or filter criteria</p>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6">
+                            <div class="flex items-center space-x-2 mb-4 sm:mb-0">
+                                <span class="text-sm text-text-secondary">Show</span>
+                                <select id="pageSize" class="form-input text-sm w-20">
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span class="text-sm text-text-secondary">per page</span>
+                            </div>
+                            
+                            <div class="flex items-center space-x-2">
+                                <button id="prevPage" class="btn-secondary px-3 py-2 text-sm disabled:opacity-50" disabled>
+                                    <i class="fas fa-chevron-left mr-1"></i>
+                                    Previous
+                                </button>
+                                <div id="pageNumbers" class="flex items-center space-x-1">
+                                    <!-- Page numbers will be populated by JavaScript -->
+                                </div>
+                                <button id="nextPage" class="btn-secondary px-3 py-2 text-sm">
+                                    Next
+                                    <i class="fas fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="lg:w-80">
+                        <!-- Summary Statistics -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Summary Statistics</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Total Employees</span>
+                                    <span class="text-lg font-semibold text-text-primary">1,247</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Active Records</span>
+                                    <span class="text-lg font-semibold text-success">1,224</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Pending Verification</span>
+                                    <span class="text-lg font-semibold text-warning">23</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">IDs Generated Today</span>
+                                    <span class="text-lg font-semibold text-primary">12</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Department Breakdown -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Department Breakdown</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Civil</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
+                                            <div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium text-text-primary">561</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Carpenter</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
+                                            <div class="bg-accent h-2 rounded-full" style="width: 32%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium text-text-primary">399</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Painter</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
+                                            <div class="bg-warning h-2 rounded-full" style="width: 18%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium text-text-primary">224</span>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">POP</span>
+                                    <div class="flex items-center space-x-2">
+                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
+                                            <div class="bg-error h-2 rounded-full" style="width: 5%"></div>
+                                        </div>
+                                        <span class="text-sm font-medium text-text-primary">63</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="card">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Activity</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-success rounded-full flex items-center justify-center">
+                                            <i class="fas fa-plus text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">New employee added</p>
+                                        <p class="text-xs text-text-secondary">Rajesh Kumar • Civil Dept • 2 hours ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                            <i class="fas fa-id-card text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">ID card generated</p>
+                                        <p class="text-xs text-text-secondary">Priya Sharma • EMP1245 • 4 hours ago</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-warning rounded-full flex items-center justify-center">
+                                            <i class="fas fa-edit text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">Record updated</p>
+                                        <p class="text-xs text-text-secondary">Amit Singh • Contact info • 6 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-error text-2xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-text-primary">Confirm Deletion</h3>
+                </div>
+            </div>
+            <p class="text-text-secondary mb-4">Are you sure you want to delete this employee record? This action cannot be undone.</p>
+            <div class="mb-4">
+                <label for="adminPassword" class="block text-sm font-medium text-text-primary mb-2">Admin Password</label>
+                <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password" />
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                <button id="confirmDelete" class="bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-fast">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock employee data
+        const mockEmployees = [
+            {
+                userID: 'EMP001',
+                name: 'Rajesh Kumar',
+                fatherName: 'Ram Kumar',
+                department: 'Civil',
+                designation: 'Mistri',
+                site: 'Campian School',
+                mobile: '9876543210',
+                aadhaar: '123456789012',
+                pan: 'ABCDE1234F',
+                account: '1234567890',
+                dateJoining: '2023-01-15',
+                maritalStatus: 'Married',
+                gender: 'Male'
+            },
+            {
+                userID: 'EMP002',
+                name: 'Priya Sharma',
+                fatherName: 'Suresh Sharma',
+                department: 'Carpenter',
+                designation: 'Helper',
+                site: 'D Decor',
+                mobile: '9876543211',
+                aadhaar: '123456789013',
+                pan: 'ABCDE1234G',
+                account: '1234567891',
+                dateJoining: '2023-02-20',
+                maritalStatus: 'Single',
+                gender: 'Female'
+            },
+            {
+                userID: 'EMP003',
+                name: 'Amit Singh',
+                fatherName: 'Vijay Singh',
+                department: 'Painter',
+                designation: 'Half-Mistri',
+                site: 'Damani',
+                mobile: '9876543212',
+                aadhaar: '123456789014',
+                pan: 'ABCDE1234H',
+                account: '1234567892',
+                dateJoining: '2023-03-10',
+                maritalStatus: 'Married',
+                gender: 'Male'
+            },
+            {
+                userID: 'EMP004',
+                name: 'Sunita Devi',
+                fatherName: 'Mohan Lal',
+                department: 'Civil',
+                designation: 'Helper',
+                site: 'EON One',
+                mobile: '9876543213',
+                aadhaar: '123456789015',
+                pan: 'ABCDE1234I',
+                account: '1234567893',
+                dateJoining: '2023-04-05',
+                maritalStatus: 'Married',
+                gender: 'Female'
+            },
+            {
+                userID: 'EMP005',
+                name: 'Vikash Yadav',
+                fatherName: 'Ramesh Yadav',
+                department: 'POP',
+                designation: 'Mistri',
+                site: 'J Kumar',
+                mobile: '9876543214',
+                aadhaar: '123456789016',
+                pan: 'ABCDE1234J',
+                account: '1234567894',
+                dateJoining: '2023-05-12',
+                maritalStatus: 'Single',
+                gender: 'Male'
+            },
+            {
+                userID: 'EMP006',
+                name: 'Kavita Gupta',
+                fatherName: 'Ashok Gupta',
+                department: 'Carpenter',
+                designation: 'Half-Mistri',
+                site: 'Kalpataru',
+                mobile: '9876543215',
+                aadhaar: '123456789017',
+                pan: 'ABCDE1234K',
+                account: '1234567895',
+                dateJoining: '2023-06-18',
+                maritalStatus: 'Married',
+                gender: 'Female'
+            }
+        ];
+
+        // State management
+        let currentPage = 1;
+        let pageSize = 25;
+        let filteredEmployees = [...mockEmployees];
+        let sortColumn = '';
+        let sortDirection = 'asc';
+        let selectedEmployees = new Set();
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+        const departmentFilter = document.getElementById('departmentFilter');
+        const designationFilter = document.getElementById('designationFilter');
+        const siteFilter = document.getElementById('siteFilter');
+        const clearFilters = document.getElementById('clearFilters');
+        const resultsCount = document.getElementById('resultsCount');
+        const selectAll = document.getElementById('selectAll');
+        const bulkActions = document.getElementById('bulkActions');
+        const bulkMenu = document.getElementById('bulkMenu');
+        const employeeTableBody = document.getElementById('employeeTableBody');
+        const mobileCardView = document.getElementById('mobileCardView');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+        const pageSizeSelect = document.getElementById('pageSize');
+        const prevPage = document.getElementById('prevPage');
+        const nextPage = document.getElementById('nextPage');
+        const pageNumbers = document.getElementById('pageNumbers');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderEmployees();
+            setupEventListeners();
+        });
+
+        // Event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', handleSearch);
+            searchClear.addEventListener('click', clearSearch);
+
+            // Filter functionality
+            departmentFilter.addEventListener('change', applyFilters);
+            designationFilter.addEventListener('change', applyFilters);
+            siteFilter.addEventListener('change', applyFilters);
+            clearFilters.addEventListener('click', clearAllFilters);
+
+            // Sorting
+            document.querySelectorAll('[data-sort]').forEach(header => {
+                header.addEventListener('click', () => handleSort(header.dataset.sort));
+            });
+
+            // Pagination
+            pageSizeSelect.addEventListener('change', handlePageSizeChange);
+            prevPage.addEventListener('click', () => changePage(currentPage - 1));
+            nextPage.addEventListener('click', () => changePage(currentPage + 1));
+
+            // Select all
+            selectAll.addEventListener('change', handleSelectAll);
+
+            // Bulk actions
+            bulkActions.addEventListener('click', toggleBulkMenu);
+            document.addEventListener('click', (e) => {
+                if (!bulkActions.contains(e.target) && !bulkMenu.contains(e.target)) {
+                    bulkMenu.classList.add('hidden');
+                }
+            });
+
+            // Delete modal
+            document.getElementById('cancelDelete').addEventListener('click', closeDeleteModal);
+            document.getElementById('confirmDelete').addEventListener('click', confirmDelete);
+        }
+
+        // Search functionality
+        function handleSearch() {
+            const query = searchInput.value.toLowerCase().trim();
+            
+            if (query) {
+                searchClear.classList.remove('hidden');
+            } else {
+                searchClear.classList.add('hidden');
+            }
+
+            applyFilters();
+        }
+
+        function clearSearch() {
+            searchInput.value = '';
+            searchClear.classList.add('hidden');
+            applyFilters();
+        }
+
+        // Filter functionality
+        function applyFilters() {
+            const searchQuery = searchInput.value.toLowerCase().trim();
+            const department = departmentFilter.value;
+            const designation = designationFilter.value;
+            const site = siteFilter.value;
+
+            filteredEmployees = mockEmployees.filter(employee => {
+                const matchesSearch = !searchQuery || 
+                    employee.name.toLowerCase().includes(searchQuery) ||
+                    employee.userID.toLowerCase().includes(searchQuery) ||
+                    employee.mobile.includes(searchQuery) ||
+                    employee.aadhaar.includes(searchQuery) ||
+                    employee.pan.toLowerCase().includes(searchQuery) ||
+                    employee.account.includes(searchQuery);
+
+                const matchesDepartment = !department || employee.department === department;
+                const matchesDesignation = !designation || employee.designation === designation;
+                const matchesSite = !site || employee.site === site;
+
+                return matchesSearch && matchesDepartment && matchesDesignation && matchesSite;
+            });
+
+            currentPage = 1;
+            renderEmployees();
+        }
+
+        function clearAllFilters() {
+            searchInput.value = '';
+            searchClear.classList.add('hidden');
+            departmentFilter.value = '';
+            designationFilter.value = '';
+            siteFilter.value = '';
+            filteredEmployees = [...mockEmployees];
+            currentPage = 1;
+            renderEmployees();
+        }
+
+        // Sorting functionality
+        function handleSort(column) {
+            if (sortColumn === column) {
+                sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                sortColumn = column;
+                sortDirection = 'asc';
+            }
+
+            filteredEmployees.sort((a, b) => {
+                let aValue = a[column];
+                let bValue = b[column];
+
+                if (typeof aValue === 'string') {
+                    aValue = aValue.toLowerCase();
+                    bValue = bValue.toLowerCase();
+                }
+
+                if (sortDirection === 'asc') {
+                    return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+                } else {
+                    return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+                }
+            });
+
+            updateSortIcons();
+            renderEmployees();
+        }
+
+        function updateSortIcons() {
+            document.querySelectorAll('[data-sort] i').forEach(icon => {
+                icon.className = 'fas fa-sort text-secondary-400';
+            });
+
+            if (sortColumn) {
+                const activeHeader = document.querySelector(`[data-sort="${sortColumn}"] i`);
+                if (activeHeader) {
+                    activeHeader.className = `fas fa-sort-${sortDirection === 'asc' ? 'up' : 'down'} text-primary`;
+                }
+            }
+        }
+
+        // Pagination functionality
+        function handlePageSizeChange() {
+            pageSize = parseInt(pageSizeSelect.value);
+            currentPage = 1;
+            renderEmployees();
+        }
+
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredEmployees.length / pageSize);
+            if (page >= 1 && page <= totalPages) {
+                currentPage = page;
+                renderEmployees();
+            }
+        }
+
+        // Selection functionality
+        function handleSelectAll() {
+            const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+                if (selectAll.checked) {
+                    selectedEmployees.add(checkbox.value);
+                } else {
+                    selectedEmployees.delete(checkbox.value);
+                }
+            });
+            updateBulkActions();
+        }
+
+        function handleRowSelection(userID, checked) {
+            if (checked) {
+                selectedEmployees.add(userID);
+            } else {
+                selectedEmployees.delete(userID);
+            }
+            updateBulkActions();
+        }
+
+        function updateBulkActions() {
+            const hasSelection = selectedEmployees.size > 0;
+            bulkActions.disabled = !hasSelection;
+            
+            if (hasSelection) {
+                bulkActions.classList.remove('opacity-50');
+            } else {
+                bulkActions.classList.add('opacity-50');
+                bulkMenu.classList.add('hidden');
+            }
+        }
+
+        function toggleBulkMenu() {
+            if (!bulkActions.disabled) {
+                bulkMenu.classList.toggle('hidden');
+            }
+        }
+
+        // Render functions
+        function renderEmployees() {
+            showLoading();
+            
+            setTimeout(() => {
+                const startIndex = (currentPage - 1) * pageSize;
+                const endIndex = startIndex + pageSize;
+                const pageEmployees = filteredEmployees.slice(startIndex, endIndex);
+
+                if (pageEmployees.length === 0 && filteredEmployees.length === 0) {
+                    showEmptyState();
+                } else {
+                    hideLoadingAndEmpty();
+                    renderDesktopTable(pageEmployees);
+                    renderMobileCards(pageEmployees);
+                    renderPagination();
+                    updateResultsCount();
+                }
+            }, 300);
+        }
+
+        function renderDesktopTable(employees) {
+            employeeTableBody.innerHTML = employees.map(employee => `
+                <tr class="hover:bg-secondary-50 transition-fast">
+                    <td class="px-6 py-4">
+                        <input type="checkbox" value="${employee.userID}" 
+                               onchange="handleRowSelection('${employee.userID}', this.checked)"
+                               class="rounded border-secondary-300 text-primary focus:ring-primary-500">
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="text-sm font-medium text-text-primary font-data">${employee.userID}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="flex items-center">
+                            <div class="flex-shrink-0 h-8 w-8">
+                                <div class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center">
+                                    <span class="text-xs font-medium text-primary">${employee.name.charAt(0)}</span>
+                                </div>
+                            </div>
+                            <div class="ml-3">
+                                <div class="text-sm font-medium text-text-primary">${employee.name}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <span class="status-badge ${getDepartmentBadgeClass(employee.department)}">${employee.department}</span>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">${employee.designation}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary">${employee.site}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data">${employee.mobile}</td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div class="flex items-center space-x-2">
+                            <button onclick="viewEmployee('${employee.userID}')" 
+                                    class="text-primary hover:text-primary-700 transition-fast" title="View Details">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="editEmployee('${employee.userID}')" 
+                                    class="text-accent hover:text-accent-600 transition-fast" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteEmployee('${employee.userID}')" 
+                                    class="text-error hover:text-red-600 transition-fast" title="Delete">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button onclick="generateID('${employee.userID}')" 
+                                    class="text-warning hover:text-warning-600 transition-fast" title="Generate ID">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function renderMobileCards(employees) {
+            mobileCardView.innerHTML = employees.map(employee => `
+                <div class="card mb-4">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" value="${employee.userID}" 
+                                   onchange="handleRowSelection('${employee.userID}', this.checked)"
+                                   class="rounded border-secondary-300 text-primary focus:ring-primary-500">
+                            <div class="h-10 w-10 rounded-full bg-primary-100 flex items-center justify-center">
+                                <span class="text-sm font-medium text-primary">${employee.name.charAt(0)}</span>
+                            </div>
+                            <div>
+                                <div class="text-sm font-medium text-text-primary">${employee.name}</div>
+                                <div class="text-xs text-text-secondary font-data">${employee.userID}</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="viewEmployee('${employee.userID}')" 
+                                    class="text-primary hover:text-primary-700 transition-fast p-1">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="editEmployee('${employee.userID}')" 
+                                    class="text-accent hover:text-accent-600 transition-fast p-1">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteEmployee('${employee.userID}')" 
+                                    class="text-error hover:text-red-600 transition-fast p-1">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                            <button onclick="generateID('${employee.userID}')" 
+                                    class="text-warning hover:text-warning-600 transition-fast p-1">
+                                <i class="fas fa-download"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-xs">
+                        <div>
+                            <span class="text-text-secondary">Department:</span>
+                            <span class="status-badge ${getDepartmentBadgeClass(employee.department)} ml-1">${employee.department}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Designation:</span>
+                            <span class="text-text-primary ml-1">${employee.designation}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Site:</span>
+                            <span class="text-text-primary ml-1">${employee.site}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Mobile:</span>
+                            <span class="text-text-primary font-data ml-1">${employee.mobile}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredEmployees.length / pageSize);
+            
+            prevPage.disabled = currentPage === 1;
+            nextPage.disabled = currentPage === totalPages;
+
+            // Generate page numbers
+            let pages = [];
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+            if (endPage - startPage + 1 < maxVisiblePages) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                pages.push(i);
+            }
+
+            pageNumbers.innerHTML = pages.map(page => `
+                <button onclick="changePage(${page})" 
+                        class="px-3 py-2 text-sm rounded-md transition-fast ${
+                            page === currentPage 
+                                ? 'bg-primary text-white' 
+                                : 'text-text-secondary hover:bg-secondary-100'
+                        }">
+                    ${page}
+                </button>
+            `).join('');
+        }
+
+        function updateResultsCount() {
+            const startIndex = (currentPage - 1) * pageSize + 1;
+            const endIndex = Math.min(currentPage * pageSize, filteredEmployees.length);
+            const total = filteredEmployees.length;
+            
+            resultsCount.textContent = `Showing ${startIndex}-${endIndex} of ${total} employees`;
+        }
+
+        // Utility functions
+        function getDepartmentBadgeClass(department) {
+            const classes = {
+                'Civil': 'status-success',
+                'Carpenter': 'bg-accent-100 text-accent-600',
+                'Painter': 'status-warning',
+                'POP': 'status-error'
+            };
+            return classes[department] || 'bg-secondary-100 text-secondary-600';
+        }
+
+        function showLoading() {
+            loadingState.classList.remove('hidden');
+            emptyState.classList.add('hidden');
+            employeeTableBody.innerHTML = '';
+            mobileCardView.innerHTML = '';
+        }
+
+        function showEmptyState() {
+            loadingState.classList.add('hidden');
+            emptyState.classList.remove('hidden');
+            employeeTableBody.innerHTML = '';
+            mobileCardView.innerHTML = '';
+        }
+
+        function hideLoadingAndEmpty() {
+            loadingState.classList.add('hidden');
+            emptyState.classList.add('hidden');
+        }
+
+        // Action functions
+        function viewEmployee(userID) {
+            window.location.href = `employee_detail_view.html?id=${userID}`;
+        }
+
+        function editEmployee(userID) {
+            window.location.href = `employee_id_generation_form.html?edit=${userID}`;
+        }
+
+        function deleteEmployee(userID) {
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteModal').dataset.userID = userID;
+        }
+
+        function generateID(userID) {
+            // Simulate ID generation
+            const button = event.target.closest('button');
+            const originalHTML = button.innerHTML;
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+            button.disabled = true;
+
+            setTimeout(() => {
+                button.innerHTML = originalHTML;
+                button.disabled = false;
+                alert(`ID card generated for ${userID}`);
+            }, 2000);
+        }
+
+        function closeDeleteModal() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        }
+
+        function confirmDelete() {
+            const password = document.getElementById('adminPassword').value;
+            const userID = document.getElementById('deleteModal').dataset.userID;
+
+            if (password === 'admin123') {
+                // Remove from mock data
+                const index = mockEmployees.findIndex(emp => emp.userID === userID);
+                if (index > -1) {
+                    mockEmployees.splice(index, 1);
+                    applyFilters();
+                    closeDeleteModal();
+                    alert(`Employee ${userID} deleted successfully`);
+                }
+            } else {
+                alert('Invalid admin password');
+            }
+        }
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

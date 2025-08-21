@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Detail View - ID Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="employee_records_dashboard.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Employee Records
+                        </a>
+                        <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            About
+                        </a>
+                        <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+                <a href="employee_records_dashboard.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="home_dashboard.html" class="text-primary hover:text-primary-700 text-sm">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-1">Home</span>
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <a href="employee_records_dashboard.html" class="text-primary hover:text-primary-700 text-sm">Employee Records</a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-secondary text-sm">John Smith</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Detail Content -->
+        <section class="py-8">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Header with Actions -->
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-text-primary mb-2">Employee Details</h1>
+                        <p class="text-text-secondary">Complete information and documents for John Smith</p>
+                    </div>
+                    <div class="flex flex-col sm:flex-row gap-3 mt-4 sm:mt-0">
+                        <button id="editEmployeeBtn" class="btn-secondary inline-flex items-center px-4 py-2">
+                            <i class="fas fa-edit mr-2"></i>
+                            Edit Employee
+                        </button>
+                        <button id="generateIdBtn" class="btn-primary inline-flex items-center px-4 py-2">
+                            <i class="fas fa-id-card mr-2"></i>
+                            <span id="generateIdText">Generate ID Card</span>
+                            <i class="fas fa-spinner fa-spin ml-2 hidden" id="generateIdSpinner"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                    <!-- Left Panel - Employee Photo & Quick Actions -->
+                    <div class="lg:col-span-3">
+                        <div class="card text-center">
+                            <div class="mb-6">
+                                <div class="w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-primary-100">
+                                    <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="John Smith" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                </div>
+                                <h3 class="text-xl font-semibold text-text-primary mb-1">John Smith</h3>
+                                <p class="text-text-secondary text-sm mb-1">Employee ID: EMP001</p>
+                                <p class="text-text-secondary text-sm">Civil Department</p>
+                            </div>
+
+                            <!-- Quick Actions -->
+                            <div class="space-y-3">
+                                <button class="w-full btn-primary text-sm py-2">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Edit Profile
+                                </button>
+                                <button class="w-full btn-secondary text-sm py-2">
+                                    <i class="fas fa-id-card mr-2"></i>
+                                    Generate ID
+                                </button>
+                                <button class="w-full bg-error-100 text-error-600 hover:bg-error-200 px-4 py-2 rounded-lg font-medium transition-all duration-200 text-sm" id="deleteEmployeeBtn">
+                                    <i class="fas fa-trash mr-2"></i>
+                                    Delete
+                                </button>
+                            </div>
+
+                            <!-- Status Badge -->
+                            <div class="mt-6 pt-4 border-t border-secondary-200">
+                                <span class="status-badge status-success">
+                                    <i class="fas fa-circle text-xs mr-1"></i>
+                                    Active Employee
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Center Section - Detailed Information -->
+                    <div class="lg:col-span-6">
+                        <!-- Personal Details Card -->
+                        <div class="card mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Personal Details</h3>
+                                <button class="text-primary hover:text-primary-700 text-sm">
+                                    <i class="fas fa-edit mr-1"></i>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Full Name</label>
+                                    <p class="text-text-primary font-medium">John Smith</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Father's Name</label>
+                                    <p class="text-text-primary font-medium">Robert Smith</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Date of Birth</label>
+                                    <p class="text-text-primary font-medium">03/15/1990</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Gender</label>
+                                    <p class="text-text-primary font-medium">Male</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Marital Status</label>
+                                    <p class="text-text-primary font-medium">Married</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Aadhaar Number</label>
+                                    <p class="text-text-primary font-medium font-data">1234 5678 9012</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Employment Information Card -->
+                        <div class="card mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Employment Information</h3>
+                                <button class="text-primary hover:text-primary-700 text-sm">
+                                    <i class="fas fa-edit mr-1"></i>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Employee ID</label>
+                                    <p class="text-text-primary font-medium font-data">EMP001</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Department</label>
+                                    <p class="text-text-primary font-medium">Civil</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Designation</label>
+                                    <p class="text-text-primary font-medium">Mistri</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Site</label>
+                                    <p class="text-text-primary font-medium">Campian School</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Date of Joining</label>
+                                    <p class="text-text-primary font-medium">01/15/2023</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Status</label>
+                                    <span class="status-badge status-success">Active</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Details Card -->
+                        <div class="card mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Contact Details</h3>
+                                <button class="text-primary hover:text-primary-700 text-sm">
+                                    <i class="fas fa-edit mr-1"></i>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Mobile Number</label>
+                                    <p class="text-text-primary font-medium font-data">+91 9876543210</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Email Address</label>
+                                    <p class="text-text-primary font-medium">john.smith@company.com</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Banking Information Card -->
+                        <div class="card">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Banking Information</h3>
+                                <button class="text-primary hover:text-primary-700 text-sm">
+                                    <i class="fas fa-edit mr-1"></i>
+                                    Edit
+                                </button>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Account Number</label>
+                                    <p class="text-text-primary font-medium font-data">1234567890123456</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">IFSC Code</label>
+                                    <p class="text-text-primary font-medium font-data">HDFC0001234</p>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-medium text-text-secondary mb-1">Bank Name</label>
+                                    <p class="text-text-primary font-medium">HDFC Bank</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Document Gallery -->
+                    <div class="lg:col-span-3">
+                        <div class="card">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Uploaded Documents</h3>
+                            
+                            <!-- Document Gallery -->
+                            <div class="space-y-4">
+                                <!-- Aadhaar Front -->
+                                <div class="border border-secondary-200 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-sm font-medium text-text-primary">Aadhaar Front</h4>
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="openLightbox('aadhaar-front')">
+                                            <i class="fas fa-expand-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="aspect-w-16 aspect-h-10 mb-2">
+                                        <img src="https://images.pixabay.com/photo/2021/01/21/15/54/id-card-5937226_1280.jpg" alt="Aadhaar Front" class="w-full h-24 object-cover rounded cursor-pointer" onclick="openLightbox('aadhaar-front')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                    <div class="flex justify-between text-xs text-text-secondary">
+                                        <span>Uploaded: 08/15/2025</span>
+                                        <span>2.1 MB</span>
+                                    </div>
+                                    <button class="w-full mt-2 text-xs text-primary hover:text-primary-700 border border-primary-200 hover:border-primary-300 rounded py-1">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Download
+                                    </button>
+                                </div>
+
+                                <!-- Aadhaar Back -->
+                                <div class="border border-secondary-200 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-sm font-medium text-text-primary">Aadhaar Back</h4>
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="openLightbox('aadhaar-back')">
+                                            <i class="fas fa-expand-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="aspect-w-16 aspect-h-10 mb-2">
+                                        <img src="https://images.pixabay.com/photo/2020/06/30/10/23/icon-5355896_1280.png" alt="Aadhaar Back" class="w-full h-24 object-cover rounded cursor-pointer" onclick="openLightbox('aadhaar-back')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                    <div class="flex justify-between text-xs text-text-secondary">
+                                        <span>Uploaded: 08/15/2025</span>
+                                        <span>1.9 MB</span>
+                                    </div>
+                                    <button class="w-full mt-2 text-xs text-primary hover:text-primary-700 border border-primary-200 hover:border-primary-300 rounded py-1">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Download
+                                    </button>
+                                </div>
+
+                                <!-- PAN Card -->
+                                <div class="border border-secondary-200 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-sm font-medium text-text-primary">PAN Card</h4>
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="openLightbox('pan-card')">
+                                            <i class="fas fa-expand-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="aspect-w-16 aspect-h-10 mb-2">
+                                        <img src="https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="PAN Card" class="w-full h-24 object-cover rounded cursor-pointer" onclick="openLightbox('pan-card')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                    <div class="flex justify-between text-xs text-text-secondary">
+                                        <span>Uploaded: 08/15/2025</span>
+                                        <span>1.7 MB</span>
+                                    </div>
+                                    <button class="w-full mt-2 text-xs text-primary hover:text-primary-700 border border-primary-200 hover:border-primary-300 rounded py-1">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Download
+                                    </button>
+                                </div>
+
+                                <!-- Bank Passbook -->
+                                <div class="border border-secondary-200 rounded-lg p-3">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <h4 class="text-sm font-medium text-text-primary">Bank Passbook</h4>
+                                        <button class="text-primary hover:text-primary-700 text-xs" onclick="openLightbox('bank-passbook')">
+                                            <i class="fas fa-expand-alt"></i>
+                                        </button>
+                                    </div>
+                                    <div class="aspect-w-16 aspect-h-10 mb-2">
+                                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Bank Passbook" class="w-full h-24 object-cover rounded cursor-pointer" onclick="openLightbox('bank-passbook')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                    </div>
+                                    <div class="flex justify-between text-xs text-text-secondary">
+                                        <span>Uploaded: 08/15/2025</span>
+                                        <span>2.3 MB</span>
+                                    </div>
+                                    <button class="w-full mt-2 text-xs text-primary hover:text-primary-700 border border-primary-200 hover:border-primary-300 rounded py-1">
+                                        <i class="fas fa-download mr-1"></i>
+                                        Download
+                                    </button>
+                                </div>
+
+                                <!-- Employee Photos -->
+                                <div class="border border-secondary-200 rounded-lg p-3">
+                                    <h4 class="text-sm font-medium text-text-primary mb-3">Employee Photos</h4>
+                                    <div class="grid grid-cols-3 gap-2">
+                                        <div class="relative">
+                                            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Front Photo" class="w-full h-16 object-cover rounded cursor-pointer" onclick="openLightbox('photo-front')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                            <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded flex items-center justify-center">
+                                                <i class="fas fa-expand-alt text-white opacity-0 hover:opacity-100 transition-opacity"></i>
+                                            </div>
+                                        </div>
+                                        <div class="relative">
+                                            <img src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg" alt="Left Photo" class="w-full h-16 object-cover rounded cursor-pointer" onclick="openLightbox('photo-left')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                            <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded flex items-center justify-center">
+                                                <i class="fas fa-expand-alt text-white opacity-0 hover:opacity-100 transition-opacity"></i>
+                                            </div>
+                                        </div>
+                                        <div class="relative">
+                                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Right Photo" class="w-full h-16 object-cover rounded cursor-pointer" onclick="openLightbox('photo-right')" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                            <div class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 rounded flex items-center justify-center">
+                                                <i class="fas fa-expand-alt text-white opacity-0 hover:opacity-100 transition-opacity"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-xs text-text-secondary mt-2 text-center">
+                                        <span>Uploaded: 08/15/2025</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightboxModal" class="fixed inset-0 bg-black bg-opacity-75 z-50 hidden flex items-center justify-center p-4">
+        <div class="relative max-w-4xl max-h-full">
+            <button id="closeLightbox" class="absolute top-4 right-4 text-white hover:text-secondary-300 z-10">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <img id="lightboxImage" src alt class="max-w-full max-h-full object-contain" />
+            <div class="absolute bottom-4 left-4 right-4 text-center">
+                <div class="bg-black bg-opacity-50 rounded-lg px-4 py-2 inline-block">
+                    <p id="lightboxTitle" class="text-white font-medium"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-surface rounded-lg max-w-md w-full p-6">
+            <div class="text-center">
+                <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-error-100 mb-4">
+                    <i class="fas fa-exclamation-triangle text-error text-xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-text-primary mb-2">Delete Employee</h3>
+                <p class="text-text-secondary mb-4">Are you sure you want to delete this employee? This action cannot be undone.</p>
+                <div class="mb-4">
+                    <label class="block text-sm font-medium text-text-secondary mb-2">Enter Admin Password</label>
+                    <input type="password" id="adminPassword" class="form-input" placeholder="Enter password" />
+                </div>
+                <div class="flex space-x-3">
+                    <button id="cancelDelete" class="flex-1 btn-secondary">Cancel</button>
+                    <button id="confirmDelete" class="flex-1 bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-error-600 transition-colors">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Generate ID Card functionality
+        document.getElementById('generateIdBtn').addEventListener('click', function() {
+            const button = this;
+            const text = document.getElementById('generateIdText');
+            const spinner = document.getElementById('generateIdSpinner');
+            
+            // Show loading state
+            button.disabled = true;
+            text.textContent = 'Generating...';
+            spinner.classList.remove('hidden');
+            
+            // Simulate PDF generation
+            setTimeout(() => {
+                // Reset button state
+                button.disabled = false;
+                text.textContent = 'Generate ID Card';
+                spinner.classList.add('hidden');
+                
+                // Simulate PDF download
+                alert('ID Card generated successfully! Download will start shortly.');
+                
+                // In a real application, this would trigger actual PDF download
+                // window.open('path/to/generated/id-card.pdf', '_blank');
+            }, 3000);
+        });
+
+        // Edit Employee functionality
+        document.getElementById('editEmployeeBtn').addEventListener('click', function() {
+            // In a real application, this would navigate to edit form or enable inline editing
+            window.location.href = 'employee_id_generation_form.html?edit=EMP001';
+        });
+
+        // Delete Employee functionality
+        document.getElementById('deleteEmployeeBtn').addEventListener('click', function() {
+            document.getElementById('deleteModal').classList.remove('hidden');
+        });
+
+        document.getElementById('cancelDelete').addEventListener('click', function() {
+            document.getElementById('deleteModal').classList.add('hidden');
+            document.getElementById('adminPassword').value = '';
+        });
+
+        document.getElementById('confirmDelete').addEventListener('click', function() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                alert('Employee deleted successfully!');
+                window.location.href = 'employee_records_dashboard.html';
+            } else {
+                alert('Invalid admin password!');
+            }
+        });
+
+        // Lightbox functionality
+        function openLightbox(documentType) {
+            const modal = document.getElementById('lightboxModal');
+            const image = document.getElementById('lightboxImage');
+            const title = document.getElementById('lightboxTitle');
+            
+            // Map document types to images and titles
+            const documentMap = {
+                'aadhaar-front': {
+                    src: 'https://images.pixabay.com/photo/2021/01/21/15/54/id-card-5937226_1280.jpg',
+                    title: 'Aadhaar Card - Front'
+                },
+                'aadhaar-back': {
+                    src: 'https://images.pixabay.com/photo/2020/06/30/10/23/icon-5355896_1280.png',
+                    title: 'Aadhaar Card - Back'
+                },
+                'pan-card': {
+                    src: 'https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                    title: 'PAN Card'
+                },
+                'bank-passbook': {
+                    src: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    title: 'Bank Passbook'
+                },
+                'photo-front': {
+                    src: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                    title: 'Employee Photo - Front'
+                },
+                'photo-left': {
+                    src: 'https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg',
+                    title: 'Employee Photo - Left'
+                },
+                'photo-right': {
+                    src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+                    title: 'Employee Photo - Right'
+                }
+            };
+            
+            const doc = documentMap[documentType];
+            if (doc) {
+                image.src = doc.src;
+                image.alt = doc.title;
+                title.textContent = doc.title;
+                modal.classList.remove('hidden');
+            }
+        }
+
+        // Close lightbox
+        document.getElementById('closeLightbox').addEventListener('click', function() {
+            document.getElementById('lightboxModal').classList.add('hidden');
+        });
+
+        // Close lightbox on background click
+        document.getElementById('lightboxModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+
+        // Close lightbox on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.getElementById('lightboxModal').classList.add('hidden');
+                document.getElementById('deleteModal').classList.add('hidden');
+            }
+        });
+
+        // Touch gestures for mobile lightbox
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.getElementById('lightboxImage').addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('lightboxImage').addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swiped left - next image (if applicable)
+                    console.log('Swiped left');
+                } else {
+                    // Swiped right - previous image (if applicable)
+                    console.log('Swiped right');
+                }
+            }
+        }
+
+        // Add loading animation to action buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function() {
+                if (!this.disabled) {
+                    this.style.opacity = '0.8';
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

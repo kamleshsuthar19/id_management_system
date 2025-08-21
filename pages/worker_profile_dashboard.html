@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worker Profile Dashboard - ID Management System</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation - Worker Role -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Minimal Navigation for Worker -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="worker_profile_dashboard.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            My Profile
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile and Logout -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6 space-x-3">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" id="userProfileImage" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Worker Profile" />
+                                <span class="ml-2 text-sm font-medium" id="userDisplayName">Worker</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                        <button onclick="logout()" class="btn-secondary px-3 py-2 text-sm">
+                            <i class="fas fa-sign-out-alt mr-1"></i>
+                            Logout
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="worker_profile_dashboard.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">My Profile</a>
+                <button onclick="logout()" class="text-error hover:bg-error-50 block w-full text-left px-3 py-2 rounded-md text-base font-medium">
+                    <i class="fas fa-sign-out-alt mr-1"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="worker_profile_dashboard.html" class="text-primary hover:text-primary-700 text-sm">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-1">Home</span>
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">My Profile</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Section -->
+        <section class="py-6">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <!-- Left Section - Employee Photo and Basic Details (4 columns) -->
+                    <div class="lg:col-span-4">
+                        <!-- Employee Photo and Basic Info -->
+                        <div class="card mb-6">
+                            <div class="text-center">
+                                <div class="relative inline-block">
+                                    <img id="employeePhoto" class="w-32 h-32 rounded-full object-cover border-4 border-primary-100 mx-auto mb-4" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Employee Photo" />
+                                    <div class="absolute bottom-0 right-0 bg-success w-6 h-6 rounded-full border-2 border-white flex items-center justify-center">
+                                        <i class="fas fa-check text-white text-xs"></i>
+                                    </div>
+                                </div>
+                                <h2 class="text-xl font-semibold text-text-primary mb-1" id="employeeName">Rajesh Kumar</h2>
+                                <p class="text-sm text-text-secondary mb-4" id="employeeId">Employee ID: EMP001</p>
+                                
+                                <!-- Basic Details -->
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">Department:</span>
+                                        <span class="font-medium" id="employeeDepartment">Civil</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">Designation:</span>
+                                        <span class="font-medium" id="employeeDesignation">Mistri</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">Site:</span>
+                                        <span class="font-medium" id="employeeSite">Campian School</span>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-text-secondary">Joining Date:</span>
+                                        <span class="font-medium" id="employeeJoiningDate">15 Jan 2023</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="card">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Quick Actions</h3>
+                            <div class="space-y-3">
+                                <button onclick="downloadIdCard()" class="w-full btn-primary flex items-center justify-center" id="downloadIdBtn">
+                                    <i class="fas fa-download mr-2"></i>
+                                    Download ID Card
+                                </button>
+                                <button onclick="toggleContactEdit()" class="w-full btn-secondary flex items-center justify-center" id="editContactBtn">
+                                    <i class="fas fa-edit mr-2"></i>
+                                    Update Contact Info
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Section - Comprehensive Personal Information (8 columns) -->
+                    <div class="lg:col-span-8">
+                        <!-- Employment Details -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Employment Details</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Employee ID</label>
+                                    <p class="text-text-primary font-medium font-data">EMP001</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Full Name</label>
+                                    <p class="text-text-primary font-medium">Rajesh Kumar</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Father's Name</label>
+                                    <p class="text-text-primary font-medium">Ram Kumar</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Department</label>
+                                    <span class="status-badge status-success">Civil</span>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Designation</label>
+                                    <p class="text-text-primary font-medium">Mistri</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Work Site</label>
+                                    <p class="text-text-primary font-medium">Campian School</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Date of Joining</label>
+                                    <p class="text-text-primary font-medium">15 January 2023</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Marital Status</label>
+                                    <p class="text-text-primary font-medium">Married</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact Information (Editable) -->
+                        <div class="card mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-semibold text-text-primary">Contact Information</h3>
+                                <span class="text-xs text-success bg-success-50 px-2 py-1 rounded-full">
+                                    <i class="fas fa-edit mr-1"></i>Editable
+                                </span>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="contactSection">
+                                <!-- Read-only Mode -->
+                                <div class="contact-readonly">
+                                    <label class="block text-sm text-text-secondary mb-1">Mobile Number</label>
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-text-primary font-medium font-data" id="displayMobile">+91 9876543210</p>
+                                        <button onclick="enableMobileEdit()" class="text-primary hover:text-primary-700 text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="contact-readonly">
+                                    <label class="block text-sm text-text-secondary mb-1">Email Address</label>
+                                    <div class="flex items-center justify-between">
+                                        <p class="text-text-primary font-medium" id="displayEmail">rajesh.kumar@example.com</p>
+                                        <button onclick="enableEmailEdit()" class="text-primary hover:text-primary-700 text-sm">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="contact-readonly md:col-span-2">
+                                    <label class="block text-sm text-text-secondary mb-1">Address</label>
+                                    <div class="flex items-start justify-between">
+                                        <p class="text-text-primary font-medium" id="displayAddress">123, MG Road, Bangalore, Karnataka - 560001</p>
+                                        <button onclick="enableAddressEdit()" class="text-primary hover:text-primary-700 text-sm ml-2">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Edit Mode (Hidden by default) -->
+                                <div class="mobile-edit hidden">
+                                    <label class="block text-sm text-text-secondary mb-1">Mobile Number</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="tel" id="editMobile" class="form-input flex-1" value="+91 9876543210" />
+                                        <button onclick="saveMobile()" class="btn-primary px-3 py-2 text-sm">Save</button>
+                                        <button onclick="cancelMobileEdit()" class="btn-secondary px-3 py-2 text-sm">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="email-edit hidden">
+                                    <label class="block text-sm text-text-secondary mb-1">Email Address</label>
+                                    <div class="flex items-center space-x-2">
+                                        <input type="email" id="editEmail" class="form-input flex-1" value="rajesh.kumar@example.com" />
+                                        <button onclick="saveEmail()" class="btn-primary px-3 py-2 text-sm">Save</button>
+                                        <button onclick="cancelEmailEdit()" class="btn-secondary px-3 py-2 text-sm">Cancel</button>
+                                    </div>
+                                </div>
+                                <div class="address-edit hidden md:col-span-2">
+                                    <label class="block text-sm text-text-secondary mb-1">Address</label>
+                                    <div class="space-y-2">
+                                        <textarea id="editAddress" class="form-input" rows="3">123, MG Road, Bangalore, Karnataka - 560001</textarea>
+                                        <div class="flex items-center space-x-2">
+                                            <button onclick="saveAddress()" class="btn-primary px-3 py-2 text-sm">Save</button>
+                                            <button onclick="cancelAddressEdit()" class="btn-secondary px-3 py-2 text-sm">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Personal Information (Read-only) -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Personal Information</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Aadhaar Number</label>
+                                    <p class="text-text-primary font-medium font-data">XXXX XXXX 9012</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">PAN Number</label>
+                                    <p class="text-text-primary font-medium font-data">ABCDE1234F</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Bank Account Number</label>
+                                    <p class="text-text-primary font-medium font-data">XXXX XXXX 7890</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Gender</label>
+                                    <p class="text-text-primary font-medium">Male</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Emergency Contacts -->
+                        <div class="card">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Emergency Contacts</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Emergency Contact 1</label>
+                                    <p class="text-text-primary font-medium">Sunita Kumar (Wife)</p>
+                                    <p class="text-text-secondary font-data text-sm">+91 9876543211</p>
+                                </div>
+                                <div>
+                                    <label class="block text-sm text-text-secondary mb-1">Emergency Contact 2</label>
+                                    <p class="text-text-primary font-medium">Ramesh Kumar (Brother)</p>
+                                    <p class="text-text-secondary font-data text-sm">+91 9876543212</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Gallery -->
+                <div class="card mt-6">
+                    <h3 class="text-lg font-semibold text-text-primary mb-4">Document Gallery</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                        <div class="group cursor-pointer" onclick="viewDocument('aadhaar')">
+                            <div class="bg-secondary-100 rounded-lg p-4 text-center group-hover:bg-secondary-200 transition-colors">
+                                <i class="fas fa-id-card text-2xl text-secondary-600 mb-2"></i>
+                                <p class="text-xs text-text-secondary">Aadhaar Card</p>
+                            </div>
+                        </div>
+                        <div class="group cursor-pointer" onclick="viewDocument('pan')">
+                            <div class="bg-secondary-100 rounded-lg p-4 text-center group-hover:bg-secondary-200 transition-colors">
+                                <i class="fas fa-credit-card text-2xl text-secondary-600 mb-2"></i>
+                                <p class="text-xs text-text-secondary">PAN Card</p>
+                            </div>
+                        </div>
+                        <div class="group cursor-pointer" onclick="viewDocument('photo')">
+                            <div class="bg-secondary-100 rounded-lg p-4 text-center group-hover:bg-secondary-200 transition-colors">
+                                <i class="fas fa-camera text-2xl text-secondary-600 mb-2"></i>
+                                <p class="text-xs text-text-secondary">Profile Photo</p>
+                            </div>
+                        </div>
+                        <div class="group cursor-pointer" onclick="viewDocument('bank')">
+                            <div class="bg-secondary-100 rounded-lg p-4 text-center group-hover:bg-secondary-200 transition-colors">
+                                <i class="fas fa-university text-2xl text-secondary-600 mb-2"></i>
+                                <p class="text-xs text-text-secondary">Bank Details</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Notification Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-check-circle text-success text-2xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-text-primary">Success</h3>
+                </div>
+            </div>
+            <p class="text-text-secondary mb-4" id="successMessage">Your information has been updated successfully.</p>
+            <div class="flex justify-end">
+                <button onclick="closeSuccessModal()" class="btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Document Viewer Modal -->
+    <div id="documentModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-lg p-6 max-w-lg w-full mx-4">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-text-primary" id="documentTitle">Document Preview</h3>
+                <button onclick="closeDocumentModal()" class="text-secondary-600 hover:text-text-primary">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="bg-secondary-100 rounded-lg p-8 text-center mb-4" id="documentPreview">
+                <i class="fas fa-file-alt text-4xl text-secondary-600 mb-4"></i>
+                <p class="text-text-secondary">Document preview is view-only</p>
+            </div>
+            <div class="flex justify-end">
+                <button onclick="closeDocumentModal()" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Session Timeout Warning -->
+    <div id="sessionWarning" class="fixed top-4 right-4 bg-warning-50 border-l-4 border-warning-500 p-4 rounded-r-lg shadow-modal z-40 hidden">
+        <div class="flex items-center">
+            <div class="flex-shrink-0">
+                <i class="fas fa-exclamation-triangle text-warning"></i>
+            </div>
+            <div class="ml-3">
+                <p class="text-sm font-medium text-warning-800">Session expires in <span id="sessionTimer">5:00</span></p>
+            </div>
+            <div class="ml-4">
+                <button onclick="extendSession()" class="text-warning-800 hover:text-warning-900 text-sm font-medium">
+                    Extend Session
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock employee data - In real app, this would come from authenticated session
+        const employeeData = {
+            id: 'EMP001',
+            name: 'Rajesh Kumar',
+            fatherName: 'Ram Kumar',
+            department: 'Civil',
+            designation: 'Mistri',
+            site: 'Campian School',
+            joiningDate: '15 January 2023',
+            maritalStatus: 'Married',
+            gender: 'Male',
+            mobile: '+91 9876543210',
+            email: 'rajesh.kumar@example.com',
+            address: '123, MG Road, Bangalore, Karnataka - 560001',
+            aadhaar: 'XXXX XXXX 9012',
+            pan: 'ABCDE1234F',
+            account: 'XXXX XXXX 7890',
+            emergencyContacts: [
+                { name: 'Sunita Kumar', relation: 'Wife', phone: '+91 9876543211' },
+                { name: 'Ramesh Kumar', relation: 'Brother', phone: '+91 9876543212' }
+            ]
+        };
+
+        // Session management
+        let sessionTimeout = 300; // 5 minutes
+        let sessionTimer;
+        let warningShown = false;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadEmployeeData();
+            setupEventListeners();
+            startSessionTimer();
+        });
+
+        // Event listeners
+        function setupEventListeners() {
+            // Mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Session warning auto-dismiss
+            setTimeout(() => {
+                const warning = document.getElementById('sessionWarning');
+                if (!warning.classList.contains('hidden')) {
+                    warning.classList.add('hidden');
+                    warningShown = false;
+                }
+            }, 30000); // Hide after 30 seconds
+        }
+
+        // Load employee data into the page
+        function loadEmployeeData() {
+            document.getElementById('employeeName').textContent = employeeData.name;
+            document.getElementById('employeeId').textContent = `Employee ID: ${employeeData.id}`;
+            document.getElementById('employeeDepartment').textContent = employeeData.department;
+            document.getElementById('employeeDesignation').textContent = employeeData.designation;
+            document.getElementById('employeeSite').textContent = employeeData.site;
+            document.getElementById('employeeJoiningDate').textContent = employeeData.joiningDate.split(' ').slice(0, 2).join(' ');
+            document.getElementById('userDisplayName').textContent = employeeData.name.split(' ')[0];
+            
+            document.getElementById('displayMobile').textContent = employeeData.mobile;
+            document.getElementById('displayEmail').textContent = employeeData.email;
+            document.getElementById('displayAddress').textContent = employeeData.address;
+        }
+
+        // Download ID Card functionality
+        function downloadIdCard() {
+            const btn = document.getElementById('downloadIdBtn');
+            const originalHTML = btn.innerHTML;
+            
+            // Show loading state
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Generating...';
+            btn.disabled = true;
+            
+            // Simulate PDF generation
+            setTimeout(() => {
+                // Create download simulation
+                const link = document.createElement('a');
+                link.href = '#';
+                link.download = `ID_Card_${employeeData.id}.pdf`;
+                link.click();
+                
+                // Reset button
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                
+                showSuccess('ID Card downloaded successfully!');
+            }, 3000);
+        }
+
+        // Contact editing functions
+        function enableMobileEdit() {
+            document.querySelector('.contact-readonly:nth-child(1)').classList.add('hidden');
+            document.querySelector('.mobile-edit').classList.remove('hidden');
+            document.getElementById('editMobile').focus();
+        }
+
+        function saveMobile() {
+            const newMobile = document.getElementById('editMobile').value;
+            if (newMobile && validateMobile(newMobile)) {
+                employeeData.mobile = newMobile;
+                document.getElementById('displayMobile').textContent = newMobile;
+                cancelMobileEdit();
+                showSuccess('Mobile number updated successfully!');
+            } else {
+                alert('Please enter a valid mobile number');
+            }
+        }
+
+        function cancelMobileEdit() {
+            document.querySelector('.contact-readonly:nth-child(1)').classList.remove('hidden');
+            document.querySelector('.mobile-edit').classList.add('hidden');
+            document.getElementById('editMobile').value = employeeData.mobile;
+        }
+
+        function enableEmailEdit() {
+            document.querySelector('.contact-readonly:nth-child(2)').classList.add('hidden');
+            document.querySelector('.email-edit').classList.remove('hidden');
+            document.getElementById('editEmail').focus();
+        }
+
+        function saveEmail() {
+            const newEmail = document.getElementById('editEmail').value;
+            if (newEmail && validateEmail(newEmail)) {
+                employeeData.email = newEmail;
+                document.getElementById('displayEmail').textContent = newEmail;
+                cancelEmailEdit();
+                showSuccess('Email address updated successfully!');
+            } else {
+                alert('Please enter a valid email address');
+            }
+        }
+
+        function cancelEmailEdit() {
+            document.querySelector('.contact-readonly:nth-child(2)').classList.remove('hidden');
+            document.querySelector('.email-edit').classList.add('hidden');
+            document.getElementById('editEmail').value = employeeData.email;
+        }
+
+        function enableAddressEdit() {
+            document.querySelector('.contact-readonly:nth-child(3)').classList.add('hidden');
+            document.querySelector('.address-edit').classList.remove('hidden');
+            document.getElementById('editAddress').focus();
+        }
+
+        function saveAddress() {
+            const newAddress = document.getElementById('editAddress').value;
+            if (newAddress && newAddress.trim().length > 10) {
+                employeeData.address = newAddress;
+                document.getElementById('displayAddress').textContent = newAddress;
+                cancelAddressEdit();
+                showSuccess('Address updated successfully!');
+            } else {
+                alert('Please enter a valid address (minimum 10 characters)');
+            }
+        }
+
+        function cancelAddressEdit() {
+            document.querySelector('.contact-readonly:nth-child(3)').classList.remove('hidden');
+            document.querySelector('.address-edit').classList.add('hidden');
+            document.getElementById('editAddress').value = employeeData.address;
+        }
+
+        // Document viewer
+        function viewDocument(type) {
+            const titles = {
+                'aadhaar': 'Aadhaar Card',
+                'pan': 'PAN Card',
+                'photo': 'Profile Photo',
+                'bank': 'Bank Details'
+            };
+            
+            document.getElementById('documentTitle').textContent = titles[type] || 'Document';
+            document.getElementById('documentModal').classList.remove('hidden');
+        }
+
+        function closeDocumentModal() {
+            document.getElementById('documentModal').classList.add('hidden');
+        }
+
+        // Success modal
+        function showSuccess(message) {
+            document.getElementById('successMessage').textContent = message;
+            document.getElementById('successModal').classList.remove('hidden');
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        // Session management
+        function startSessionTimer() {
+            sessionTimer = setInterval(() => {
+                sessionTimeout--;
+                
+                if (sessionTimeout <= 60 && !warningShown) {
+                    showSessionWarning();
+                    warningShown = true;
+                }
+                
+                if (sessionTimeout <= 0) {
+                    logout();
+                }
+                
+                updateSessionDisplay();
+            }, 1000);
+        }
+
+        function showSessionWarning() {
+            document.getElementById('sessionWarning').classList.remove('hidden');
+        }
+
+        function updateSessionDisplay() {
+            const minutes = Math.floor(sessionTimeout / 60);
+            const seconds = sessionTimeout % 60;
+            document.getElementById('sessionTimer').textContent = 
+                `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function extendSession() {
+            sessionTimeout = 300; // Reset to 5 minutes
+            document.getElementById('sessionWarning').classList.add('hidden');
+            warningShown = false;
+            showSuccess('Session extended for 5 more minutes');
+        }
+
+        // Logout functionality
+        function logout() {
+            clearInterval(sessionTimer);
+            alert('Session expired. You will be redirected to login page.');
+            // In real app, this would redirect to login page
+            window.location.href = '../index.html';
+        }
+
+        // Validation functions
+        function validateMobile(mobile) {
+            const mobileRegex = /^[+]?[0-9]{10,15}$/;
+            return mobileRegex.test(mobile);
+        }
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Toggle contact edit mode (for mobile button)
+        function toggleContactEdit() {
+            const editButton = document.getElementById('editContactBtn');
+            if (editButton.textContent.includes('Update')) {
+                // Currently in view mode, switch to edit mode
+                enableMobileEdit();
+            }
+        }
+
+        // Add some animations and enhancements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add smooth scroll behavior
+            document.documentElement.style.scrollBehavior = 'smooth';
+            
+            // Add fade-in animation to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease-out';
+                
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+
+        // Prevent unauthorized access
+        function checkAuthStatus() {
+            // In real app, this would check authentication token
+            const isAuthenticated = localStorage.getItem('workerAuth');
+            if (!isAuthenticated) {
+                window.location.href = '../index.html';
+            }
+        }
+
+        // Initialize auth check
+        // checkAuthStatus(); // Commented out for demo purposes
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>
