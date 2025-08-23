@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Dashboard - ID Management System</title>
+    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Home
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Employee Records
+                        </a>
+                        <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            About
+                        </a>
+                        <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+                <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="about_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <i class="fas fa-home text-primary text-sm"></i>
+                    <span class="text-primary font-medium text-sm">Home</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="flex justify-center mb-6">
+                        <div class="bg-primary-100 p-4 rounded-full">
+                            <svg class="h-12 w-12 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-4">
+                        Welcome to ID Management System
+                    </h1>
+                    <p class="text-xl text-text-secondary max-w-3xl mx-auto mb-8">
+                        Streamline your employee identification processes with our comprehensive digital platform for creating, managing, and generating professional ID cards.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="employee_id_generation_form.html" class="btn-primary inline-flex items-center px-6 py-3 text-base">
+                            <i class="fas fa-plus mr-2"></i>
+                            Generate New ID
+                        </a>
+                        <a href="employee_records_dashboard.html" class="btn-secondary inline-flex items-center px-6 py-3 text-base">
+                            <i class="fas fa-database mr-2"></i>
+                            View Records
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Action Cards Section -->
+        <section class="py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">Quick Actions</h2>
+                    <p class="text-lg text-text-secondary">Access key functions with a single click</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Generate New ID Card -->
+                    <div class="card group hover:shadow-modal transition-all duration-300 cursor-pointer" onclick="window.location.href='employee_id_generation_form.html'">
+                        <div class="text-center">
+                            <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                                <i class="fas fa-id-card text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-2">Generate New ID</h3>
+                            <p class="text-text-secondary mb-4">Create professional employee ID cards with document upload and validation</p>
+                            <div class="flex items-center justify-center text-primary font-medium group-hover:text-primary-700">
+                                <span>Get Started</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- View Employee Records -->
+                    <div class="card group hover:shadow-modal transition-all duration-300 cursor-pointer" onclick="window.location.href='employee_records_dashboard.html'">
+                        <div class="text-center">
+                            <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-200 transition-colors">
+                                <i class="fas fa-database text-2xl text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-2">View Employee Records</h3>
+                            <p class="text-text-secondary mb-4">Browse, search, and manage all employee records with advanced filtering</p>
+                            <div class="flex items-center justify-center text-accent font-medium group-hover:text-accent-600">
+                                <span>Browse Records</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Statistics -->
+                    <div class="card group hover:shadow-modal transition-all duration-300 cursor-pointer md:col-span-2 lg:col-span-1">
+                        <div class="text-center">
+                            <div class="bg-warning-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-warning-200 transition-colors">
+                                <i class="fas fa-chart-bar text-2xl text-warning"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-2">System Statistics</h3>
+                            <p class="text-text-secondary mb-4">View comprehensive analytics and insights about your ID management system</p>
+                            <div class="flex items-center justify-center text-warning font-medium group-hover:text-warning-600">
+                                <span>View Analytics</span>
+                                <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistics Dashboard -->
+        <section class="bg-surface py-12 lg:py-16 border-t border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">System Overview</h2>
+                    <p class="text-lg text-text-secondary">Key metrics and statistics at a glance</p>
+                </div>
+
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Total Employees -->
+                    <div class="bg-primary-50 rounded-lg p-6 text-center border border-primary-100">
+                        <div class="text-3xl font-bold text-primary mb-2">1,247</div>
+                        <div class="text-sm font-medium text-primary-700 mb-1">Total Employees</div>
+                        <div class="text-xs text-text-secondary">Active records</div>
+                    </div>
+
+                    <!-- Pending IDs -->
+                    <div class="bg-warning-50 rounded-lg p-6 text-center border border-warning-100">
+                        <div class="text-3xl font-bold text-warning mb-2">23</div>
+                        <div class="text-sm font-medium text-warning-700 mb-1">Pending IDs</div>
+                        <div class="text-xs text-text-secondary">Awaiting approval</div>
+                    </div>
+
+                    <!-- Completed This Month -->
+                    <div class="bg-success-50 rounded-lg p-6 text-center border border-success-100">
+                        <div class="text-3xl font-bold text-success mb-2">156</div>
+                        <div class="text-sm font-medium text-success-600 mb-1">Completed</div>
+                        <div class="text-xs text-text-secondary">This month</div>
+                    </div>
+
+                    <!-- Departments -->
+                    <div class="bg-accent-50 rounded-lg p-6 text-center border border-accent-100">
+                        <div class="text-3xl font-bold text-accent mb-2">4</div>
+                        <div class="text-sm font-medium text-accent-600 mb-1">Departments</div>
+                        <div class="text-xs text-text-secondary">Active divisions</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity and Quick Links -->
+        <section class="py-12 lg:py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Recent Activity Feed -->
+                    <div class="lg:col-span-2">
+                        <div class="card">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-xl font-semibold text-text-primary">Recent Activity</h3>
+                                <a href="employee_records_dashboard.html" class="text-primary hover:text-primary-700 text-sm font-medium">View All</a>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3 p-3 bg-success-50 rounded-lg border border-success-100">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+                                            <i class="fas fa-check text-white text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-text-primary">ID card generated for John Smith</p>
+                                        <p class="text-xs text-text-secondary">Employee ID: EMP001 • 2 hours ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3 p-3 bg-primary-50 rounded-lg border border-primary-100">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center">
+                                            <i class="fas fa-plus text-white text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-text-primary">New employee record created</p>
+                                        <p class="text-xs text-text-secondary">Sarah Johnson • Civil Department • 4 hours ago</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3 p-3 bg-warning-50 rounded-lg border border-warning-100">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-warning rounded-full flex items-center justify-center">
+                                            <i class="fas fa-edit text-white text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-text-primary">Employee record updated</p>
+                                        <p class="text-xs text-text-secondary">Michael Brown • Updated contact info • 6 hours ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Links Sidebar -->
+                    <div class="lg:col-span-1">
+                        <div class="card">
+                            <h3 class="text-xl font-semibold text-text-primary mb-6">Quick Links</h3>
+                            <div class="space-y-3">
+                                <a href="employee_id_generation_form.html" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-id-card text-primary group-hover:text-primary-700"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-text-primary group-hover:text-primary-700">Generate ID Card</p>
+                                    </div>
+                                </a>
+
+                                <a href="employee_records_dashboard.html" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-search text-accent group-hover:text-accent-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-text-primary group-hover:text-accent-600">Search Records</p>
+                                    </div>
+                                </a>
+
+                                <a href="employee_detail_view.html" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-eye text-warning group-hover:text-warning-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-text-primary group-hover:text-warning-600">View Details</p>
+                                    </div>
+                                </a>
+
+                                <a href="contact_us.html" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                    <div class="flex-shrink-0">
+                                        <i class="fas fa-headset text-error group-hover:text-error-600"></i>
+                                    </div>
+                                    <div class="ml-3">
+                                        <p class="text-sm font-medium text-text-primary group-hover:text-error-600">Get Support</p>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- System Status -->
+                        <div class="card mt-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">System Status</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Database</span>
+                                    <span class="status-badge status-success">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Online
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">PDF Generator</span>
+                                    <span class="status-badge status-success">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Active
+                                    </span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">File Storage</span>
+                                    <span class="status-badge status-success">
+                                        <i class="fas fa-circle text-xs mr-1"></i>
+                                        Available
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Add loading animation to action cards
+        document.querySelectorAll('.card.group').forEach(card => {
+            card.addEventListener('click', function() {
+                if (this.onclick) {
+                    this.style.opacity = '0.7';
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.opacity = '1';
+                        this.style.transform = 'scale(1)';
+                    }, 200);
+                }
+            });
+        });
+
+        // Update timestamp for recent activity
+        document.addEventListener('DOMContentLoaded', function() {
+            const now = new Date();
+            const activities = document.querySelectorAll('.text-xs.text-text-secondary');
+            activities.forEach((activity, index) => {
+                if (activity.textContent.includes('ago')) {
+                    const hours = (index + 1) * 2;
+                    activity.textContent = activity.textContent.replace(/\d+ hours ago/, `${hours} hours ago`);
+                }
+            });
+        });
+    </script>
+<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
+</body>
+</html>

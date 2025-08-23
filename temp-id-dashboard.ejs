@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JRC ID Dashboard</title>
+    <link rel="stylesheet" href="Assets/css/jrc-id-dashboard.css">
+</head>
+
+<body>
+
+    <h1><span>JRC ID Dashboard</span> <br> || Powered by Kamlesh Suthar ||</h1>
+
+    <div class="filters">
+        <input type="text" id="filterName" placeholder="Search Name">
+        <input type="text" id="filterMobileNumber" placeholder="Search Mobile Number">
+        <input type="text" id="filterAadharNumber" placeholder="Search Aadhar Number">
+        <select id="filterDepartment">
+            <option value="">All Departments</option>
+            <option value="Carpenter">Carpenter</option>
+            <option value="Chef">Chef</option>
+            <option value="Civil">Civil</option>
+            <option value="Housekeeping">Housekeeping</option>
+            <option value="Inventory">Inventory</option>
+            <option value="Painter">Painter</option>
+            <option value="POP">POP</option>
+        </select>
+        <select id="filterDesignation">
+            <option value="">All Designations</option>
+            <option value="Chef">Chef</option>
+            <option value="Half Mistri">Half Mistri</option>
+            <option value="Helper">Helper</option>
+            <option value="Housekeeper">Housekeeper</option>
+            <option value="Mistri">Mistri</option>
+            <option value="Storekeeper">Storekeeper</option>
+        </select>
+        <select id="filterSite">
+            <option value="">All Sites</option>
+            <option value="D Decor">D Decor</option>
+            <option value="Damani">Damani</option>
+            <option value="EON One">EON One</option>
+            <option value="GMA 63">GMA 63</option>
+            <option value="J Kumar">J Kumar</option>
+            <option value="Kalpataru">Kalpataru</option>
+            <option value="Laxmi Niwas">Laxmi Niwas</option>
+            <option value="Lodha World Crest">Lodha World Crest</option>
+            <option value="Lodha World View">Lodha World View</option>
+            <option value="Naigaon Factory Unit-01">Naigaon Factory Unit-01</option>
+            <option value="Naigaon Factory Unit-02">Naigaon Factory Unit-02</option>
+            <option value="Oberoi International School">Oberoi International School</option>
+            <option value="One Lodha Place">One Lodha Place</option>
+            <option value="ORL 360">ORL 360</option>
+            <option value="Palais Royale">Palais Royale</option>
+            <option value="Prakash Jain">Prakash Jain</option>
+            <option value="Raheja Legend">Raheja Legend</option>
+            <option value="Reliance JWC">Reliance JWC</option>
+            <option value="Shreevardhan">Shreevardhan</option>
+            <option value="Sky City">Sky City</option>
+            <option value="Tips Office">Tips Office</option>
+            <option value="Trump Tower">Trump Tower</option>
+        </select>
+        <button onclick="loadRecords()">Search</button>
+        <button onclick="clearFilters()">Clear Filters</button>
+    </div>
+
+    <div class="table-wrapper">
+        <table id="recordsTable">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Father's Name</th>
+                    <th>Marital Status</th>
+                    <th>Gender</th>
+                    <th>Date of Birth</th>
+                    <th>Date of Joining</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Site</th>
+                    <th>Mobile Number</th>
+                    <th>Aadhar Number</th>
+                    <th>Holder Name</th>
+                    <th>Account Number</th>
+                    <th>IFSC</th>
+                    <th>Bank Name</th>
+                    <th class="document-column">Aadhar Card</th>
+                    <th class="document-column">PAN Card</th>
+                    <th class="document-column">Bank Details</th>
+                    <th>Front Photo</th>
+                    <th>Left Photo</th>
+                    <th>Right Photo</th>
+                    <th>Remarks</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="recordsTableBody">
+                <!-- Records will be inserted here -->
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+<script src="/Assets/js/id-dashboard.js"></script>
+
+</html>

@@ -1,0 +1,90 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  overflow: hidden; /* no double scrollbar */
+}
+
+h1 {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  font-size: 15px;
+  padding: 20px;
+  background: white;
+  text-align: center;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.filters {
+  margin-top: 80px;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.filters input,
+.filters select,
+.filters button {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #c7c7c7;
+  border-radius: 4px;
+  box-shadow: 0 2px 2px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.filters input:focus,
+.filters select:focus,
+.filters button:focus {
+  box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.table-wrapper {
+  max-height: calc(100vh - 140px); /* adjust for header + filters */
+  overflow: auto;
+  padding: 0 10px 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+th, td {
+  border: 1px solid #ccc;
+  padding: 20px 10px;
+  white-space: nowrap;
+  text-align: left;
+}
+
+thead th {
+  position: sticky;
+  top: 0;
+  background-color: #eee;
+  z-index: 500;
+}
+
+/* Edit button style */
+button.edit-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button.edit-btn:hover {
+  background-color: #0056b3;
+}

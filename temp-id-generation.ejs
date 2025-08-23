@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Assets/css/id-generation.css">
+    <link rel="stylesheet" href="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.css">
+    <link rel="stylesheet" href="/Assets/css/cropper.css">
+    <title>KS</title>
+</head>
+
+<body>
+    <div class="form-wrapper">
+        <div class="form-card">
+            <h2>User Registration Form</h2>
+            <form action="https://new.jrcidgeneration.dpdns.org/jrc-id-generation/submit" method="post" id="userForm"
+                enctype="multipart/form-data">
+
+                <!-- 🟨 Section: Personal -->
+                <div class="form-section">
+                    <h3>Personal Details</h3>
+
+                    <div class="form-control">
+                        <input type="text" id="name" name="name" required>
+                        <label for="name">
+                            <span style="transition-delay:0ms">U</span><span style="transition-delay:50ms">s</span><span
+                                style="transition-delay:100ms">e</span><span
+                                style="transition-delay:150ms">r</span><span
+                                style="transition-delay:200ms">n</span><span
+                                style="transition-delay:250ms">a</span><span
+                                style="transition-delay:300ms">m</span><span style="transition-delay:350ms">e</span>
+                        </label>
+                    </div>
+
+                    <div class="form-control">
+                        <input type="text" id="fatherName" name="fatherName" required>
+                        <label for="fatherName">
+                            <span style="transition-delay:0ms">F</span><span style="transition-delay:50ms">a</span><span
+                                style="transition-delay:100ms">t</span><span
+                                style="transition-delay:150ms">h</span><span
+                                style="transition-delay:200ms">e</span><span
+                                style="transition-delay:250ms">r</span><span
+                                style="transition-delay:300ms">'</span><span
+                                style="transition-delay:350ms">s</span></span><span
+                                style="transition-delay:350ms"></span></span><span
+                                style="transition-delay:350ms">N</span></span><span
+                                style="transition-delay:350ms">a</span></span><span
+                                style="transition-delay:350ms">m</span></span><span
+                                style="transition-delay:350ms">e</span></span>
+                        </label>
+                    </div>
+
+                    <div class="radio-heading">Marital Status</div>
+                    <div class="radio-inputs">
+                        <label class="radio">
+                            <input type="radio" name="maritalStatus" value="Married" />
+                            <span class="name">Married</span>
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="maritalStatus" value="Unmarried" checked="" />
+                            <span class="name">Unmarried</span>
+                        </label>
+                    </div>
+
+                    <div class="radio-heading">Gender</div>
+                    <div class="radio-inputs">
+                        <label class="radio">
+                            <input type="radio" name="gender" value="Male" checked="" />
+                            <span class="name">Male</span>
+                        </label>
+                        <label class="radio">
+                            <input type="radio" name="gender" value="Female" />
+                            <span class="name">Female</span>
+                        </label>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group form-group-1">
+                            <label for="dob">Date of Birth</label>
+                            <input type="date" id="dob" name="dob" />
+                        </div>
+
+                        <div class="form-group form-group-2">
+                            <label for="doj">Date of Joining</label>
+                            <input type="date" id="doj" name="doj" />
+                        </div>
+                    </div>
+
+
+                    <!-- 🟨 Section: Job Info -->
+                    <div class="form-section">
+                        <h3>Job Information</h3>
+                        <div class="form-group">
+                            <label for="department">Department</label>
+                            <select id="department" name="department">
+                                <option disabled selected>Select</option>
+                                <option value="Carpenter">Carpenter</option>
+                                <option value="Chef">Chef</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Housekeeping">Housekeeping</option>
+                                <option value="Inventory">Inventory</option>
+                                <option value="Painter">Painter</option>
+                                <option value="POP">POP</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="designation">Designation</label>
+                            <select id="designation" name="designation">
+                                <option disabled selected>Select</option>
+                                <option value="Chef">Chef</option>
+                                <option value="Half Mistri">Half Mistri</option>
+                                <option value="Helper">Helper</option>
+                                <option value="Housekeeper">Housekeeper</option>
+                                <option value="Mistri">Mistri</option>
+                                <option value="Storekeeper">Storekeeper</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="site">Site</label>
+                            <select id="site" name="site">
+                                <option disabled selected>Select</option>
+                                <option value="D Decor">D Decor</option>
+                                <option value="Damani">Damani</option>
+                                <option value="EON One">EON One</option>
+                                <option value="GMA 63">GMA 63</option>
+                                <option value="J Kumar">J Kumar</option>
+                                <option value="Kalpataru">Kalpataru</option>
+                                <option value="Laxmi Niwas">Laxmi Niwas</option>
+                                <option value="Lodha World Crest">Lodha World Crest</option>
+                                <option value="Lodha World View">Lodha World View</option>
+                                <option value="Naigaon Factory Unit-01">Naigaon Factory Unit-01</option>
+                                <option value="Naigaon Factory Unit-02">Naigaon Factory Unit-02</option>
+                                <option value="Oberoi International School">Oberoi International School</option>
+                                <option value="One Lodha Place">One Lodha Place</option>
+                                <option value="ORL 360">ORL 360</option>
+                                <option value="Palais Royale">Palais Royale</option>
+                                <option value="Prakash Jain">Prakash Jain</option>
+                                <option value="Raheja Legend">Raheja Legend</option>
+                                <option value="Reliance JWC">Reliance JWC</option>
+                                <option value="Shreevardhan">Shreevardhan</option>
+                                <option value="Sky City">Sky City</option>
+                                <option value="Tips Office">Tips Office</option>
+                                <option value="Trump Tower">Trump Tower</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 🟨 Section: Bank & Contact -->
+                    <div class="form-section">
+                        <h3>Contact & Bank Details</h3>
+
+                        <div class="form-control">
+                            <input type="text" id="mobileNumber" name="mobileNumber" required>
+                            <label for="mobileNumber">
+                                <span style="transition-delay:0ms">M</span><span
+                                    style="transition-delay:50ms">o</span><span
+                                    style="transition-delay:100ms">b</span><span
+                                    style="transition-delay:150ms">i</span><span
+                                    style="transition-delay:200ms">l</span><span
+                                    style="transition-delay:250ms">e</span><span
+                                    style="transition-delay:300ms"></span><span
+                                    style="transition-delay:350ms">N</span><span
+                                    style="transition-delay:300ms">u</span><span
+                                    style="transition-delay:350ms">m</span><span
+                                    style="transition-delay:300ms">b</span><span
+                                    style="transition-delay:350ms">e</span><span style="transition-delay:300ms">r</span>
+                            </label>
+                        </div>
+
+                        <div class="form-control">
+                            <input type="text" id="aadharNumber" name="aadharNumber" required>
+                            <label for="aadharNumber">
+                                <span style="transition-delay:0ms">A</span><span
+                                    style="transition-delay:50ms">a</span><span
+                                    style="transition-delay:100ms">d</span><span
+                                    style="transition-delay:150ms">h</span><span
+                                    style="transition-delay:200ms">a</span><span
+                                    style="transition-delay:250ms">r</span><span
+                                    style="transition-delay:300ms"></span><span
+                                    style="transition-delay:350ms">N</span><span
+                                    style="transition-delay:300ms">u</span><span
+                                    style="transition-delay:350ms">m</span><span
+                                    style="transition-delay:300ms">b</span><span
+                                    style="transition-delay:350ms">e</span><span style="transition-delay:300ms">r</span>
+                            </label>
+                        </div>
+
+                        <div class="form-row form-row-container form-bank-row-container">
+                            <div class="form-group">
+
+
+                                <div class="form-control form-group-1">
+                                    <input type="text" id="accountNumber" name="accountNumber" required>
+                                    <label for="accountNumber">
+                                        <span style="transition-delay:0ms">A</span><span
+                                            style="transition-delay:50ms">c</span><span
+                                            style="transition-delay:100ms">c</span><span
+                                            style="transition-delay:150ms">o</span><span
+                                            style="transition-delay:200ms">u</span><span
+                                            style="transition-delay:250ms">n</span><span
+                                            style="transition-delay:300ms">t</span><span
+                                            style="transition-delay:300ms"></span><span
+                                            style="transition-delay:350ms">N</span><span
+                                            style="transition-delay:300ms">u</span><span
+                                            style="transition-delay:350ms">m</span><span
+                                            style="transition-delay:300ms">b</span><span
+                                            style="transition-delay:350ms">e</span><span
+                                            style="transition-delay:300ms">r</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control form-group-center">
+                                    <input type="text" id="ifsc" name="ifsc" required>
+                                    <label for="ifsc">
+                                        <span style="transition-delay:0ms">I</span><span
+                                            style="transition-delay:50ms">F</span><span
+                                            style="transition-delay:100ms">S</span><span
+                                            style="transition-delay:150ms">C</span><span
+                                            style="transition-delay:150ms"></span><span
+                                            style="transition-delay:200ms">C</span><span
+                                            style="transition-delay:250ms">o</span><span
+                                            style="transition-delay:300ms">d</span><span
+                                            style="transition-delay:350ms">e</span>
+                                    </label>
+                                </div>
+
+                                <div class="form-control form-group-2">
+                                    <input type="text" id="bankName" name="bankName" required>
+                                    <label for="bankName">
+                                        <span style="transition-delay:0ms">B</span><span
+                                            style="transition-delay:50ms">a</span><span
+                                            style="transition-delay:100ms">n</span><span
+                                            style="transition-delay:150ms">k</span><span style="transition-delay:200ms">
+                                        </span><span style="transition-delay:250ms">N</span><span
+                                            style="transition-delay:300ms">a</span><span
+                                            style="transition-delay:350ms">m</span><span
+                                            style="transition-delay:350ms">e</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-control">
+                            <input type="text" id="remarks" name="remarks" required>
+                            <label for="remarks">
+                                <span style="transition-delay:0ms">R</span><span
+                                    style="transition-delay:50ms">e</span><span
+                                    style="transition-delay:100ms">m</span><span
+                                    style="transition-delay:150ms">a</span><span
+                                    style="transition-delay:200ms">r</span><span
+                                    style="transition-delay:250ms">k</span><span style="transition-delay:300ms">s</span>
+                            </label>
+                        </div>
+
+                    </div>
+
+                    <!-- 🟨 Section: Documents -->
+                    <div class="form-section">
+                        <h3>Upload Documents</h3>
+
+                        <div class="form-row form-row-container">
+                            <div class="form-group form-group-1">
+                                <label for="aadharFront">Aadhar Card (Front)</label>
+                                <input type="file" name="aadharFront" id="aadharFront" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="aadharFrontPreview" class="image-preview"></div>
+                            </div>
+
+                            <div class="form-group form-group-center">
+                                <label for="aadharBack">Aadhar Card (Back)</label>
+                                <input type="file" name="aadharBack" id="aadharBack" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="aadharBackPreview" class="image-preview"></div>
+                            </div>
+
+                            <div class="form-group form-group-2">
+                                <label for="panCard">PAN Card </label>
+                                <input type="file" name="panCard" id="panCard" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="panCardPreview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row form-row-container">
+                            <div class="form-group form-group-1">
+                                <label for="photoFront">Photo Front</label>
+                                <input type="file" name="photoFront" id="photoFront" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="photoFrontPreview" class="image-preview"></div>
+                            </div>
+                            <div class="form-group form-group-center">
+                                <label for="photoLeft">Photo Left</label>
+                                <input type="file" name="photoLeft" id="photoLeft" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="photoLeftPreview" class="image-preview"></div>
+                            </div>
+                            <div class="form-group form-group-2">
+                                <label for="photoRight">Photo Right</label>
+                                <input type="file" name="photoRight" id="photoRight" accept="image/jpeg"
+                                    capture="environment" />
+                                <div id="photoRightPreview" class="image-preview"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group form-group-bank">
+                            <label for="bankDetail">Bank Passbook Photo </label>
+                            <input type="file" name="bankDetail" id="bankDetail" accept="image/jpeg"
+                                capture="environment" />
+                            <div id="bankDetailPreview" class="image-preview"></div>
+                        </div>
+
+                    </div>
+
+                    <button type="submit" id="submitBtn">Submit Form</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Cropping Aadhaar -->
+    <div id="cropModal"
+        style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:9999;">
+        <div
+            style="background:#fff; padding:15px; max-width:90vw; max-height:90vh; display:flex; flex-direction:column; align-items:center; overflow:hidden; border-radius:8px;">
+
+            <div
+                style="flex:1; width:100%; max-height:75vh; overflow:hidden; display:flex; justify-content:center; align-items:center;">
+                <img id="cropImage" style="max-width:100%; max-height:100%; object-fit:contain;" />
+            </div>
+
+            <button id="cropBtn"
+                style="margin-top:12px; padding:10px 18px; background:#007bff; color:#fff; border:none; border-radius:6px; cursor:pointer;">
+                Crop & Save
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/cropperjs@1.5.13/dist/cropper.min.js"></script>
+    <script src="/Assets/js/id-generation.js"></script>
+
+</body>
+
+</html>

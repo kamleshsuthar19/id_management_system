@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ID Card - <%= user.name %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/Assets/css/id-card.css">
+</head>
+
+<body>
+  <div class="container">
+
+
+    <div id="idCard">
+      <div class="header">
+        <img id="jrcLogo" src="/Assets/images/JRC_Logo.png" alt="" width="50" height="50">
+      </div>
+
+      <div class="profile-pic">
+        <img src="/<%= user.photoFront %>" alt="User Photo">
+      </div>
+
+      <div class="name">
+        <%= user.name %>
+      </div>
+      <div class="department">
+        <%= user.department %>
+      </div>
+      <div class="designation">
+        <%= user.designation %>
+      </div>
+
+      <div class="info">
+        <table>
+          <tr>
+            <td class="label">User ID :</td>
+            <td>
+              <%= user.userID %>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Father's Name :</td>
+            <td>
+              <%= user.fatherName %>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">D.O.B. :</td>
+            <td>
+              <%= user.dob %>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Joining Date :</td>
+            <td>
+              <%= user.doj %>
+            </td>
+          </tr>
+          <tr>
+            <td class="label">Mobile Number :</td>
+            <td>
+              <%= user.mobileNumber %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="footer">
+        © JRC Interiors | Valid Company ID
+      </div>
+    </div>
+
+    <div class="actions no-print" style="text-align:center; margin-top:20px;">
+      <a href="/export/<%= user.userID %>" class="btn btn-download" target="_blank">
+        Download ID Card (PDF)
+      </a>
+    </div>
+
+    <div class="actions no-print" style="text-align:center; margin-top:20px;">
+      <button class="btn redirect-button" onclick="window.location.href='/id-generation'">Register Another
+        User</button>
+    </div>
+  </div>
+</body>
+
+<script src="/Assets/js/id-card.js"></script>
+
+</html>

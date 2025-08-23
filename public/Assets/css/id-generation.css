@@ -1,0 +1,428 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(to right, #f0f4f8, #e2e8f0);
+}
+
+.form-wrapper {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.form-card {
+    width: 100%;
+    max-width: 900px;
+    background: #ffffffcc;
+    backdrop-filter: blur(6px);
+    padding: 40px 50px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #1f2937;
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #374151;
+    border-left: 4px solid #3b82f6;
+    padding-left: 10px;
+}
+
+.form-group label {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 400;
+    min-width: 5px;
+    margin: 0 0 3px 5px;
+    color: #000000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group-1 {
+    margin-right: 10px;
+}
+
+.form-group-center {
+    margin: 0 5px 0 5px;
+}
+
+.form-group-2 {
+    margin-left: 10px;
+}
+
+.form-group-1,
+.form-group-2,
+.form-group-center input[type="file"] {
+    flex-shrink: 1;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.form-bank-row-container .form-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 120px;
+}
+
+/* File input styling */
+.form-row.documents input[type="file"] {
+    padding: 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #fff;
+    font-size: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #f9fafb;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+input[type="file"] {
+    background: #fff;
+}
+
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+    background: #eff7fde8;
+    outline: none;
+}
+
+#ifsc {
+    text-transform: uppercase;
+}
+
+.image-preview img {
+    max-width: 100%;
+    height: auto;
+    max-height: 150px;
+    display: block;
+    margin-top: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    border-radius: 6px;
+}
+
+/* -------------------------
+   Form Control (floating labels)
+   ------------------------- */
+.form-control {
+    position: relative;
+    margin: 20px 0 10px;
+    max-width: 900px;
+}
+
+.form-control input {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #111010 solid;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: #464343;
+}
+
+.form-control input:focus,
+.form-control input:valid {
+    padding: 20px 10px 4px 10px;
+    outline: 0;
+    border-bottom-color: rgb(72, 171, 204);
+}
+
+.form-control label {
+    position: absolute;
+    top: 15px;
+    left: 0;
+    pointer-events: none;
+    padding-left: 10px;
+}
+
+.form-control label span {
+    display: inline-block;
+    font-size: 18px;
+    min-width: 5px;
+    color: #000000;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.form-control input:focus+label span,
+.form-control input:valid+label span {
+    color: rgb(59, 164, 199);
+    transform: translateY(-20px);
+}
+
+.radio-heading {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 30px 0 0 10px;
+}
+
+/* -------------------------
+   Radio Inputs
+   ------------------------- */
+.radio-inputs {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+    background-color: #eee;
+    box-sizing: border-box;
+    box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+    margin: 5px 0 20px 0;
+    padding: 0.25rem;
+    width: 100%;
+    max-width: 400px;
+    font-size: 14px;
+}
+
+.radio-inputs .radio {
+    flex: 1 1 auto;
+    text-align: center;
+}
+
+.radio-inputs .radio input {
+    display: none;
+}
+
+.radio-inputs .radio .name {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.5rem 0;
+    color: rgba(51, 65, 85, 1);
+    transition: all 0.15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked+.name {
+    background-color: #fff;
+    font-weight: 600;
+    position: relative;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    animation: select 0.3s ease;
+}
+
+.radio-inputs .radio:hover .name {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+@keyframes select {
+    0% {
+        transform: scale(0.95);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Particles */
+.radio-inputs .radio input:checked+.name::before,
+.radio-inputs .radio input:checked+.name::after {
+    content: "";
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #3b82f6;
+    opacity: 0;
+    animation: particles 0.5s ease forwards;
+}
+
+.radio-inputs .radio input:checked+.name::before {
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    --direction: -10px;
+}
+
+.radio-inputs .radio input:checked+.name::after {
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    --direction: 10px;
+}
+
+@keyframes particles {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(var(--direction));
+    }
+}
+
+/* -------------------------
+   Submit Button
+   ------------------------- */
+button[type="submit"] {
+    width: 100%;
+    padding: 14px;
+    background-color: #3b82f6;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+}
+
+/* ==========================
+   📱 Responsive Design
+   ========================== */
+@media (max-width: 900px) {
+    .form-card {
+        padding: 25px;
+    }
+}
+
+@media (max-width: 700px) {
+    .form-wrapper {
+        padding: 10px;
+    }
+
+    .form-card {
+        padding: 20px;
+        box-shadow: none;
+        border-radius: 8px;
+        width: 100%;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 1rem;
+    }
+
+    .form-row-container {
+        margin-bottom: 15px;
+    }
+
+    .form-row-container .form-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1px;
+    }
+
+    .form-row-container .form-group-1 input,
+    .form-row-container .form-group-center input,
+    .form-row-container .form-group-2 input {
+        width: 94%;
+    }
+
+    .form-group-bank {
+        margin-top: 30px !important;
+    }
+
+    .form-group,
+    .form-group-1,
+    .form-group-2,
+    .form-group-center {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        margin: 8px 0 10px 0;
+    }
+
+     select {
+        width: 100% !important;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="file"],
+    select {
+        font-size: 15px;
+        padding: 12px;
+        height: auto;
+        /* better for touch */
+        width: 94%;
+        margin: 0;
+    }
+
+   
+
+    button[type="submit"] {
+        width: 100%;
+        font-size: 16px;
+        padding: 14px;
+        margin-top: 20px;
+    }
+
+    /* .radio-inputs {
+        flex-direction: column;
+        max-width: 100%;
+    } */
+}
+
+@media (max-width: 480px) {
+    h2 {
+        font-size: 20px;
+    }
+
+    .form-card {
+        padding: 15px;
+    }
+
+    input,
+    select,
+    button {
+        font-size: 14px;
+    }
+}
