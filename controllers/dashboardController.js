@@ -158,23 +158,40 @@ const deleteWorker = async (req, res) => {
 // Update worker (basic)
 // ----------------------
 const updateWorker = async (req, res) => {
+  // 1️⃣ Get the worker ID from the URL parameters
   const { id } = req.params;
-  const { name, email, phone, dob, doj } = req.body;
+
+  // 2️⃣ Get the updated data from the request body
+  const updatedData = req.body;
 
   try {
-    const [result] = await db.query(
-      "UPDATE information SET name = ?, email = ?, phone = ?, dob = ?, doj = ? WHERE userID = ?",
-      [name, email, phone, dob, doj, id]
-    );
+    // 3️⃣ Construct the SQL UPDATE query dynamically from the request body
+    // This makes the code flexible and secure against SQL injection.
+    const keys = Object.keys(updatedData);
+    const values = Object.values(updatedData);
 
+    // Build the "SET" part of the query, e.g., "name = ?, fatherName = ?"
+    const setClause = keys.map(key => `${key} = ?`).join(', ');
+
+    // The full SQL query, with the user ID as the last value
+    const query = `UPDATE information SET ${setClause} WHERE userID = ?`;
+    const finalValues = [...values, id];
+
+    // 4️⃣ Execute the update query on the database
+    const [result] = await db.query(query, finalValues);
+
+    // 5️⃣ Check if any rows were affected to confirm the update
     if (result.affectedRows === 0) {
-      return res.status(404).json({ error: "Worker not found" });
+      return res.status(404).json({ error: "Worker not found or no changes made." });
     }
 
-    res.json({ success: true, message: `Worker ${id} updated successfully` });
+    // 6️⃣ Send a success response back to the frontend
+    res.json({ success: true, message: `Worker ${id} updated successfully.` });
+
   } catch (err) {
+    // ❌ If an error occurs, log it and send a 500 status code
     console.error("❌ Error updating worker:", err);
-    res.status(500).json({ error: "Failed to update worker" });
+    res.status(500).json({ error: "Failed to update worker details." });
   }
 };
 

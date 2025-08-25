@@ -40,6 +40,10 @@ app.get('/', (req, res) => {
   res.render('home'); // Express will look for /views/home.ejs
 });
 
+const dashboardController = require('./controllers/dashboardController');
+// Route for EDITING a worker
+app.put('/id-dashboard/records/:id', dashboardController.updateWorker);
+
 // Routes
 const generationRoutes = require('./routes/generationRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
