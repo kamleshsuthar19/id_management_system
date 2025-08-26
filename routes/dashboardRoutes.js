@@ -17,7 +17,6 @@ router.get("/records/:id", dashboardController.getWorkerById);
 // Delete worker
 router.delete("/records/:id", dashboardController.deleteWorker);
 
-// Update worker
-router.put("/records/:id", dashboardController.updateWorker);
+// Update worker (-PENDING-)
 
 module.exports = router;

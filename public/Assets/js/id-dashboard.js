@@ -536,12 +536,7 @@ function hideLoadingAndEmpty() {
 
 // Action functions
 function viewWorker(userID) {
-    window.location.href = `worker_detail_view.html?id=${userID}`;
-}
-
-function editWorker(userID) {
-    document.getElementById('editModal').classList.remove('hidden');
-    document.getElementById('editModal').dataset.userID = userID;
+    window.location.href = `worker-detail-view?id=${userID}`;
 }
 
 function deleteWorker(userID) {
@@ -563,88 +558,9 @@ function generateID(userID) {
     }, 2000);
 }
 
-function closeEditModal() {
-    document.getElementById('editModal').classList.add('hidden');
-    document.getElementById('editWorkerForm').reset();
-}
-
 function closeDeleteModal() {
     document.getElementById('deleteModal').classList.add('hidden');
     document.getElementById('adminPassword').value = '';
-}
-
-function confirmEdit() {
-    // Get the form element from the DOM
-    const form = document.getElementById('editWorkerForm');
-
-    // Create a FormData object from the form to easily get all input values
-    const formData = new FormData(form);
-
-    // Convert the FormData object to a plain JavaScript object
-    const updatedWorker = {};
-    for (let [key, value] of formData.entries()) {
-        updatedWorker[key] = value;
-    }
-
-    // Get the userID from the hidden input field
-    const userID = updatedWorker.userID;
-
-    if (!userID) {
-        // We need a userID to know which record to update
-        alert('Worker ID not found. Cannot update record.');
-        return;
-    }
-
-    // The fetch call is wrapped in a try-catch block for robust error handling
-    try {
-        // Send the updated data to the server using a PUT request
-        fetch(`/id-dashboard/records/${userID}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedWorker),
-        })
-            .then(res => {
-                // Check if the response is successful (status code 200-299)
-                if (!res.ok) {
-                    // If not, throw an error with the status text
-                    throw new Error(`HTTP error! status: ${res.status}`);
-                }
-                return res.json();
-            })
-            .then(data => {
-                if (data.success) {
-                    // Find the worker in the local array and update their data
-                    const index = allWorkers.findIndex(worker => worker.userID === userID);
-                    if (index !== -1) {
-                        // Update the worker's object in the array
-                        allWorkers[index] = { ...allWorkers[index], ...updatedWorker };
-                    }
-
-                    // Refresh the table to show the updated data
-                    applyFilters();
-
-                    // Close the edit modal
-                    closeEditModal();
-
-                    // Show a success message to the user
-                    alert(`Worker ${userID} updated successfully`);
-                } else {
-                    // Show a custom error message from the server
-                    alert(data.error || 'Failed to update worker');
-                }
-            })
-            .catch(err => {
-                // Log the detailed error to the console for debugging
-                console.error('Error updating worker:', err);
-                // Show a generic error message to the user
-                alert('Failed to update worker. Please check the console for details.');
-            });
-    } catch (err) {
-        console.error('Network or other error:', err);
-        alert('An error occurred. Please try again.');
-    }
 }
 
 function confirmDelete() {
