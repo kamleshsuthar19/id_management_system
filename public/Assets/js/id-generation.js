@@ -8,13 +8,6 @@ document.getElementById('mobile-menu-button').addEventListener('click', function
 const form = document.getElementById('userForm');
 const submitBtn = document.getElementById('submitBtn');
 
-// // Auto-generate User ID
-// function generateUserID() {
-//     const timestamp = Date.now().toString().slice(-6);
-//     const random = Math.floor(Math.random() * 1000).toString().padStart(3, '0');
-//     return `EMP${timestamp}${random}`;
-// }
-
 // Update preview in real-time
 function updatePreview() {
     const name = document.getElementById('name').value;
@@ -32,23 +25,24 @@ function updatePreview() {
     document.getElementById('previewMobile').textContent = mobileNumber || '-';
 }
 
-// Form field event listeners
+// Event listeners for preview updates
 ['name', 'department', 'designation', 'site', 'mobileNumber'].forEach(fieldId => {
     document.getElementById(fieldId).addEventListener('input', updatePreview);
 });
 
-// Form validation
-function validateField(field, errorContainer, validationFn, errorMessage) {
-    const isValid = validationFn(field.value);
-    if (!isValid) {
-        errorContainer.textContent = errorMessage;
+// ----------------- Validation Helpers -----------------
+function validateField(field, errorContainer, validator, message) {
+    const valid = validator(field.value);
+    if (!valid) {
+        errorContainer.textContent = message;
         errorContainer.classList.remove('hidden');
         field.classList.add('border-error');
     } else {
+        errorContainer.textContent = '';
         errorContainer.classList.add('hidden');
         field.classList.remove('border-error');
     }
-    return isValid;
+    return valid;
 }
 
 
@@ -75,19 +69,13 @@ attachValidation(
 // Mobile number validation
 document.getElementById('mobileNumber').addEventListener('blur', function () {
     const errorContainer = this.parentNode.querySelector('.error-message');
-    validateField(this, errorContainer,
-        value => /^\d{10}$/.test(value),
-        'Please enter a valid 10-digit mobile number'
-    );
+    validateField(this, errorContainer, value => /^\d{10}$/.test(value), 'Mobile number must be exactly 10 digits');
 });
 
 // Aadhar validation
 document.getElementById('aadharNumber').addEventListener('blur', function () {
     const errorContainer = this.parentNode.querySelector('.error-message');
-    validateField(this, errorContainer,
-        value => /^\d{12}$/.test(value),
-        'Please enter a valid 12-digit Aadhar number'
-    );
+    validateField(this, errorContainer, value => /^\d{12}$/.test(value), 'Aadhar must be exactly 12 digits');
 });
 
 // ifsc pattern
@@ -99,41 +87,37 @@ document.getElementById('ifsc').addEventListener('blur', function () {
     );
 });
 
-// <<------  *Autofill Bank name using IFSC code*  ------>>
+// IFSC validation and autofill
 document.getElementById('ifsc').addEventListener('blur', function () {
-    const ifsc = this.value.trim().toUpperCase();
-    const bankNameInput = document.getElementById('bankName');
+    const errorContainer = this.parentNode.querySelector('.error-message');
+    const value = this.value.trim().toUpperCase();
+    const bankInput = document.getElementById('bankName');
 
-    if (ifsc === '') {
-        bankNameInput.value = '';
-        bankNameInput.style.borderColor = '';
-        return;
-    }
+    const isValid = /^[A-Za-z]{4}[0-9]{7}$/.test(value);
+    validateField(this, errorContainer, () => isValid, 'Please enter a valid 11-character IFSC code');
 
-    if (ifsc.length === 11) {
-        fetch(`https://ifsc.razorpay.com/${ifsc}`)
-            .then(response => {
-                if (!response.ok) throw new Error('Invalid IFSC');
-                return response.json();
+    if (isValid) {
+        fetch(`https://ifsc.razorpay.com/${value}`)
+            .then(res => {
+                if (!res.ok) throw new Error('Invalid IFSC');
+                return res.json();
             })
             .then(data => {
-                bankNameInput.value = data.BANK || '';
-                bankNameInput.style.borderColor = '';
+                bankInput.value = data.BANK || '';
+                bankInput.style.borderColor = '';
             })
             .catch(() => {
-                bankNameInput.value = '';
-                bankNameInput.style.borderColor = 'red';
+                bankInput.value = '';
+                bankInput.style.borderColor = 'red';
                 alert('Invalid IFSC code. Please check.');
             });
     } else {
-        bankNameInput.value = '';
-        bankNameInput.style.borderColor = 'red';
+        bankInput.value = '';
+        bankInput.style.borderColor = 'red';
     }
 });
 
-
-
-// File upload handling
+// ----------------- File Upload & Preview -----------------
 document.querySelectorAll('.upload-zone').forEach(zone => {
     const input = zone.querySelector('input[type="file"]');
     const uploadContent = zone.querySelector('.upload-content');
@@ -165,10 +149,8 @@ document.querySelectorAll('.upload-zone').forEach(zone => {
     });
 
     // File input change
-    input.addEventListener('change', (e) => {
-        if (e.target.files.length > 0) {
-            handleFileUpload(e.target.files[0], zone);
-        }
+    input.addEventListener('change', e => {
+        if (e.target.files.length) handleFileUpload(e.target.files[0], zone);
     });
 
     // Remove button
@@ -192,11 +174,6 @@ document.querySelectorAll('.upload-zone').forEach(zone => {
 });
 
 function handleFileUpload(file, zone) {
-    if (file.size > 5 * 1024 * 1024) {
-        alert('File size must be less than 5MB');
-        return;
-    }
-
     const reader = new FileReader();
     reader.onload = (e) => {
         const uploadContent = zone.querySelector('.upload-content');
@@ -246,16 +223,11 @@ function openCropModal(imageSrc, zone) {
         cropContext.drawImage(img, 0, 0, width, height);
     };
     img.src = imageSrc;
-
     modal.classList.remove('hidden');
 }
 
-document.getElementById('closeCropModal').addEventListener('click', () => {
-    document.getElementById('cropModal').classList.add('hidden');
-});
-
-document.getElementById('cancelCrop').addEventListener('click', () => {
-    document.getElementById('cropModal').classList.add('hidden');
+['closeCropModal', 'cancelCrop'].forEach(id => {
+    document.getElementById(id).addEventListener('click', () => document.getElementById('cropModal').classList.add('hidden'));
 });
 
 document.getElementById('applyCrop').addEventListener('click', () => {
@@ -267,74 +239,99 @@ document.getElementById('applyCrop').addEventListener('click', () => {
     if (currentCropZone.dataset.uploadType === 'photoFront') {
         document.getElementById('previewPhoto').innerHTML = `<img src="${croppedDataURL}" alt="Employee Photo" class="w-full h-full object-cover rounded-lg">`;
     }
-
     document.getElementById('cropModal').classList.add('hidden');
 });
 
-// Form submission
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+// ----------------- Form Initialization -----------------
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('doj').value = today;
+const maxBirthDate = new Date();
+maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 18);
+document.getElementById('dob').max = maxBirthDate.toISOString().split('T')[0];
 
-    // Show loading state
-    const submitText = submitBtn.querySelector('.submit-text');
-    const loadingText = submitBtn.querySelector('.loading-text');
+// ----------------- Toast Notification -----------------
+function showToast(message, type = "error") {
+    const containerId = "toast-container";
+    let container = document.getElementById(containerId);
 
-    submitText.classList.add('hidden');
-    loadingText.classList.remove('hidden');
-    submitBtn.disabled = true;
+    // Create container if it doesn't exist
+    if (!container) {
+        container = document.createElement("div");
+        container.id = containerId;
+        container.style.position = "fixed";
+        container.style.top = "20px";
+        container.style.right = "20px";
+        container.style.display = "flex";
+        container.style.flexDirection = "column";
+        container.style.gap = "10px";
+        container.style.zIndex = "9999";
+        document.body.appendChild(container);
+    }
 
-    // Simulate form processing
-    setTimeout(() => {
-        alert('Employee ID card generated successfully! PDF will be downloaded shortly.');
+    // Create toast element
+    const toast = document.createElement("div");
+    toast.textContent = message;
 
-        // Reset loading state
-        submitText.classList.remove('hidden');
-        loadingText.classList.add('hidden');
-        submitBtn.disabled = false;
+    toast.style.position = "fixed";
+    toast.style.top = "20px";
+    toast.style.right = "20px";
+    toast.style.padding = "12px 20px";
+    toast.style.color = "#fff";
+    toast.style.borderRadius = "8px";
+    toast.style.fontSize = "14px";
+    toast.style.boxShadow = "0 4px 6px rgba(0,0,0,0.2)";
+    toast.style.zIndex = "1000";
+    toast.style.opacity = "0";
+    toast.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+    toast.style.transform = "translateY(20px)";
+    toast.style.background = type === "error" ? "#e74c3c" : "#2ecc71";
 
-        // Redirect to records dashboard
-        window.location.href = 'id-dashboard';
-    }, 3000);
-});
+    document.body.appendChild(toast);
 
-// Initialize form
-document.addEventListener('DOMContentLoaded', function () {
-    // Set default dates
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('doj').value = today;
-
-    // Set max date for date of birth (18 years ago)
-    const maxBirthDate = new Date();
-    maxBirthDate.setFullYear(maxBirthDate.getFullYear() - 18);
-    document.getElementById('dob').max = maxBirthDate.toISOString().split('T')[0];
-});
-
-// <<------  *Redirecting to ID card page*  ------>>
-document.getElementById('userForm').addEventListener('submit', async function (e) {
-  e.preventDefault();
-
-  const formData = new FormData(this);
-  const submitBtn = document.getElementById('submitBtn');
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Submitting...';
-
-  try {
-    const response = await fetch('/submit', {
-      method: 'POST',
-      body: formData
+    // Trigger animation
+    requestAnimationFrame(() => {
+        toast.style.opacity = "1";
+        toast.style.transform = "translateY(0)";
     });
 
-    const result = await response.json();
-    if (result.success && result.redirect) {
-      window.location.href = result.redirect;
-    } else {
-      alert('Submission failed. Try again.');
+    // Auto Remove after 3s
+    setTimeout(() => {
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(20px)";
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
+
+// ----------------- Form Submit -----------------
+form.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    try {
+        const formData = new FormData(form);
+        const res = await fetch('/submit', { method: 'POST', body: formData });
+        const data = await res.json();
+
+        if (!data.success) {
+            // Backend validation errors
+            showToast(data.message || 'Submission failed.', "error");
+            return;
+        }
+
+        // Success
+        showToast('Worker ID generated successfully! Redirecting...', "success");
+        setTimeout(() => {
+            window.location.href = '/id-dashboard';
+        }, 1500);
+
+    } catch (err) {
+        console.error(err);
+        showToast('Server error.', "error");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit Form';
     }
-  } catch (err) {
-    console.error(err);
-    alert('Server error.');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Submit Form';
-  }
 });

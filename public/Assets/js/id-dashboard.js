@@ -100,10 +100,6 @@ function setupEventListeners() {
         }
     });
 
-    // Edit modal
-    document.getElementById('cancelEdit').addEventListener('click', closeEditModal);
-    document.getElementById('confirmEdit').addEventListener('click', confirmEdit);
-
     // Delete modal
     document.getElementById('cancelDelete').addEventListener('click', closeDeleteModal);
     document.getElementById('confirmDelete').addEventListener('click', confirmDelete);
@@ -230,46 +226,7 @@ function changePage(page) {
     }
 }
 
-// Selection functionality
-function handleSelectAll() {
-    const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-    checkboxes.forEach(checkbox => {
-        checkbox.checked = selectAll.checked;
-        if (selectAll.checked) {
-            selectedWorkers.add(checkbox.value);
-        } else {
-            selectedWorkers.delete(checkbox.value);
-        }
-    });
-    updateBulkActions();
-}
 
-function handleRowSelection(userID, checked) {
-    if (checked) {
-        selectedWorkers.add(userID);
-    } else {
-        selectedWorkers.delete(userID);
-    }
-    updateBulkActions();
-}
-
-function updateBulkActions() {
-    const hasSelection = selectedWorkers.size > 0;
-    bulkActions.disabled = !hasSelection;
-
-    if (hasSelection) {
-        bulkActions.classList.remove('opacity-50');
-    } else {
-        bulkActions.classList.add('opacity-50');
-        bulkMenu.classList.add('hidden');
-    }
-}
-
-function toggleBulkMenu() {
-    if (!bulkActions.disabled) {
-        bulkMenu.classList.toggle('hidden');
-    }
-}
 
 // Render functions
 function renderWorkers() {
@@ -307,7 +264,7 @@ function renderDesktopTable(workers) {
     <td class="px-6 py-4">
     <input type="checkbox" value="${safeText(worker.userID)}" 
             onchange="handleRowSelection('${safeText(worker.userID)}', this.checked)"
-            class="rounded border-secondary-300 text-primary focus:ring-primary-500">
+            class="rowCheckbox rounded border-secondary-300 text-primary focus:ring-primary-500">
     </td>
     <td class="px-6 py-4 whitespace-nowrap">
     <span class="text-sm font-medium text-text-primary font-data">${safeText(worker.userID)}</span>
@@ -501,6 +458,104 @@ function updateResultsCount() {
     resultsCount.textContent = `Showing ${startIndex}-${endIndex} of ${total} workers`;
 }
 
+// <<------------Selection functionality------------>>
+
+// Excel Export Handler
+document.addEventListener("DOMContentLoaded", () => {
+    const exportBtn = document.getElementById("exportSelectedExcel");
+    if (!exportBtn) return;
+
+    exportBtn.addEventListener("click", async () => {
+        if (selectedWorkers.size === 0) {
+            alert("Please select at least one worker to export.");
+            return;
+        }
+
+        exportBtn.disabled = true;
+        const originalText = exportBtn.textContent;
+        exportBtn.textContent = "Exporting...";
+
+        try {
+            const response = await fetch("/id-dashboard/export-excel", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ ids: Array.from(selectedWorkers) })
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to export Excel. Status: ${response.status}`);
+            }
+
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+
+            // Extract filename from response headers if possible
+            const disposition = response.headers.get("Content-Disposition");
+            let filename = "workers.xlsx";
+            if (disposition && disposition.includes("filename=")) {
+                filename = disposition.split("filename=")[1].replace(/"/g, '');
+            }
+            a.download = filename;
+
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+
+        } catch (err) {
+            console.error("Excel export error:", err);
+            alert("Error exporting Excel. See console for details.");
+        } finally {
+            exportBtn.disabled = false;
+            exportBtn.textContent = originalText;
+        }
+    });
+});
+
+
+// Handle select all checkbox
+function handleSelectAll() {
+    const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = selectAll.checked;
+        if (selectAll.checked) {
+            selectedWorkers.add(checkbox.value);
+        } else {
+            selectedWorkers.delete(checkbox.value);
+        }
+    });
+    updateBulkActions();
+}
+
+function handleRowSelection(userID, checked) {
+    if (checked) {
+        selectedWorkers.add(userID);
+    } else {
+        selectedWorkers.delete(userID);
+    }
+    updateBulkActions();
+}
+
+function updateBulkActions() {
+    const hasSelection = selectedWorkers.size > 0;
+    bulkActions.disabled = !hasSelection;
+
+    if (hasSelection) {
+        bulkActions.classList.remove('opacity-50');
+    } else {
+        bulkActions.classList.add('opacity-50');
+        bulkMenu.classList.add('hidden');
+    }
+}
+
+function toggleBulkMenu() {
+    if (!bulkActions.disabled) {
+        bulkMenu.classList.toggle('hidden');
+    }
+}
+
 // Utility functions
 function getDepartmentBadgeClass(department) {
     const classes = {
@@ -539,9 +594,16 @@ function viewWorker(userID) {
     window.location.href = `worker-detail-view?id=${userID}`;
 }
 
-function deleteWorker(userID) {
-    document.getElementById('deleteModal').classList.remove('hidden');
-    document.getElementById('deleteModal').dataset.userID = userID;
+function deleteWorker(userID, event) {
+    // Showing modal
+    const modal = document.getElementById('deleteModal');
+    modal.classList.remove('hidden');
+
+    // Save userID in dataset for later use
+    modal.dataset.userID = userID;
+
+    // Clear password input
+    document.getElementById('adminPassword').value = '';
 }
 
 function generateID(userID) {

@@ -1,6 +1,7 @@
 // controllers/dashboardController.js
 const fs = require("fs").promises;
 const path = require("path");
+const ExcelJS = require("exceljs");
 const db = require("../config/db"); // mysql2 connection pool
 
 // ----------------------
@@ -113,6 +114,60 @@ const getWorkerById = async (req, res) => {
 };
 
 // ----------------------
+// Export excel for selected row
+// ----------------------
+
+async function exportExcel(req, res) {
+    try {
+        const { ids } = req.body;
+        if (!ids || !ids.length) return res.status(400).json({ error: "No IDs provided" });
+
+        const placeholders = ids.map(() => '?').join(',');
+        const [rows] = await db.query(
+            `SELECT * FROM information WHERE userID IN (${placeholders})`, ids
+        );
+
+        const workbook = new ExcelJS.Workbook();
+        const sheet = workbook.addWorksheet('Workers');
+
+        // Add headers
+        sheet.addRow([
+            'WorkerFirstName','workerAadharCardNumber', 'workerDesignation','workerDepartment',
+            'workerType','workerId','fatherName','workerRate','salary','marriedStatus',
+            'workerBirthDate','workerPhoneNumber','gender','accountNumber','branchName',
+            'accountHolderName','bankName','ifscCode','pfNumber','uanNumber','panCard'
+        ]);
+
+        // Add data
+        rows.forEach(r => {
+            sheet.addRow([
+                r.name, r.aadharNumber, r.designation, r.department,
+                r.type || 'Worker', r.userID, r.fatherName, r.rate || '', r.salary || '', r.maritalStatus,
+                r.dob ? new Date(r.dob).toISOString().split("T")[0] : "", r.mobileNumber, r.gender, r.accountNumber, r.branchName || '',
+                r.accountHolderName, r.bankName, r.ifsc, r.pfNumber || '', r.uanNumber || '', r.panCard || ''
+            ]);
+        });
+
+        res.setHeader(
+            "Content-Type",
+            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+        );
+        res.setHeader(
+            "Content-Disposition",
+            `attachment; filename=workers.xlsx`
+        );
+
+        await workbook.xlsx.write(res);
+        res.end();
+
+    } catch (err) {
+        console.error("Failed to export Excel:", err);
+        res.status(500).json({ error: "Failed to export Excel" });
+    }
+}
+
+
+// ----------------------
 // Delete worker
 // ----------------------
 
@@ -165,5 +220,6 @@ const deleteWorker = async (req, res) => {
 exports = module.exports = {
   getWorkers,
   getWorkerById,
+  exportExcel,
   deleteWorker
 };

@@ -22,7 +22,7 @@ const generateUserID = async (req, res, next) => {
     const newUserID = `JRCW${newNumber}`;
     req.newUserID = newUserID;
 
-    console.log("✅ Generated UserID:", newUserID);
+    console.log("✅ Generating UserID:", newUserID);
     next();
   } catch (err) {
     console.error("❌ generateUserID error:", err);

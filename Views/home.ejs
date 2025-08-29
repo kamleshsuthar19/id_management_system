@@ -15,15 +15,13 @@
             <div class="flex justify-between items-center h-16">
                 <!-- Logo and Brand -->
                 <div class="flex items-center space-x-4">
-                    <div class="flex-shrink-0">
-                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
-                        </svg>
+                    <div class="flex-shrink-0 rounded-full overflow-hidden">
+                        <img src="/Assets/images/JRC_Original_Logo.jpg" alt="" class="h-10 w-10">
                     </div>
                     <div class="hidden md:block">
                         <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
                     </div>
-                </div>
+                </div>  
 
                 <!-- Main Navigation -->
                 <div class="hidden md:block">
@@ -31,16 +29,16 @@
                         <a href="#" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
                             Home
                         </a>
-                        <a href="id-generation" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast" target="_blank">
+                        <a href="id-generation" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
                             ID Generation
                         </a>
-                        <a href="id-dashboard" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast" target="_blank">
+                        <a href="id-dashboard" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
                             Worker Records
                         </a>
-                        <a href="about" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast" target="_blank">
+                        <a href="about" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
                             About
                         </a>
-                        <a href="contact" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast" target="_blank">
+                        <a href="contact" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
                             Contact
                         </a>
                     </div>
@@ -52,7 +50,7 @@
                         <div class="relative">
                             <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <i class="fa-sharp fa-regular fa-circle-user object-cover"></i>
                                 <span class="ml-2 text-sm font-medium">Admin</span>
                                 <i class="fas fa-chevron-down ml-1 text-xs"></i>
                             </button>
@@ -73,7 +71,7 @@
         <!-- Mobile Navigation Menu -->
         <div class="md:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
-                <a href="home" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="/" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Home</a>
                 <a href="id-generation" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
                 <a href="id-dashboard" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
                 <a href="about" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>

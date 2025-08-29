@@ -4,6 +4,7 @@ const router = express.Router();
 const upload = require('../middlewares/upload');
 const generationController = require('../controllers/generationController');
 const generateUserID = require('../middlewares/generateUserID');
+const checkUniqueAadhar = require('../middlewares/checkUniqueAadhar');
 
 // Render form
 // Render form

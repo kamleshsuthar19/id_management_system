@@ -94,80 +94,111 @@ const submitForm = async (req, res) => {
     mobileNumber, aadharNumber, holderName: rawHolderName, accountNumber, ifsc: rawIfsc, bankName, remarks
   } = req.body;
 
-  // Use only userID for folder creation to ensure it's a stable path
-  const folderPath = path.join(process.cwd(), 'Public', 'uploads', newUserID);
 
-  ensureFolder(folderPath);
+  // --- VALIDATION FIRST (before saving/moving files) ---
+  if (!/^[0-9]{10}$/.test(mobileNumber)) {
+    return res.status(400).json({ success: false, message: "Mobile number must be exactly 10 digits" });
+  }
 
-  // Capitalize name before storing
-  const name = capitalizeWords(rawName);
-  const fatherName = capitalizeWords(rawFatherName);
-  const holderName = capitalizeWords(rawHolderName);
-  const ifsc = rawIfsc?.toUpperCase().trim();
-
-  // Normalize dates or set to null if empty
-  const dob = rawDob?.trim() || null;
-  const doj = rawDoj?.trim() || null;
+  if (!/^[0-9]{12}$/.test(aadharNumber)) {
+    return res.status(400).json({ success: false, message: "Aadhar number must be exactly 12 digits" });
+  }
 
   try {
-    // Aadhaar (front/back → PDF)
-    const aadharImages = [
-      files?.aadharFront?.[0]?.path,
-      files?.aadharBack?.[0]?.path
-    ].filter(Boolean);
-    const aadharPdfFilename = await generatePDFfromImages(
-      aadharImages,
-      `${newUserID}_Aadhar.pdf`,
-      folderPath
-    );
-    const aadharPdfPath = aadharPdfFilename ? `uploads/${newUserID}/${aadharPdfFilename}` : null;
+    // 🔎 Check if Aadhaar already exists
+    const [existing] = await db.query("SELECT userID FROM information WHERE aadharNumber = ?", [aadharNumber]);
+    if (existing.length > 0) {
+      // 🗑️ Delete entire upload folder if created
+      if (req.newUserID) {
+        const userFolder = path.join(process.cwd(), "Public", "uploads", req.newUserID);
+        if (fs.existsSync(userFolder)) {
+          fs.rmSync(userFolder, { recursive: true, force: true });
+          console.log("🗑️ Deleted folder for duplicate Aadhaar:", userFolder);
+        }
+      }
+      // Return error response if Aadhaar already exists
+      return res.status(400).json({ success: false, message: "ID number already exists!" });
+    }
 
-    // PAN → PDF
-    const panPdfFilename = await generatePDFfromImages(
-      files?.panCard?.map(f => f.path) || [],
-      `${newUserID}_PAN.pdf`,
-      folderPath
-    );
-    const panPdfPath = panPdfFilename ? `uploads/${newUserID}/${panPdfFilename}` : null;
+    // Use only userID for folder creation to ensure it's a stable path
+    const folderPath = path.join(process.cwd(), 'Public', 'uploads', newUserID);
 
-    // Bank → PDF
-    const bankPdfFilename = await generatePDFfromImages(
-      files?.bankDetail?.map(f => f.path) || [],
-      `${newUserID}_Bank.pdf`,
-      folderPath
-    );
-    const bankDetailPath = bankPdfFilename ? `uploads/${newUserID}/${bankPdfFilename}` : null;
+    ensureFolder(folderPath);
 
-    // Profile photos
-    const photoFront = savePhoto(files?.photoFront?.[0], newUserID, 'photoFront', folderPath);
-    const photoLeft = savePhoto(files?.photoLeft?.[0], newUserID, 'photoLeft', folderPath);
-    const photoRight = savePhoto(files?.photoRight?.[0], newUserID, 'photoRight', folderPath);
+    // Capitalize name before storing
+    const name = capitalizeWords(rawName);
+    const fatherName = capitalizeWords(rawFatherName);
+    const holderName = capitalizeWords(rawHolderName);
+    const ifsc = rawIfsc?.toUpperCase().trim();
 
-    // Insert into DB
-    const sql = `
+    // Normalize dates or set to null if empty
+    const dob = rawDob?.trim() || null;
+    const doj = rawDoj?.trim() || null;
+
+    try {
+      // Aadhaar (front/back → PDF)
+      const aadharImages = [
+        files?.aadharFront?.[0]?.path,
+        files?.aadharBack?.[0]?.path
+      ].filter(Boolean);
+      const aadharPdfFilename = await generatePDFfromImages(
+        aadharImages,
+        `${newUserID}_Aadhar.pdf`,
+        folderPath
+      );
+      const aadharPdfPath = aadharPdfFilename ? `uploads/${newUserID}/${aadharPdfFilename}` : null;
+
+      // PAN → PDF
+      const panPdfFilename = await generatePDFfromImages(
+        files?.panCard?.map(f => f.path) || [],
+        `${newUserID}_PAN.pdf`,
+        folderPath
+      );
+      const panPdfPath = panPdfFilename ? `uploads/${newUserID}/${panPdfFilename}` : null;
+
+      // Bank → PDF
+      const bankPdfFilename = await generatePDFfromImages(
+        files?.bankDetail?.map(f => f.path) || [],
+        `${newUserID}_Bank.pdf`,
+        folderPath
+      );
+      const bankDetailPath = bankPdfFilename ? `uploads/${newUserID}/${bankPdfFilename}` : null;
+
+      // Profile photos
+      const photoFront = savePhoto(files?.photoFront?.[0], newUserID, 'photoFront', folderPath);
+      const photoLeft = savePhoto(files?.photoLeft?.[0], newUserID, 'photoLeft', folderPath);
+      const photoRight = savePhoto(files?.photoRight?.[0], newUserID, 'photoRight', folderPath);
+
+      // Insert into DB
+      const sql = `
             INSERT INTO information (
                 userID, name, fatherName, maritalStatus, gender, dob, doj, department, designation, site,
                 mobileNumber, aadharNumber, holderName, accountNumber, ifsc, bankName, aadharPdf, panPdf, bankDetail, photoFront, photoLeft, photoRight, remarks
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         `;
 
-    const values = [
-      newUserID, name, fatherName, maritalStatus, gender, dob, doj,
-      department, designation, site, mobileNumber, aadharNumber, holderName, accountNumber, ifsc, bankName,
-      aadharPdfPath, panPdfPath, bankDetailPath, photoFront, photoLeft, photoRight, remarks
-    ];
+      const values = [
+        newUserID, name, fatherName, maritalStatus, gender, dob, doj,
+        department, designation, site, mobileNumber, aadharNumber, holderName, accountNumber, ifsc, bankName,
+        aadharPdfPath, panPdfPath, bankDetailPath, photoFront, photoLeft, photoRight, remarks
+      ];
 
-    await db.query(sql, values);
+      await db.query(sql, values);
 
-    res.json({
-      success: true,
-      userID: newUserID,
-      redirect: `/id-card/${newUserID}`
-    });
+      res.json({
+        success: true,
+        userID: newUserID,
+        redirect: `/id-dashboard`
+      });
 
-  } catch (error) {
-    console.error('❌ File Processing Error:', error);
-    res.status(500).json({ success: false, message: 'File processing error', error: error.message });
+    }
+    catch (error) {
+      console.error('❌ Submit Error:', error);
+      res.status(500).json({ success: false, message: 'Something went wrong', error: error.message });
+    }
+  } catch (outerError) {
+    console.error('❌ Outer Submit Error:', outerError);
+    res.status(500).json({ success: false, message: 'Something went wrong', error: outerError.message });
   }
 };
 

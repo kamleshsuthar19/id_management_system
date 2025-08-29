@@ -14,6 +14,8 @@ router.get("/records", dashboardController.getWorkers);
 // Get single worker by ID
 router.get("/records/:id", dashboardController.getWorkerById);
 
+router.post("/export-excel", dashboardController.exportExcel);
+
 // Delete worker
 router.delete("/records/:id", dashboardController.deleteWorker);
 
