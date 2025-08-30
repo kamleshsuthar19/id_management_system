@@ -40,6 +40,11 @@ app.get('/', (req, res) => {
   res.render('home'); // Express will look for /views/home.ejs
 });
 
+// Serve the contact-us.ejs
+app.get('/contact-us', (req, res) => {
+  res.render('contact-us'); // this looks for views/contact-us.ejs
+});
+
 // Routes
 const generationRoutes = require('./routes/generationRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');

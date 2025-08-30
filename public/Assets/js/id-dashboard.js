@@ -374,7 +374,7 @@ function renderMobileCards(workers) {
                                 <span class="text-sm font-medium text-primary">${worker.name.charAt(0)}</span>
                             </div>
                             <div>
-                                <div class="text-sm font-medium text-text-primary">${worker.name}</div>
+                                <div class="text-sm font-medium text-text-primary">${worker.name} S/O ${worker.fatherName}</div>
                                 <div class="text-xs text-text-secondary font-data">${worker.userID}</div>
                             </div>
                         </div>
@@ -399,6 +399,22 @@ function renderMobileCards(workers) {
                     </div>
                     <div class="grid grid-cols-2 gap-3 text-xs">
                         <div>
+                            <span class="text-text-secondary">Gender:</span>
+                            <span class="status-badge ${getGenderBadgeClass(worker.gender)} ml-1">${safeFirstChar(worker.gender)}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Marital Status:</span>
+                            <span class="status-badge ${getMaritalStatusBadgeClass(worker.maritalStatus)} ml-1">${safeFirstChar(worker.maritalStatus)}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Date of Birth:</span>
+                            <span class="text-text-primary ml-1">${formatDate(worker.dateOfBirth)}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Date of Joining:</span>
+                            <span class="text-text-primary ml-1">${formatDate(worker.dateOfJoining)}</span>
+                        </div>
+                        <div>
                             <span class="text-text-secondary">Department:</span>
                             <span class="status-badge ${getDepartmentBadgeClass(worker.department)} ml-1">${worker.department}</span>
                         </div>
@@ -414,6 +430,58 @@ function renderMobileCards(workers) {
                             <span class="text-text-secondary">Mobile:</span>
                             <span class="text-text-primary font-data ml-1">${worker.mobileNumber}</span>
                         </div>
+                        <div>
+                            <span class="text-text-secondary">Aadhar:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.aadharNumber}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Holder Name:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.holderName}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Account:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.accountNumber}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">IFSC:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.ifsc}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Bank Name:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.bankName}</span>
+                        </div>
+                        <div>
+                            <span class="text-text-secondary">Remarks:</span>
+                            <span class="text-text-primary font-data ml-1">${worker.remarks}</span>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <div>
+                            <span class="text-text-primary font-data ml-1">${worker.aadharPdf ? `<a href="${worker.aadharPdf}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</span>
+                            </div>
+                            <div>
+                                <span class="text-text-primary font-data ml-1">${worker.panPdf ? `<a href="${worker.panPdf}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</span>
+                            </div>
+                            <div>
+                                <span class="text-text-primary font-data ml-1">${worker.bankDetail ? `<a href="${worker.bankDetail}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-2">
+                            <div>
+                            <span class="text-text-primary font-data ml-1">${worker.photoFront ? `<img src="${worker.photoFront}" alt="Front Photo" width="60">` : 'N/A'}</span>
+                            </div>
+                            <div>
+                                <span class="text-text-primary font-data ml-1">${worker.photoLeft ? `<img src="${worker.photoLeft}" alt="Left Photo" width="60">` : 'N/A'}</span>
+                            </div>
+                            <div>
+                                <span class="text-text-primary font-data ml-1">${worker.photoRight ? `<img src="${worker.photoRight}" alt="Right Photo" width="60">` : 'N/A'}</span>
+                            </div>
+                        </div>
+
+
+                        
+                        
                     </div>
                 </div>
             `).join('');
@@ -568,6 +636,22 @@ function getDepartmentBadgeClass(department) {
         'POP': 'status-warning'
     };
     return classes[department] || 'bg-secondary-100 text-secondary-600';
+}
+
+function getMaritalStatusBadgeClass(maritalStatus) {
+    const classes = {
+        'Married': 'status-error',
+        'Unmarried': 'status-success'
+    };
+    return classes[maritalStatus] || 'bg-secondary-100 text-secondary-600';
+}
+
+function getGenderBadgeClass(gender) {
+    const classes = {
+        'Male': 'status-success',
+        'Female': 'status-error'
+    };
+    return classes[gender] || 'bg-secondary-100 text-secondary-600';
 }
 
 function showLoading() {
