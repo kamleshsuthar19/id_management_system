@@ -277,7 +277,8 @@
                     <div class="flex-1 overflow-x-auto">
                         <div class="card p-0 overflow-hidden">
                             <!-- Desktop Table View -->
-                            <div style="max-height:600px; overflow-y:auto;" class="border border-gray-300 rounded-lg">
+                            <div style="max-height:600px; overflow-y:auto;"
+                                class="hidden lg:block border border-gray-300 rounded-lg">
                                 <table class="min-w-full divide-y divide-secondary-200">
                                     <thead class="sticky top-0 bg-light-yellow z-10">
                                         <tr>
@@ -459,7 +460,7 @@
                             </div>
 
                             <!-- Mobile Card View -->
-                            <div class="lg:hidden" id="mobileCardView">
+                            <div style="max-height:800px; overflow-y:auto;" class="lg:hidden" id="mobileCardView">
                                 <!-- Mobile cards will be populated by JavaScript -->
                             </div>
 
@@ -519,19 +520,11 @@
                             <div class="space-y-4">
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm text-text-secondary">Total Workers</span>
-                                    <span class="text-lg font-semibold text-text-primary">1,247</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">Active Records</span>
-                                    <span class="text-lg font-semibold text-success">1,224</span>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">Pending Verification</span>
-                                    <span class="text-lg font-semibold text-warning">23</span>
+                                    <span id="totalWorkers" class="text-lg font-semibold text-text-primary">0</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <span class="text-sm text-text-secondary">IDs Generated Today</span>
-                                    <span class="text-lg font-semibold text-primary">12</span>
+                                    <span id="idsToday" class="text-lg font-semibold text-primary">0</span>
                                 </div>
                             </div>
                         </div>
@@ -539,43 +532,8 @@
                         <!-- Department Breakdown -->
                         <div class="card mb-6">
                             <h3 class="text-lg font-semibold text-text-primary mb-4">Department Breakdown</h3>
-                            <div class="space-y-3">
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">Civil</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
-                                            <div class="bg-primary h-2 rounded-full" style="width: 45%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-text-primary">561</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">Carpenter</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
-                                            <div class="bg-accent h-2 rounded-full" style="width: 32%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-text-primary">399</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">Painter</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
-                                            <div class="bg-warning h-2 rounded-full" style="width: 18%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-text-primary">224</span>
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between">
-                                    <span class="text-sm text-text-secondary">POP</span>
-                                    <div class="flex items-center space-x-2">
-                                        <div class="w-16 bg-secondary-200 rounded-full h-2">
-                                            <div class="bg-error h-2 rounded-full" style="width: 5%"></div>
-                                        </div>
-                                        <span class="text-sm font-medium text-text-primary">63</span>
-                                    </div>
-                                </div>
+                            <div id="department-breakdown" class="space-y-3">
+                                <!-- Dynamic content will be injected here -->
                             </div>
                         </div>
 
@@ -591,8 +549,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs font-medium text-text-primary">New worker added</p>
-                                        <p class="text-xs text-text-secondary">Rajesh Kumar • Civil Dept • 2 hours ago
-                                        </p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
                                     </div>
                                 </div>
 
@@ -604,7 +561,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs font-medium text-text-primary">ID card generated</p>
-                                        <p class="text-xs text-text-secondary">Priya Sharma • EMP1245 • 4 hours ago</p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
                                     </div>
                                 </div>
 
@@ -616,8 +573,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-xs font-medium text-text-primary">Record updated</p>
-                                        <p class="text-xs text-text-secondary">Amit Singh • Contact info • 6 hours ago
-                                        </p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
                                     </div>
                                 </div>
                             </div>

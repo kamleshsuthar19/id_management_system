@@ -49,11 +49,14 @@ app.get('/contact-us', (req, res) => {
 const generationRoutes = require('./routes/generationRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
 const formRoutes = require('./routes/form');
+const statsRoutes = require('./routes/statsRoutes');
+const departmentBreakDownRoutes = require('./routes/departmentBreakDownRoutes');
 
 app.use('/', generationRoutes);
 app.use('/id-dashboard', dashboardRoutes);
 app.use('/', formRoutes);
-
+app.use('/', statsRoutes);
+app.use('/', departmentBreakDownRoutes);
 
 // Start server
 app.listen(PORT, () => {

@@ -187,10 +187,15 @@ function handleSort(column) {
             bValue = bValue.toLowerCase();
         }
 
+        // Normal ascending/descending handling
         if (sortDirection === 'asc') {
-            return aValue < bValue ? -1 : aValue > bValue ? 1 : 0;
+            if (aValue < bValue) return -1;
+            if (aValue > bValue) return 1;
+            return 0;
         } else {
-            return aValue > bValue ? -1 : aValue < bValue ? 1 : 0;
+            if (aValue > bValue) return -1;
+            if (aValue < bValue) return 1;
+            return 0;
         }
     });
 
@@ -233,6 +238,15 @@ function renderWorkers() {
     showLoading();
 
     setTimeout(() => {
+        // Ensure default sort: newest first if no sort applied
+        if (!sortColumn) {
+            filteredWorkers.sort((a, b) => {
+                const aNum = parseInt(a.userID.replace(/\D/g, ''), 10);
+                const bNum = parseInt(b.userID.replace(/\D/g, ''), 10);
+                return bNum - aNum; // DESCENDING (newest first)
+            });
+        }
+
         const startIndex = (currentPage - 1) * pageSize;
         const endIndex = startIndex + pageSize;
         const pageWorkers = filteredWorkers.slice(startIndex, endIndex);
@@ -375,7 +389,7 @@ function renderMobileCards(workers) {
                             </div>
                             <div>
                                 <div class="text-sm font-medium text-text-primary">${worker.name} S/O ${worker.fatherName}</div>
-                                <div class="text-xs text-text-secondary font-data">${worker.userID}</div>
+                                <div class="text-xs font-bold text-primary">${worker.userID}</div>
                             </div>
                         </div>
                         <div class="flex items-center space-x-2">
@@ -469,19 +483,15 @@ function renderMobileCards(workers) {
 
                         <div class="flex items-center space-x-2">
                             <div>
-                            <span class="text-text-primary font-data ml-1">${worker.photoFront ? `<img src="${worker.photoFront}" alt="Front Photo" width="60">` : 'N/A'}</span>
+                                <span class="text-text-primary font-data ml-1 w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoFront ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoFront}" alt="Front Photo">` : 'N/A'}</span>
                             </div>
                             <div>
-                                <span class="text-text-primary font-data ml-1">${worker.photoLeft ? `<img src="${worker.photoLeft}" alt="Left Photo" width="60">` : 'N/A'}</span>
+                                <span class="text-text-primary font-data ml-1 w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoLeft ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoLeft}" alt="Left Photo">` : 'N/A'}</span>
                             </div>
                             <div>
-                                <span class="text-text-primary font-data ml-1">${worker.photoRight ? `<img src="${worker.photoRight}" alt="Right Photo" width="60">` : 'N/A'}</span>
+                                <span class="text-text-primary font-data ml-1 w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoRight ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoRight}" alt="Right Photo">` : 'N/A'}</span>
                             </div>
                         </div>
-
-
-                        
-                        
                     </div>
                 </div>
             `).join('');
@@ -507,15 +517,27 @@ function renderPagination() {
         pages.push(i);
     }
 
-    pageNumbers.innerHTML = pages.map(page => `
-                <button onclick="changePage(${page})" 
-                        class="px-3 py-2 text-sm rounded-md transition-fast ${page === currentPage
+    // Build pagination buttons (with First & Last)
+    pageNumbers.innerHTML = `
+        <button onclick="changePage(1)" 
+                class="px-3 py-2 text-sm rounded-md text-text-secondary hover:bg-secondary-100"
+                ${currentPage === 1 ? 'disabled' : ''}>
+            First
+        </button>
+        ${pages.map(page => `
+            <button onclick="changePage(${page})" 
+                    class="px-3 py-2 text-sm rounded-md transition-fast ${page === currentPage
             ? 'bg-primary text-white'
-            : 'text-text-secondary hover:bg-secondary-100'
-        }">
-                    ${page}
-                </button>
-            `).join('');
+            : 'text-text-secondary hover:bg-secondary-100'}">
+                ${page}
+            </button>
+        `).join('')}
+        <button onclick="changePage(${totalPages})" 
+                class="px-3 py-2 text-sm rounded-md text-text-secondary hover:bg-secondary-100"
+                ${currentPage === totalPages ? 'disabled' : ''}>
+            Last
+        </button>
+    `;
 }
 
 function updateResultsCount() {
@@ -672,6 +694,59 @@ function hideLoadingAndEmpty() {
     loadingState.classList.add('hidden');
     emptyState.classList.add('hidden');
 }
+
+// Fetch summary stats
+async function fetchSummaryStats() {
+    try {
+        const res = await fetch('/summary-stats');
+        const stats = await res.json();
+
+        document.getElementById("totalWorkers").textContent = stats.totalWorkers;
+        document.getElementById("idsToday").textContent = stats.idsGeneratedToday;
+    } catch (err) {
+        console.error("Failed to load summary stats", err);
+    }
+}
+
+// Fetch on page load
+fetchSummaryStats();
+
+// Load department breakdown
+async function loadDepartmentBreakdown() {
+  try {
+    const res = await fetch("/department-breakdown");
+    const data = await res.json();
+
+    const container = document.querySelector("#department-breakdown");
+    container.innerHTML = ""; // Clear old content
+
+    data.forEach(dep => {
+      const colorClass = getRandomColor(); // Optional color function
+      container.innerHTML += `
+        <div class="flex items-center justify-between">
+          <span class="text-sm text-text-secondary">${dep.department}</span>
+          <div class="flex items-center space-x-2">
+            <div class="w-16 bg-secondary-200 rounded-full h-2">
+              <div class="${colorClass} h-2 rounded-full" style="width: ${dep.percentage}%"></div>
+            </div>
+            <span class="text-sm font-medium text-text-primary">${dep.count}</span>
+          </div>
+        </div>
+      `;
+    });
+  } catch (err) {
+    console.error("Error loading department breakdown:", err);
+  }
+}
+
+// Simple helper to rotate bar colors
+function getRandomColor() {
+  const colors = ["bg-primary", "bg-accent", "bg-warning", "bg-error", "bg-success"];
+  return colors[Math.floor(Math.random() * colors.length)];
+}
+
+loadDepartmentBreakdown();
+
 
 // Action functions
 function viewWorker(userID) {
