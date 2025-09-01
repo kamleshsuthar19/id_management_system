@@ -729,7 +729,7 @@ async function loadDepartmentBreakdown() {
             <div class="w-16 bg-secondary-200 rounded-full h-2">
               <div class="${colorClass} h-2 rounded-full" style="width: ${dep.percentage}%"></div>
             </div>
-            <span class="text-sm font-medium text-text-primary">${dep.count}</span>
+            <span class="w-8 text-center text-sm font-medium text-text-primary">${dep.count}</span>
           </div>
         </div>
       `;

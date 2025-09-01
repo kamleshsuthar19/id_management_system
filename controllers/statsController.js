@@ -11,7 +11,7 @@ const getSummaryStats = async (req, res) => {
     const [idsRows] = await db.query(`
       SELECT COUNT(*) AS idsGeneratedToday 
       FROM information 
-      WHERE DATE(createdAt) = CURDATE()
+      WHERE DATE(created_at) = CURDATE()
     `);
 
     res.json({
