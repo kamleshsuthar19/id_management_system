@@ -115,7 +115,7 @@
                             <i class="fas fa-plus mr-2"></i>
                             Generate New ID
                         </a>
-                        <a href="id-dashboard" class="btn-secondary inline-flex items-center px-6 py-3 text-base" target="_blank">
+                        <a href="" class="btn-secondary inline-flex items-center px-6 py-3 text-base" target="_blank">
                             <i class="fas fa-database mr-2"></i>
                             View Records
                         </a>
@@ -149,7 +149,7 @@
                     </div>
 
                     <!-- View Employee Records -->
-                    <div class="card group hover:shadow-modal transition-all duration-300 cursor-pointer" onclick="window.location.href='id-dashboard'">
+                    <div class="card group hover:shadow-modal transition-all duration-300 cursor-pointer" onclick="window.location.href=''">
                         <div class="text-center">
                             <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-200 transition-colors">
                                 <i class="fas fa-database text-2xl text-accent"></i>
@@ -192,8 +192,8 @@
                 <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
                     <!-- Total Employees -->
                     <div class="bg-primary-50 rounded-lg p-6 text-center border border-primary-100">
-                        <div class="text-3xl font-bold text-primary mb-2">1,247</div>
-                        <div class="text-sm font-medium text-primary-700 mb-1">Total Employees</div>
+                        <div id="totalWorkers" class="text-3xl font-bold text-primary mb-2">0</div>
+                        <div class="text-sm font-medium text-primary-700 mb-1">Total Workers</div>
                         <div class="text-xs text-text-secondary">Active records</div>
                     </div>
 
@@ -206,14 +206,14 @@
 
                     <!-- Completed This Month -->
                     <div class="bg-success-50 rounded-lg p-6 text-center border border-success-100">
-                        <div class="text-3xl font-bold text-success mb-2">156</div>
+                        <div id="idsGeneratedByMonth" class="text-3xl font-bold text-success mb-2">0</div>
                         <div class="text-sm font-medium text-success-600 mb-1">Completed</div>
                         <div class="text-xs text-text-secondary">This month</div>
                     </div>
 
                     <!-- Departments -->
                     <div class="bg-accent-50 rounded-lg p-6 text-center border border-accent-100">
-                        <div class="text-3xl font-bold text-accent mb-2">4</div>
+                        <div id="totalDepartments" class="text-3xl font-bold text-accent mb-2">0</div>
                         <div class="text-sm font-medium text-accent-600 mb-1">Departments</div>
                         <div class="text-xs text-text-secondary">Active divisions</div>
                     </div>
@@ -230,7 +230,7 @@
                         <div class="card">
                             <div class="flex items-center justify-between mb-6">
                                 <h3 class="text-xl font-semibold text-text-primary">Recent Activity</h3>
-                                <a href="employee_records_dashboard.html" class="text-primary hover:text-primary-700 text-sm font-medium">View All</a>
+                                <a href="" class="text-primary hover:text-primary-700 text-sm font-medium">View All</a>
                             </div>
                             <div class="space-y-4">
                                 <div class="flex items-start space-x-3 p-3 bg-success-50 rounded-lg border border-success-100">
@@ -240,8 +240,8 @@
                                         </div>
                                     </div>
                                     <div class="flex-1 min-w-0">
-                                        <p class="text-sm font-medium text-text-primary">ID card generated for John Smith</p>
-                                        <p class="text-xs text-text-secondary">Employee ID: EMP001 • 2 hours ago</p>
+                                        <p class="text-sm font-medium text-text-primary">ID card generated for worker</p>
+                                        <p class="text-xs text-error">Code is not written for this yet</p>
                                     </div>
                                 </div>
 
@@ -253,7 +253,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-sm font-medium text-text-primary">New employee record created</p>
-                                        <p class="text-xs text-text-secondary">Sarah Johnson • Civil Department • 4 hours ago</p>
+                                        <p class="text-xs text-error">Code was not written for this yet</p>
                                     </div>
                                 </div>
 
@@ -265,7 +265,7 @@
                                     </div>
                                     <div class="flex-1 min-w-0">
                                         <p class="text-sm font-medium text-text-primary">Employee record updated</p>
-                                        <p class="text-xs text-text-secondary">Michael Brown • Updated contact info • 6 hours ago</p>
+                                        <p class="text-xs text-error">Code was not written for this yet</p>
                                     </div>
                                 </div>
                             </div>
@@ -286,7 +286,7 @@
                                     </div>
                                 </a>
 
-                                <a href="id-dashboard" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                <a href="" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
                                     <div class="flex-shrink-0">
                                         <i class="fas fa-search text-accent group-hover:text-accent-600"></i>
                                     </div>
@@ -295,7 +295,7 @@
                                     </div>
                                 </a>
 
-                                <a href="employee_detail_view.html" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                <a href="" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
                                     <div class="flex-shrink-0">
                                         <i class="fas fa-eye text-warning group-hover:text-warning-600"></i>
                                     </div>
@@ -304,7 +304,7 @@
                                     </div>
                                 </a>
 
-                                <a href="#" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
+                                <a href="contact-us" class="flex items-center p-3 rounded-lg hover:bg-secondary-100 transition-colors group">
                                     <div class="flex-shrink-0">
                                         <i class="fas fa-headset text-error group-hover:text-error-600"></i>
                                     </div>
@@ -359,38 +359,6 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Add loading animation to action cards
-        document.querySelectorAll('.card.group').forEach(card => {
-            card.addEventListener('click', function() {
-                if (this.onclick) {
-                    this.style.opacity = '0.7';
-                    this.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        this.style.opacity = '1';
-                        this.style.transform = 'scale(1)';
-                    }, 200);
-                }
-            });
-        });
-
-        // Update timestamp for recent activity
-        document.addEventListener('DOMContentLoaded', function() {
-            const now = new Date();
-            const activities = document.querySelectorAll('.text-xs.text-text-secondary');
-            activities.forEach((activity, index) => {
-                if (activity.textContent.includes('ago')) {
-                    const hours = (index + 1) * 2;
-                    activity.textContent = activity.textContent.replace(/\d+ hours ago/, `${hours} hours ago`);
-                }
-            });
-        });
-    </script>
+    <script src="/Assets/js/home.js"></script>
 </body>
 </html>

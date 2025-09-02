@@ -348,9 +348,9 @@ function renderDesktopTable(workers) {
     <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.aadharPdf ? `<a href="${worker.aadharPdf}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.panPdf ? `<a href="${worker.panPdf}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.bankDetail ? `<a href="${worker.bankDetail}" target="_blank"><img src="/Assets/Images/pdfIcon.png" alt="PDF Icon" width="50" height="50"></a>` : 'N/A'}</td>
-    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.photoFront ? `<img src="${worker.photoFront}" alt="Front Photo" width="50">` : 'N/A'}</td>
-    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.photoLeft ? `<img src="${worker.photoLeft}" alt="Left Photo" width="50">` : 'N/A'}</td>
-    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center">${worker.photoRight ? `<img src="${worker.photoRight}" alt="Right Photo" width="50">` : 'N/A'}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoFront ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoFront}" alt="Front Photo" width="50">` : 'N/A'}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoLeft ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoLeft}" alt="Left Photo" width="50">` : 'N/A'}</td>
+    <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data item-center w-60 max-h-[60] rounded-lg overflow-hidden">${worker.photoRight ? `<img class="object-contain max-h-[60px] min-w-[60px] rounded-lg overflow-hidden" src="${worker.photoRight}" alt="Right Photo" width="50">` : 'N/A'}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm text-text-secondary font-data">${worker.remarks}</td>
     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
         <div class="flex items-center space-x-2">
