@@ -44,6 +44,12 @@ async function loadWorkers() {
     }
 }
 
+function handleRefresh() {
+    const container = document.getElementById("toastContainer");
+    if (container) container.remove(); // clear all notifications
+    loadWorkers(); // or location.reload();
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', async function () {
     await loadWorkers();   // fetch workers from backend
@@ -548,6 +554,29 @@ function updateResultsCount() {
     resultsCount.textContent = `Showing ${startIndex}-${endIndex} of ${total} workers`;
 }
 
+const eventSource = new EventSource('/events');
+
+eventSource.onmessage = function (event) {
+    console.log("📩 Event received:", event.data);
+    const record = JSON.parse(event.data);
+
+    // Create a toast container (once)
+    let container = document.getElementById("toastContainer");
+    if (!container) {
+        container = document.createElement("div");
+        container.id = "toastContainer";
+        container.className = "fixed top-4 right-4 space-y-2 z-50";
+        document.body.appendChild(container);
+    }
+
+    // Create individual toast
+    const toast = document.createElement("div");
+    toast.className = "bg-green-600 text-white px-4 py-2 rounded shadow-lg";
+    toast.innerText = `✅ New ID Generated: ${record.name} (${record.userID})`;
+
+    container.appendChild(toast);
+};
+
 // <<------------Selection functionality------------>>
 
 // Excel Export Handler
@@ -713,16 +742,16 @@ fetchSummaryStats();
 
 // Load department breakdown
 async function loadDepartmentBreakdown() {
-  try {
-    const res = await fetch("/department-breakdown");
-    const data = await res.json();
+    try {
+        const res = await fetch("/department-breakdown");
+        const data = await res.json();
 
-    const container = document.querySelector("#department-breakdown");
-    container.innerHTML = ""; // Clear old content
+        const container = document.querySelector("#department-breakdown");
+        container.innerHTML = ""; // Clear old content
 
-    data.forEach(dep => {
-      const colorClass = getRandomColor(); // Optional color function
-      container.innerHTML += `
+        data.forEach(dep => {
+            const colorClass = getRandomColor(); // Optional color function
+            container.innerHTML += `
         <div class="flex items-center justify-between">
           <span class="text-sm text-text-secondary">${dep.department}</span>
           <div class="flex items-center space-x-2">
@@ -733,16 +762,16 @@ async function loadDepartmentBreakdown() {
           </div>
         </div>
       `;
-    });
-  } catch (err) {
-    console.error("Error loading department breakdown:", err);
-  }
+        });
+    } catch (err) {
+        console.error("Error loading department breakdown:", err);
+    }
 }
 
 // Simple helper to rotate bar colors
 function getRandomColor() {
-  const colors = ["bg-primary", "bg-accent", "bg-warning", "bg-error", "bg-success"];
-  return colors[Math.floor(Math.random() * colors.length)];
+    const colors = ["bg-primary", "bg-accent", "bg-warning", "bg-error", "bg-success"];
+    return colors[Math.floor(Math.random() * colors.length)];
 }
 
 loadDepartmentBreakdown();

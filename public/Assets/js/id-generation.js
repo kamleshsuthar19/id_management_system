@@ -324,7 +324,7 @@ form.addEventListener('submit', async e => {
         // Success
         showToast('Worker ID generated successfully! Redirecting...', "success");
         setTimeout(() => {
-            window.location.href = '/id-dashboard';
+            window.location.href = '/redirecting-page';
         }, 1500);
 
     } catch (err) {

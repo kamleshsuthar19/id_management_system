@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - ID Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0">
+                        <svg class="h-8 w-8 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                        </svg>
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Employee Records
+                        </a>
+                        <a href="about_us.html" class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            About
+                        </a>
+                        <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500" id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Admin Profile" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500" id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="home_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="employee_id_generation_form.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID Generation</a>
+                <a href="employee_records_dashboard.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Employee Records</a>
+                <a href="about_us.html" class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact_us.html" class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="home_dashboard.html" class="text-primary hover:text-primary-700 text-sm">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-1">Home</span>
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">About Us</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Banner Section -->
+        <section class="bg-gradient-to-br from-primary-50 to-accent-50 py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="flex justify-center mb-8">
+                        <div class="bg-primary-100 p-6 rounded-full">
+                            <svg class="h-16 w-16 text-primary" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 4V6C15 7.1 14.1 8 13 8S11 7.1 11 6V4L5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9V15L15 18V16C15 14.9 14.1 14 13 14S11 14.9 11 16V18L5 15V13C5 11.9 5.9 11 7 11S9 11.9 9 13V7C9 5.9 8.1 5 7 5S5 5.9 5 7V9C5 10.1 5.9 11 7 11S9 10.1 9 9Z"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <h1 class="text-4xl lg:text-5xl font-bold text-text-primary mb-6">
+                        About ID Management System
+                    </h1>
+                    <p class="text-xl text-text-secondary max-w-3xl mx-auto">
+                        Empowering organizations with cutting-edge digital identity solutions for seamless employee management and professional ID card generation.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mission Statement -->
+        <section class="py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="max-w-4xl mx-auto">
+                    <div class="card bg-gradient-to-r from-primary-50 to-accent-50 border-primary-200">
+                        <div class="text-center">
+                            <h2 class="text-3xl font-bold text-text-primary mb-6">Our Mission</h2>
+                            <p class="text-lg text-text-secondary leading-relaxed">
+                                To revolutionize employee identification processes by providing a comprehensive, secure, and user-friendly digital platform that streamlines ID card generation, document management, and administrative oversight. We are committed to delivering innovative solutions that enhance organizational efficiency while maintaining the highest standards of data security and user experience.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company History Timeline -->
+        <section class="bg-surface py-16 lg:py-20 border-t border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">Our Journey</h2>
+                    <p class="text-lg text-text-secondary">Key milestones in our company's evolution</p>
+                </div>
+
+                <div class="relative">
+                    <!-- Timeline Line -->
+                    <div class="absolute left-1/2 transform -translate-x-1/2 w-1 bg-primary-200 h-full hidden lg:block"></div>
+
+                    <div class="space-y-12 lg:space-y-16">
+                        <!-- Timeline Item 1 -->
+                        <div class="relative flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                                <div class="card">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-primary-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-rocket text-primary"></i>
+                                        </div>
+                                        <span class="text-primary font-semibold">2020</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-text-primary mb-2">Company Founded</h3>
+                                    <p class="text-text-secondary">Started with a vision to digitize employee identification processes and eliminate manual paperwork inefficiencies.</p>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-surface"></div>
+                            <div class="lg:w-1/2 lg:pl-8"></div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-8"></div>
+                            <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-accent rounded-full border-4 border-surface"></div>
+                            <div class="lg:w-1/2 lg:pl-8">
+                                <div class="card">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-accent-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-users text-accent"></i>
+                                        </div>
+                                        <span class="text-accent font-semibold">2021</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-text-primary mb-2">First 100 Clients</h3>
+                                    <p class="text-text-secondary">Reached our first major milestone by serving over 100 organizations with our ID management solutions.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-8 mb-6 lg:mb-0">
+                                <div class="card">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-warning-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-award text-warning"></i>
+                                        </div>
+                                        <span class="text-warning font-semibold">2023</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-text-primary mb-2">Industry Recognition</h3>
+                                    <p class="text-text-secondary">Received the "Best Digital Innovation Award" for excellence in employee management technology solutions.</p>
+                                </div>
+                            </div>
+                            <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-warning rounded-full border-4 border-surface"></div>
+                            <div class="lg:w-1/2 lg:pl-8"></div>
+                        </div>
+
+                        <!-- Timeline Item 4 -->
+                        <div class="relative flex flex-col lg:flex-row items-center">
+                            <div class="lg:w-1/2 lg:pr-8"></div>
+                            <div class="hidden lg:block absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-success rounded-full border-4 border-surface"></div>
+                            <div class="lg:w-1/2 lg:pl-8">
+                                <div class="card">
+                                    <div class="flex items-center mb-4">
+                                        <div class="bg-success-100 p-2 rounded-full mr-3">
+                                            <i class="fas fa-globe text-success"></i>
+                                        </div>
+                                        <span class="text-success font-semibold">2025</span>
+                                    </div>
+                                    <h3 class="text-xl font-semibold text-text-primary mb-2">Global Expansion</h3>
+                                    <p class="text-text-secondary">Expanded operations internationally, now serving over 1,000 organizations across multiple countries.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">Our Core Services</h2>
+                    <p class="text-lg text-text-secondary">Comprehensive solutions for modern employee management</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="card group hover:shadow-modal transition-all duration-300">
+                        <div class="text-center">
+                            <div class="bg-primary-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-primary-200 transition-colors">
+                                <i class="fas fa-id-card text-2xl text-primary"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-3">ID Card Generation</h3>
+                            <p class="text-text-secondary">Professional digital ID card creation with customizable templates, automated PDF generation, and secure document handling.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="card group hover:shadow-modal transition-all duration-300">
+                        <div class="text-center">
+                            <div class="bg-accent-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-accent-200 transition-colors">
+                                <i class="fas fa-database text-2xl text-accent"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-3">Employee Records Management</h3>
+                            <p class="text-text-secondary">Comprehensive database management with advanced search, filtering, and real-time updates for all employee information.</p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="card group hover:shadow-modal transition-all duration-300">
+                        <div class="text-center">
+                            <div class="bg-warning-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-warning-200 transition-colors">
+                                <i class="fas fa-shield-alt text-2xl text-warning"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-text-primary mb-3">Document Security</h3>
+                            <p class="text-text-secondary">Enterprise-grade security with encrypted storage, access controls, and compliance with data protection regulations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Leadership Team -->
+        <section class="bg-surface py-16 lg:py-20 border-t border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-bold text-text-primary mb-4">Leadership Team</h2>
+                    <p class="text-lg text-text-secondary">Meet the experts driving our innovation</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Team Member 1 -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="mb-4">
+                            <img class="w-24 h-24 rounded-full mx-auto object-cover" src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Sarah Johnson" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-1">Sarah Johnson</h3>
+                        <p class="text-primary font-medium mb-3">Chief Executive Officer</p>
+                        <p class="text-text-secondary text-sm">With over 15 years in enterprise software, Sarah leads our vision for digital transformation in employee management systems.</p>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="mb-4">
+                            <img class="w-24 h-24 rounded-full mx-auto object-cover" src="https://images.pixabay.com/photo/2016/11/21/12/42/beard-1845166_1280.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Michael Chen" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-1">Michael Chen</h3>
+                        <p class="text-accent font-medium mb-3">Chief Technology Officer</p>
+                        <p class="text-text-secondary text-sm">Michael brings deep expertise in security architecture and scalable systems, ensuring our platform meets enterprise standards.</p>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="card text-center group hover:shadow-modal transition-all duration-300">
+                        <div class="mb-4">
+                            <img class="w-24 h-24 rounded-full mx-auto object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2961&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Emily Rodriguez" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-1">Emily Rodriguez</h3>
+                        <p class="text-warning font-medium mb-3">Head of Product</p>
+                        <p class="text-text-secondary text-sm">Emily drives product strategy and user experience design, ensuring our solutions meet real-world organizational needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Values and Certifications -->
+        <section class="py-16 lg:py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="space-y-16">
+                    <!-- Values Block -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h2 class="text-3xl font-bold text-text-primary mb-6">Our Core Values</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-shield-alt text-primary text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary mb-1">Security First</h3>
+                                        <p class="text-text-secondary text-sm">We prioritize data protection and privacy in every aspect of our platform design and implementation.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-lightbulb text-accent text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary mb-1">Innovation</h3>
+                                        <p class="text-text-secondary text-sm">Continuously evolving our technology to meet changing organizational needs and industry standards.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-warning-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-handshake text-warning text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary mb-1">Customer Success</h3>
+                                        <p class="text-text-secondary text-sm">Dedicated to delivering exceptional support and ensuring our clients achieve their operational goals.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="relative">
+                            <img class="rounded-lg shadow-card w-full h-64 object-cover" src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Team collaboration" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                    </div>
+
+                    <!-- Certifications Block -->
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div class="lg:order-2">
+                            <h2 class="text-3xl font-bold text-text-primary mb-6">Certifications & Compliance</h2>
+                            <div class="space-y-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-success-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-certificate text-success text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">ISO 27001 Certified</h3>
+                                        <p class="text-text-secondary text-sm">Information security management system certification</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-lock text-primary text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">GDPR Compliant</h3>
+                                        <p class="text-text-secondary text-sm">Full compliance with European data protection regulations</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-8 h-8 bg-accent-100 rounded-full flex items-center justify-center">
+                                            <i class="fas fa-cloud text-accent text-sm"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-text-primary">SOC 2 Type II</h3>
+                                        <p class="text-text-secondary text-sm">Audited security, availability, and confidentiality controls</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:order-1 relative">
+                            <img class="rounded-lg shadow-card w-full h-64 object-cover" src="https://images.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Security and compliance" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Statistics, Awards, and Testimonials -->
+        <section class="bg-surface py-16 lg:py-20 border-t border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Statistics Grid -->
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-primary mb-2">1,000+</div>
+                        <div class="text-sm font-medium text-text-secondary">Organizations Served</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-accent mb-2">50,000+</div>
+                        <div class="text-sm font-medium text-text-secondary">ID Cards Generated</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-warning mb-2">99.9%</div>
+                        <div class="text-sm font-medium text-text-secondary">System Uptime</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-success mb-2">24/7</div>
+                        <div class="text-sm font-medium text-text-secondary">Customer Support</div>
+                    </div>
+                </div>
+
+                <!-- Awards Section -->
+                <div class="mb-16">
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary mb-4">Awards & Recognition</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="card text-center">
+                            <div class="bg-warning-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-trophy text-warning text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-text-primary mb-2">Best Digital Innovation 2023</h3>
+                            <p class="text-text-secondary text-sm">TechExcellence Awards</p>
+                        </div>
+                        <div class="card text-center">
+                            <div class="bg-primary-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-star text-primary text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-text-primary mb-2">Customer Choice Award</h3>
+                            <p class="text-text-secondary text-sm">Enterprise Software Review</p>
+                        </div>
+                        <div class="card text-center">
+                            <div class="bg-success-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                <i class="fas fa-medal text-success text-xl"></i>
+                            </div>
+                            <h3 class="font-semibold text-text-primary mb-2">Security Excellence</h3>
+                            <p class="text-text-secondary text-sm">InfoSec Global Awards</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Client Testimonials -->
+                <div>
+                    <div class="text-center mb-8">
+                        <h2 class="text-2xl font-bold text-text-primary mb-4">What Our Clients Say</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="card">
+                            <div class="flex items-start space-x-4">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="David Thompson" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="flex-1">
+                                    <p class="text-text-secondary text-sm mb-3">"The ID Management System has transformed our employee onboarding process. What used to take days now takes hours, and the quality is consistently professional."</p>
+                                    <div>
+                                        <p class="font-semibold text-text-primary text-sm">David Thompson</p>
+                                        <p class="text-text-secondary text-xs">HR Director, TechCorp Solutions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="flex items-start space-x-4">
+                                <img class="w-12 h-12 rounded-full object-cover" src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Maria Garcia" onerror="this.src='https://images.unsplash.com/photo-1584824486509-112e4181ff6b?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'; this.onerror=null;" />
+                                <div class="flex-1">
+                                    <p class="text-text-secondary text-sm mb-3">"Excellent platform with outstanding security features. The customer support team is responsive and knowledgeable. Highly recommended for any organization."</p>
+                                    <div>
+                                        <p class="font-semibold text-text-primary text-sm">Maria Garcia</p>
+                                        <p class="text-text-secondary text-xs">Operations Manager, BuildRight Construction</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="bg-gradient-to-r from-primary-600 to-accent-600 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-3xl font-bold text-white mb-4">Ready to Transform Your ID Management?</h2>
+                <p class="text-xl text-primary-100 mb-8 max-w-2xl mx-auto">
+                    Join thousands of organizations already using our platform to streamline their employee identification processes.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="employee_id_generation_form.html" class="bg-white text-primary-600 px-8 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors inline-flex items-center">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Get Started Today
+                    </a>
+                    <a href="contact_us.html" class="border-2 border-white text-white px-8 py-3 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors inline-flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    © 2025 ID Management System. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll for timeline items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items and cards
+        document.querySelectorAll('.card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(card);
+        });
+
+        // Add hover effects to team member cards
+        document.querySelectorAll('.card.group').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

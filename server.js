@@ -9,6 +9,36 @@ const app = express();
 const generateUserID = require('./middlewares/generateUserID');
 const PORT = process.env.PORT || 4500;
 
+
+
+// Store dashboard connections
+const clients = [];
+
+app.get('/events', (req, res) => {
+  res.setHeader('Content-Type', 'text/event-stream');
+  res.setHeader('Cache-Control', 'no-cache');
+  res.setHeader('Connection', 'keep-alive');
+  res.flushHeaders();
+
+  clients.push(res);
+
+  req.on('close', () => {
+    const i = clients.indexOf(res);
+    if (i >= 0) clients.splice(i, 1);
+  });
+});
+
+// Function to notify dashboards
+function notifyNewID(newRecord) {
+  clients.forEach(res => {
+    res.write(`data: ${JSON.stringify(newRecord)}\n\n`);
+  });
+}
+
+// Make available in controllers
+app.set("notifyNewID", notifyNewID);
+
+
 // Other middleware like body-parser, multer, etc.
 app.use(cors());
 app.use(express.json());
@@ -43,6 +73,16 @@ app.get('/', (req, res) => {
 // Serve the contact-us.ejs
 app.get('/contact-us', (req, res) => {
   res.render('contact-us'); // this looks for views/contact-us.ejs
+});
+
+// Serve the about.ejs
+app.get('/about', (req, res) => {
+  res.render('about'); // this looks for views/about.ejs
+});
+
+// Serve the redirecting-page.ejs
+app.get('/redirecting-page', (req, res) => {
+  res.render('redirecting-page'); // this looks for views/redirecting-page.ejs
 });
 
 // Routes

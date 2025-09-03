@@ -185,10 +185,23 @@ const submitForm = async (req, res) => {
 
       await db.query(sql, values);
 
+      // 🔔 Notify dashboards
+      const notifyNewID = req.app.get("notifyNewID");
+      if (notifyNewID) {
+        notifyNewID({
+          userID: newUserID,
+          name,
+          department,
+          designation,
+          site
+        });
+        console.log("📢 Notified dashboards:", newUserID);
+      }
+
       res.json({
         success: true,
         userID: newUserID,
-        redirect: `/id-dashboard`
+        redirect: `/redirecting-page`
       });
 
     }
