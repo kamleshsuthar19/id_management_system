@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Worker Records Dashboard - ID Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/Assets/css/main.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <script type="module"
+        src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fidmanagem2496back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.6"></script>
+</head>
+
+<body class="bg-background min-h-screen">
+    <!-- Fixed Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-surface shadow-card border-b border-secondary-200 z-50">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo and Brand -->
+                <div class="flex items-center space-x-4">
+                    <div class="flex-shrink-0 rounded-full overflow-hidden">
+                        <img src="/Assets/images/JRC_Original_Logo.jpg" alt="" class="h-10 w-10">
+                    </div>
+                    <div class="hidden md:block">
+                        <h1 class="text-xs lg:text-xl font-semibold text-text-primary">ID Management System</h1>
+                    </div>
+                </div>
+
+                <!-- Main Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-4 text-center">
+                        <a href="/"
+                            class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Home
+                        </a>
+                        <a href="id-generation"
+                            class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            ID Generation
+                        </a>
+                        <a href="id-dashboard"
+                            class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Worker Records
+                        </a>
+                        <a href="missing-attendance"
+                            class="bg-primary-100 text-primary-700 px-3 py-2 rounded-md text-sm font-medium">
+                            Missing Attendance
+                        </a>
+                        <a href="about_us"
+                            class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            About
+                        </a>
+                        <a href="contact-us"
+                            class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary px-3 py-2 rounded-md text-sm font-medium transition-fast">
+                            Contact
+                        </a>
+                    </div>
+                </div>
+
+                <!-- User Profile Dropdown -->
+                <div class="hidden md:block">
+                    <div class="ml-4 flex items-center md:ml-6">
+                        <div class="relative">
+                            <button
+                                class="bg-surface max-w-xs text-sm rounded-full flex items-center text-secondary-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500"
+                                id="user-menu-button">
+                                <span class="sr-only">Open user menu</span>
+                                <i class="fa-sharp fa-regular fa-circle-user object-cover"></i>
+                                <span class="ml-2 text-sm font-medium">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button"
+                        class="bg-surface inline-flex items-center justify-center p-2 rounded-md text-secondary-600 hover:text-text-primary hover:bg-secondary-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+                        id="mobile-menu-button">
+                        <span class="sr-only">Open main menu</span>
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-surface border-t border-secondary-200">
+                <a href="/"
+                    class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="id-generation"
+                    class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">ID
+                    Generation</a>
+                <a href="id-dashboard"
+                    class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Worker
+                    Records</a>
+                <a href="missing-attendance"
+                    class="bg-primary-100 text-primary-700 block px-3 py-2 rounded-md text-base font-medium">Missing
+                    Attendance</a>
+                <a href="about_us"
+                    class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">About</a>
+                <a href="contact-us"
+                    class="text-secondary-600 hover:bg-secondary-100 hover:text-text-primary block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-16">
+        <!-- Breadcrumb -->
+        <div class="bg-surface border-b border-secondary-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center space-x-2 py-4">
+                    <a href="/" class="text-primary hover:text-primary-700 text-sm">
+                        <i class="fas fa-home"></i>
+                        <span class="ml-1">Home</span>
+                    </a>
+                    <i class="fas fa-chevron-right text-secondary-400 text-xs"></i>
+                    <span class="text-text-primary font-medium text-sm">Missing Attendance</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page Header -->
+        <section class="bg-surface py-6 border-b border-secondary-200">
+            <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                    <div class="flex-1 min-w-0">
+                        <h1 class="text-2xl font-bold text-text-primary sm:text-3xl">Missing Attendance Dashboard</h1>
+                        <p class="mt-1 text-sm text-text-secondary">Manage and view all missing attendance records with advanced
+                            filtering and search capabilities</p>
+                    </div>
+                    <div class="mt-4 flex lg:mt-0 lg:ml-4">
+                        <a href="id-generation" class="btn-primary inline-flex items-center">
+                            <i class="fas fa-plus mr-2"></i>
+                            Add Missing Attendance
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filter and Search Section -->
+        <section class="bg-surface py-4 border-b border-secondary-200">
+            <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <!-- Filters -->
+                    <div class="flex flex-col sm:flex-row gap-3 flex-1">
+                        <div class="relative">
+                            <select id="filterDepartment" class="form-input pr-8 text-sm min-w-0 sm:min-w-32">
+                                <option value="">All Departments</option>
+                                <option value="Carpenter">Carpenter</option>
+                                <option value="Chef">Chef</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Housekeeping">Housekeeping</option>
+                                <option value="Inventory">Inventory</option>
+                                <option value="Painter">Painter</option>
+                                <option value="POP">POP</option>
+                            </select>
+                            <i
+                                class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+
+                        <div class="relative">
+                            <select id="filterDesignation" class="form-input pr-8 text-sm min-w-0 sm:min-w-32">
+                                <option value="">All Designations</option>
+                                <option value="Chef">Chef</option>
+                                <option value="Half Mistri">Half Mistri</option>
+                                <option value="Helper">Helper</option>
+                                <option value="Housekeeper">Housekeeper</option>
+                                <option value="Mistri">Mistri</option>
+                                <option value="Storekeeper">Storekeeper</option>
+                            </select>
+                            <i
+                                class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+
+                        <div class="relative">
+                            <select id="filterSite" class="form-input pr-8 text-sm min-w-0 sm:min-w-40">
+                                <option value="">All Sites</option>
+                                <option value="D Decor">D Decor</option>
+                                <option value="Damani">Damani</option>
+                                <option value="EON One">EON One</option>
+                                <option value="GMA 63">GMA 63</option>
+                                <option value="J Kumar">J Kumar</option>
+                                <option value="Kalpataru">Kalpataru</option>
+                                <option value="Laxmi Niwas">Laxmi Niwas</option>
+                                <option value="Lodha World Crest">Lodha World Crest</option>
+                                <option value="Lodha World View">Lodha World View</option>
+                                <option value="Naigaon Factory Unit-01">Naigaon Factory Unit-01</option>
+                                <option value="Naigaon Factory Unit-02">Naigaon Factory Unit-02</option>
+                                <option value="Oberoi International School">Oberoi International School</option>
+                                <option value="One Lodha Place">One Lodha Place</option>
+                                <option value="ORL 360">ORL 360</option>
+                                <option value="Palais Royale">Palais Royale</option>
+                                <option value="Prakash Jain">Prakash Jain</option>
+                                <option value="Raheja Legend">Raheja Legend</option>
+                                <option value="Reliance JWC">Reliance JWC</option>
+                                <option value="Shreevardhan">Shreevardhan</option>
+                                <option value="Sky City">Sky City</option>
+                                <option value="Tips Office">Tips Office</option>
+                                <option value="Trump Tower">Trump Tower</option>
+                            </select>
+                            <i
+                                class="fas fa-chevron-down absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary-400 text-xs pointer-events-none"></i>
+                        </div>
+
+                        <button id="clearFilters" class="btn-secondary text-sm px-3 py-2 whitespace-nowrap">
+                            <i class="fas fa-times mr-1"></i>
+                            Clear Filters
+                        </button>
+                    </div>
+
+                    <!-- Search Bar -->
+                    <div class="relative flex-1 max-w-md">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <i class="fas fa-search text-secondary-400"></i>
+                        </div>
+                        <input type="text" id="searchInput" class="form-input pl-10 text-sm"
+                            placeholder="Search by ID, Name, Father, Mobile, Aadhaar, Account..." />
+                        <button id="searchClear"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-secondary-400 hover:text-text-primary hidden">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Count and Bulk Actions -->
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-4 pt-4 border-t border-secondary-200">
+                    <div class="flex items-center space-x-4">
+                        <span id="resultsCount" class="text-sm text-text-secondary">Showing 1,247 workers</span>
+                        <div class="flex items-center space-x-2">
+                            <input type="checkbox" id="selectAll"
+                                class="rounded border-secondary-300 text-primary focus:ring-primary-500" />
+                            <label for="selectAll" class="text-sm text-text-secondary">Select All</label>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-0">
+                        <div class="relative">
+                            <button onclick="handleRefresh()"
+                                class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                                Refresh
+                            </button>
+                            <button id="bulkActions" class="btn-secondary text-sm px-3 py-2 disabled:opacity-50"
+                                disabled>
+                                <i class="fas fa-cog mr-1"></i>
+                                Bulk Actions
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </button>
+                            <div id="bulkMenu"
+                                class="absolute right-0 mt-1 w-48 bg-surface rounded-md shadow-modal border border-secondary-200 z-10 hidden">
+                                <div class="py-1">
+                                    <button id="exportSelectedExcel"
+                                        class="w-full text-left px-4 py-2 text-sm text-text-primary hover:bg-secondary-100">
+                                        <i class="fas fa-file-excel mr-2 text-green-600"></i>
+                                        Export Selected to CSV
+                                    </button>
+                                    <button class="w-full text-left px-4 py-2 text-sm text-error hover:bg-error-50">
+                                        <i class="fas fa-trash mr-2"></i>
+                                        Delete Selected
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="py-6">
+            <div class="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <!-- Data Table -->
+                    <div class="flex-1 overflow-x-auto">
+                        <div class="card p-0 overflow-hidden">
+                            <!-- Desktop Table View -->
+                            <div style="max-height:600px; overflow-y:auto;"
+                                class="hidden lg:block border border-gray-300 rounded-lg">
+                                <table class="min-w-full divide-y divide-secondary-200">
+                                    <thead class="sticky top-0 bg-light-yellow z-10">
+                                        <tr>
+                                            <th class="px-6 py-3 text-left">
+                                                <input type="checkbox"
+                                                    class="rounded border-secondary-300 text-primary focus:ring-primary-500" />
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast"
+                                                data-sort="userID">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>EMPLOYEE ID</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast"
+                                                data-sort="name">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>PRESENT</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast"
+                                                data-sort="fatherName">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>IN TIME</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast"
+                                                data-sort="maritalStatus">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>OUT TIME</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th class="px-6 py-3 text-center text-xs font-medium text-text-secondary uppercase tracking-wider cursor-pointer hover:bg-secondary-100 transition-fast"
+                                                data-sort="gender">
+                                                <div class="flex items-center space-x-1">
+                                                    <span>REMARKS</span>
+                                                    <i class="fas fa-sort text-secondary-400"></i>
+                                                </div>
+                                            </th>
+                                            <th
+                                                class="px-6 py-3 text-center text-xs font-medium text-text-secondary uppercase tracking-wider">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="workerTableBody" class="bg-surface divide-y divide-secondary-200">
+                                        <!-- Table rows will be populated by JavaScript -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Mobile Card View -->
+                            <div style="max-height:800px; overflow-y:auto;" class="lg:hidden" id="mobileCardView">
+                                <!-- Mobile cards will be populated by JavaScript -->
+                            </div>
+
+                            <!-- Loading State -->
+                            <div id="loadingState" class="hidden p-8 text-center">
+                                <div class="inline-flex items-center">
+                                    <i class="fas fa-spinner fa-spin text-primary mr-2"></i>
+                                    <span class="text-text-secondary">Loading missing attendance...</span>
+                                </div>
+                            </div>
+
+                            <!-- Empty State -->
+                            <div id="emptyState" class="hidden p-8 text-center">
+                                <div class="text-secondary-400 mb-4">
+                                    <i class="fas fa-search text-4xl"></i>
+                                </div>
+                                <h3 class="text-lg font-medium text-text-primary mb-2">No missing attendance found</h3>
+                                <p class="text-text-secondary">Try adjusting your search or filter criteria</p>
+                            </div>
+                        </div>
+
+                        <!-- Pagination -->
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mt-6">
+                            <div class="flex items-center space-x-2 mb-4 sm:mb-0">
+                                <span class="text-sm text-text-secondary">Show</span>
+                                <select id="pageSize" class="form-input text-sm w-20">
+                                    <option value="10">10</option>
+                                    <option value="25" selected>25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span class="text-sm text-text-secondary">per page</span>
+                            </div>
+
+                            <div class="flex items-center space-x-2">
+                                <button id="prevPage" class="btn-secondary px-3 py-2 text-sm disabled:opacity-50"
+                                    disabled>
+                                    <i class="fas fa-chevron-left mr-1"></i>
+                                    Previous
+                                </button>
+                                <div id="pageNumbers" class="flex items-center space-x-1">
+                                    <!-- Page numbers will be populated by JavaScript -->
+                                </div>
+                                <button id="nextPage" class="btn-secondary px-3 py-2 text-sm">
+                                    Next
+                                    <i class="fas fa-chevron-right ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="lg:w-80">
+                        <!-- Summary Statistics -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Summary Statistics</h3>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Total Solved</span>
+                                    <span id="totalSolved" class="text-lg font-semibold text-text-primary">0</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-sm text-text-secondary">Today's Total Missing Attendance</span>
+                                    <span id="missingAttendanceToday" class="text-lg font-semibold text-primary">0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Site Breakdown -->
+                        <div class="card mb-6">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Site Breakdown</h3>
+                            <div id="site-breakdown" class="space-y-3">
+                                <!-- Dynamic content will be injected here -->
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="card">
+                            <h3 class="text-lg font-semibold text-text-primary mb-4">Recent Activity</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-success rounded-full flex items-center justify-center">
+                                            <i class="fas fa-plus text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">New missing attendance added</p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-primary rounded-full flex items-center justify-center">
+                                            <i class="fas fa-id-card text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">Solved the missing attendance issue</p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-start space-x-3">
+                                    <div class="flex-shrink-0">
+                                        <div class="w-6 h-6 bg-warning rounded-full flex items-center justify-center">
+                                            <i class="fas fa-edit text-white text-xs"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-xs font-medium text-text-primary">Missing attendance deleted</p>
+                                        <p class="text-xs text-error">There is no code available for this yet</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-surface border-t border-secondary-200 py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <p class="text-text-secondary text-sm">
+                    Developed & Maintained by Kamlesh Suthar - 2025 © JRC INTERIORS
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Edit Modal  -PENDING- -->
+
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-surface rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0">
+                    <i class="fas fa-exclamation-triangle text-error text-2xl"></i>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-lg font-medium text-text-primary">Confirm Deletion</h3>
+                </div>
+            </div>
+            <p class="text-text-secondary mb-4">Are you sure you want to delete this missing attendance record? This action cannot
+                be undone.</p>
+            <div class="mb-4">
+                <label for="adminPassword" class="block text-sm font-medium text-text-primary mb-2">Admin
+                    Password</label>
+                <input type="password" id="adminPassword" class="form-input" placeholder="Enter admin password" />
+            </div>
+            <div class="flex justify-end space-x-3">
+                <button id="cancelDelete" class="btn-secondary">Cancel</button>
+                <button id="confirmDelete"
+                    class="bg-error text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-fast">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/Assets/js/missing-attendance-dashboard.js"></script>
+</body>
+
+</html>

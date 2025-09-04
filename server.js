@@ -65,6 +65,13 @@ app.get('/test-db', (req, res) => {
   });
 });
 
+// Routes
+const generationRoutes = require('./routes/generationRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
+const formRoutes = require('./routes/form');
+const statsRoutes = require('./routes/statsRoutes');
+const departmentBreakDownRoutes = require('./routes/departmentBreakDownRoutes');
+
 // Serve the home.ejs
 app.get('/', (req, res) => {
   res.render('home'); // Express will look for /views/home.ejs
@@ -85,12 +92,10 @@ app.get('/redirecting-page', (req, res) => {
   res.render('redirecting-page'); // this looks for views/redirecting-page.ejs
 });
 
-// Routes
-const generationRoutes = require('./routes/generationRoutes');
-const dashboardRoutes = require('./routes/dashboardRoutes');
-const formRoutes = require('./routes/form');
-const statsRoutes = require('./routes/statsRoutes');
-const departmentBreakDownRoutes = require('./routes/departmentBreakDownRoutes');
+// Serve the missing-attendance.ejs
+app.get('/missing-attendance', (req, res) => {
+  res.render('missing-attendance'); // this looks for views/missing-attendance.ejs
+});
 
 app.use('/', generationRoutes);
 app.use('/id-dashboard', dashboardRoutes);
